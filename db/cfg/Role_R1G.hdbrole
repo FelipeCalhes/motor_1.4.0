@@ -110,6 +110,27 @@
         "privileges_with_grant_option": [
           "SELECT"
         ]
+      },
+      {
+        "name": "REGRASNAMESPACE_MATERIAISVIEW",
+        "type": "TABLE",
+        "privileges_with_grant_option": [
+          "SELECT"
+        ]
+      },
+      {
+        "name": "REGRASNAMESPACE_ESTOQUEVIEW",
+        "type": "TABLE",
+        "privileges_with_grant_option": [
+          "SELECT"
+        ]
+      },
+      {
+        "name": "REGRASNAMESPACE_FORNECEDORVIEW",
+        "type": "TABLE",
+        "privileges_with_grant_option": [
+          "SELECT"
+        ]
       }
     ]
   }

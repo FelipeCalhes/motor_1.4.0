@@ -23,7 +23,7 @@ module.exports = (motor) => {
                 bomTable.push(r)
             }
         })
-        await srv.run(DELETE.from(BOM))        
+        await srv.run(DELETE.from(BOM))
         try {
             await srv.run(INSERT.into(BOM).entries(bomTable))
         }
@@ -33,16 +33,60 @@ module.exports = (motor) => {
         }
         return (req.data)
     })
+
     motor.on('READ', 'killBOM', async (req) => {
         const srv = await cds.connect.to('db');
-        const { BOM } = srv.entities        
+        const { BOM } = srv.entities
         let resp
         try {
             await srv.run(DELETE.from(BOM))
-            resp = {'kill':true}
+            resp = { 'kill': true }
         }
         catch (err) {
-            resp = {'kill':false}
+            resp = { 'kill': false }
+            req.reject(400, 'Erro ao deletar tabela')
+        }
+        return resp
+    })
+
+    motor.on('CREATE', 'importTipoWoBaixaAutomatica', async (req) => {
+        const srv = await cds.connect.to('db');
+        const { TipoWoBaixaAutomatica } = srv.entities
+        reqArr = req.data.TipoWoBaixaAutomatica
+        backup = await srv.run(SELECT.from(TipoWoBaixaAutomatica))
+        repetidos = []
+        insert = []
+        reqArr.forEach((r) => {
+            backup.forEach((b) => {
+                if (b.tipoWo === r.tipoWo) {
+                    repetidos.push(r.tipoWo)
+                }
+            })
+        })
+        reqArr.forEach((r) => {
+            if (!repetidos.includes(r.tipoWo)) {
+                insert.push(r)
+            }
+        })
+        try {
+            await srv.run(INSERT.into(TipoWoBaixaAutomatica).entries(insert))
+        }
+        catch (err) {
+            req.reject(400, err.message)
+        }
+        return (req.data)
+    })
+
+    motor.on('READ', 'killTipoWoBaixaAutomatica', async (req) => {
+        const srv = await cds.connect.to('db');
+        const { TipoWoBaixaAutomatica } = srv.entities
+        let resp
+        try {
+            await srv.run(DELETE.from(TipoWoBaixaAutomatica))
+            resp = { 'kill': true }
+        }
+        catch (err) {
+            resp = { 'kill': false }
             req.reject(400, 'Erro ao deletar tabela')
         }
         return resp

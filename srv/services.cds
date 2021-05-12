@@ -9,6 +9,10 @@ define type ObjBOM {
     unidadeConsumo : String(3);
 }
 
+define type ObjTipoWo {
+    tipoWo : String(20);
+}
+
 service MotorDeRegras {
     entity BOM @(restrict : [{
         grant : [
@@ -111,4 +115,25 @@ service MotorDeRegras {
         ],
         to    : 'Edit'
     }]) as projection on p.TipoWoBaixaAutomatica;
+
+
+    entity importTipoWoBaixaAutomatica @(restrict : [{
+        grant : [
+            'READ',
+            'WRITE'
+        ],
+        to    : 'Edit'
+    }]) {
+        TipoWoBaixaAutomatica : array of ObjTipoWo;
+    }
+
+    entity killTipoWoBaixaAutomatica @(restrict : [{
+        grant : [
+            'READ',
+            'WRITE'
+        ],
+        to    : 'Edit'
+    }]) {
+        kill : Boolean;
+    }
 }

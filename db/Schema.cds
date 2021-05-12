@@ -33,10 +33,54 @@ entity Parametros {
 @cds.persistence.exists
 entity Fornecedor {
     lifnr     : String(10);
-    name1     : String(50);
-    stcd1     : String(18);
-    werks_mrp : String(4);
+    berid     : String(10);
+    werks_mrp : String(10);
+    name1     : String(35);
+    stcd1     : String(16);
+    stcd2     : String(11);
 }
+
+@cds.persistence.exists
+entity Fornecedor_VT {
+    lifnr     : String(10);
+    berid     : String(10);
+    werks_mrp : String(10);
+    name1     : String(35);
+    stcd1     : String(16);
+    stcd2     : String(11);
+}
+
+entity FornecedorView      as
+    select from Fornecedor_VT {
+        lifnr     as lifnr,
+        berid     as berid,
+        werks_mrp as werks_mrp,
+        name1     as name1,
+        stcd1     as stcd1,
+        stcd2     as stcd2
+    };
+
+@cds.persistence.exists
+entity Estoque_VT {
+    matnr : String(18);
+    werks : String(4);
+    lifnr : String(10);
+    berid : String(10);
+    lblab : Decimal(13, 3);
+    lbins : Decimal(13, 3);
+    meins : String(3);
+}
+
+entity EstoqueView         as
+    select from Estoque_VT {
+        matnr as matnr,
+        werks as werks,
+        lifnr as lifnr,
+        berid as berid,
+        lblab as lblab,
+        lbins as lbins,
+        meins as meins
+    };
 
 @cds.persistence.exists
 entity Empresas {
@@ -105,7 +149,6 @@ entity BOM2ODATA           as
         BOM.unidadeConsumo
     };
 
-
 @cds.persistence.exists
 entity TipoOs {
     key mandt     : String(3);
@@ -164,6 +207,22 @@ entity Materiais {
         maktx : String(40);
         meins : String(3);
 }
+
+@cds.persistence.exists
+entity Materiais_VT {
+    key matnr : String(18);
+    key spras : String(1);
+        maktx : String(40);
+        meins : String(3);
+}
+
+entity MateriaisView       as
+    select from Materiais_VT {
+        matnr as matnr,
+        spras as spras,
+        maktx as maktx,
+        meins as meins
+    };
 
 entity MateriaisHelpOdata  as
     select from Materiais {
