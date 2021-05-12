@@ -1,0 +1,193 @@
+namespace regrasNamespace;
+
+entity BOM {
+    key tipoInstalacao : String(1);
+    key idTipoOS       : String(200);
+    key codMaterialSAP : String(40);
+        qtdMin         : Decimal;
+        qtdMax         : Decimal;
+        unidadeConsumo : String(3);
+        tipoOs         : Association to one TipoOs
+                             on tipoOs.tipo_Os = $self.idTipoOS;
+        materiais      : Association to one Materiais
+                             on materiais.matnr = $self.codMaterialSAP;
+}
+
+entity RegraDeCalculo {
+    key tipoDeRegra  : String(50);
+        BOM          : Integer;
+        estoque      : Integer;
+        atribTecnico : Integer;
+}
+
+entity TipoWoBaixaAutomatica {
+    key tipoWo : String(20);
+}
+
+entity Parametros {
+    key parametros     : Integer;
+        labelParametro : String;
+        valor          : String;
+}
+
+@cds.persistence.exists
+entity Fornecedor {
+    lifnr     : String(10);
+    name1     : String(50);
+    stcd1     : String(18);
+    werks_mrp : String(4);
+}
+
+@cds.persistence.exists
+entity Empresas {
+    bukrs  : String(4);
+    branch : String(4);
+}
+
+entity EmpresasHelp        as
+    select from Empresas {
+        bukrs  as empresa,
+        branch as branch
+    };
+
+@cds.persistence.exists
+entity Centros {
+    werks      : String(4);
+    name1      : String(30);
+    bwkey      : String(4);
+    kunnr      : String(10);
+    lifnr      : String(10);
+    j_1bbranch : String(4);
+}
+
+entity CentrosHelp         as
+    select from Centros {
+        werks      as werks,
+        lifnr      as fornecedorID,
+        j_1bbranch as branch
+    };
+
+entity TecnicoPorEPO {
+    key loginTecnico     : String(120);
+        CodFornecedorSAP : String(50);
+        fornecedor       : Association to one Fornecedor
+                               on $self.CodFornecedorSAP = fornecedor.lifnr
+}
+
+entity LoginTecnico {
+    key loginTecnico     : String(120);
+        CodFornecedorSAP : String(50);
+        CNPJ             : String(10);
+}
+
+entity BOM2ODATA           as
+    select from BOM
+    left join Materiais mat
+        on BOM.codMaterialSAP = mat.matnr
+    left join TipoOs os
+        on BOM.idTipoOS = os.tipo_Os
+    {
+        BOM.tipoInstalacao,
+        case BOM.tipoInstalacao
+            when
+                'C'
+            then
+                'Casa'
+            else
+                'Edifício/Unidade'
+        end        as descTipoInstalacao : String(12),
+        BOM.idTipoOS,
+        os.desc_os as descTipoOs         : String(50),
+        BOM.codMaterialSAP,
+        mat.maktx  as descMaterial       : String(50),
+        BOM.qtdMin,
+        BOM.qtdMax,
+        BOM.unidadeConsumo
+    };
+
+
+@cds.persistence.exists
+entity TipoOs {
+    key mandt     : String(3);
+    key tipo_Os   : String(4);
+        desc_os   : String(50);
+        aplicacao : String(1);
+}
+
+@cds.persistence.exists
+entity RespBaixa {
+    key mandt            : String(3);
+    key id_consolid_orig : String(50);
+    key consolidado      : String(50);
+    key contador         : Integer;
+        matnr            : String(18);
+        status           : String(1);
+        mensagem         : String(220);
+        lbkum            : Decimal(13, 3);
+        lbkum_doc        : Decimal(13, 3);
+        mblnr            : String(10);
+        mjahr            : String(4);
+        data             : String(8);
+        wo               : String(50);
+        lifnr            : String(10);
+        item_text        : String(50);
+}
+
+entity TipoOsHelpOdata     as
+    select from TipoOs {
+        tipo_Os as tipoOs,
+        desc_os as descricaoOs
+    };
+
+entity RetornoDaBaixa      as
+    select from RespBaixa {
+        consolidado      as consolidado,
+        id_consolid_orig as consolidID,
+        matnr            as material,
+        contador         as contador,
+        status           as status,
+        mensagem         as mensagem,
+        lbkum            as quantidade,
+        lbkum_doc        as quantidadeDoc,
+        mblnr            as mblnr,
+        mjahr            as mjahr,
+        data             as data,
+        wo               as workOrderID,
+        lifnr            as fornecedorID,
+        item_text        as aplicacao
+    };
+
+@cds.persistence.exists
+entity Materiais {
+    key matnr : String(18);
+    key spras : String(1);
+        maktx : String(40);
+        meins : String(3);
+}
+
+entity MateriaisHelpOdata  as
+    select from Materiais {
+        matnr as material,
+        maktx as descMaterial,
+        meins as unidade
+    }
+    where
+        spras = 'P';
+
+entity FornecedorHelpOdata as
+    select from Fornecedor {
+        lifnr     as fornecedor,
+        name1     as nomeFornecedor,
+        stcd1     as cnpj,
+        werks_mrp as centro
+    }
+    group by
+        lifnr,
+        name1,
+        stcd1,
+        werks_mrp;
+
+entity MatCount            as
+    select count(
+        *
+    ) as c : String(10) from Materiais;

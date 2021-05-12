@@ -1,0 +1,28 @@
+# CAP
+_out
+connection.properties
+target/
+
+# Web IDE, App Studio
+.che/
+
+
+# MTA
+*_mta_build_tmp
+*.mtar
+mta_archives/
+
+# Other
+.DS_Store
+*.orig
+*.log
+
+*.iml
+*.flattened-pom.xml
+
+# IDEs
+# .vscode
+# .idea
+
+# auto generated wildcard
+.env

@@ -1,0 +1,35 @@
+using regrasNamespace as p from '../db/Schema';
+
+service MotorDeRegras {
+
+    define type ObjBOM {
+        tipoInstalacao : String(1);
+        idTipoOS       : String(200);
+        codMaterialSAP : String(40);
+        qtdMin         : Decimal;
+        qtdMax         : Decimal;
+        unidadeConsumo : String(3);
+    }
+
+    entity BOM            as projection on p.BOM;
+
+    //entity BOMUpd as projection on p.BOM;
+
+    entity RegraDeCalculo as projection on p.RegraDeCalculo;
+    entity Parametros     as projection on p.Parametros;
+    entity TecnicoPorEPO  as projection on p.TecnicoPorEPO;
+    entity TipoOsHelp     as projection on p.TipoOsHelpOdata;
+    entity MateriaisHelp  as projection on p.MateriaisHelpOdata;
+    entity FornecedorHelp as projection on p.FornecedorHelpOdata;
+    entity LoginTecnico   as projection on p.LoginTecnico;
+    entity RetornoDaBaixa as projection on p.RetornoDaBaixa;
+
+    entity importBOM {
+        BOM : array of ObjBOM;
+    }
+
+    entity killBOM {
+        kill : Boolean;
+    }
+//entity Fornecedor as projection on p.Fornecedor;
+}

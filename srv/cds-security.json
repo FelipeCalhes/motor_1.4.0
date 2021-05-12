@@ -1,0 +1,21 @@
+{
+  "xsappname": "srv",
+  "tenant-mode": "dedicated",
+  "scopes": [
+    {
+      "name": "$XSAPPNAME.Read",
+      "description": "Read"
+    }
+  ],
+  "attributes": [],
+  "role-templates": [
+    {
+      "name": "Read",
+      "description": "generated",
+      "scope-references": [
+        "$XSAPPNAME.Read"
+      ],
+      "attribute-references": []
+    }
+  ]
+}

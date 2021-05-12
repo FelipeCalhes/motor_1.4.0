@@ -1,0 +1,116 @@
+{
+  "role": {
+    "name": "Role_R1#",
+    "object_privileges": [
+      {
+        "name": "REGRASNAMESPACE_TIPOOS",
+        "type": "TABLE",
+        "privileges_with_grant_option": [
+          "SELECT"
+        ]
+      },
+      {
+        "name": "REGRASNAMESPACE_MATERIAIS",
+        "type": "TABLE",
+        "privileges_with_grant_option": [
+          "SELECT"
+        ]
+      },
+      {
+        "name": "SUB_ZVMM006_DS",
+        "type": "REMOTE SUBSCRIPTION",
+        "privileges_with_grant_option": [
+          "ALTER"
+        ]
+      },
+      {
+        "name": "REGRASNAMESPACE_BOM",
+        "type": "TABLE",
+        "privileges_with_grant_option": [
+          "SELECT"
+        ]
+      },
+      {
+        "name": "REGRASNAMESPACE_FORNECEDOR",
+        "type": "TABLE",
+        "privileges_with_grant_option": [
+          "SELECT"
+        ]
+      },
+      {
+        "name": "REGRASNAMESPACE_REGRADECALCULO",
+        "type": "TABLE",
+        "privileges_with_grant_option": [
+          "SELECT"
+        ]
+      },
+      {
+        "name": "REGRASNAMESPACE_PARAMETROS",
+        "type": "TABLE",
+        "privileges_with_grant_option": [
+          "SELECT"
+        ]
+      },
+      {
+        "name": "REGRASNAMESPACE_ESTOQUE",
+        "type": "TABLE",
+        "privileges_with_grant_option": [
+          "SELECT"
+        ]
+      },
+      {
+        "name": "REGRASNAMESPACE_TECNICOPOREPO",
+        "type": "TABLE",
+        "privileges_with_grant_option": [
+          "SELECT",
+          "UPDATE",
+          "INSERT",
+          "DELETE",
+          "ALTER"
+        ]
+      },
+      {
+        "name": "SUB_ZVMM008_DS",
+        "type": "REMOTE SUBSCRIPTION",
+        "privileges_with_grant_option": [
+          "ALTER"
+        ]
+      },
+      {
+        "name": "REGRASNAMESPACE_RETORNODABAIXA",
+        "type": "TABLE",
+        "privileges_with_grant_option": [
+          "SELECT"
+        ]
+      },
+      {
+        "name": "REGRASNAMESPACE_EMPRESASHELP",
+        "type": "TABLE",
+        "privileges_with_grant_option": [
+          "SELECT"
+        ]
+      },
+      {
+        "name": "REGRASNAMESPACE_CENTROSHELP",
+        "type": "TABLE",
+        "privileges_with_grant_option": [
+          "SELECT"
+        ]
+      },
+      {
+        "name": "REGRASNAMESPACE_TIPOOSHELPODATA",
+        "type": "TABLE",
+        "privileges_with_grant_option": [
+          "SELECT"
+        ]
+      },
+      {
+        "name": "REGRASNAMESPACE_TIPOWOBAIXAAUTOMATICA",
+        "type": "TABLE",
+        "privileges_with_grant_option": [
+          "SELECT"
+        ]
+      }
+    ]
+  }
+}

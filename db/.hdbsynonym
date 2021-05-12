@@ -1,0 +1,9 @@
+{
+    "REGRASNAMESPACE_TIPOOS": {
+    "target": {
+        "database"   : "DBADMIN", // optional (cross-database access)
+        "schema"     : "DBADMIN",        // optional
+        "object"     : "ZTBMM907_TIPO_OS"
+    }
+  }
+}

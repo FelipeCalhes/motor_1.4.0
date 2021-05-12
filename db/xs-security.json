@@ -1,0 +1,41 @@
+{
+    "xsappname": "xsmotor-regras",
+    "tenant-mode": "dedicated",
+    "scopes": [
+        {
+            "name": "uaa.user",
+            "description": "UAA"
+        },
+        {
+            "name": "$XSAPPNAME.xsmotor-regras",
+            "description": "Motor de regras"
+        },
+        {
+            "name": "$XSAPPNAME.Read",
+            "description": "Read"
+        }
+    ],
+    "role-templates": [
+        {
+            "name": "Token_Exchange",
+            "description": "UAA",
+            "scope-references": [
+                "uaa.user"
+            ]
+        },
+        {
+            "name": "user",
+            "description": "User",
+            "scope-references": [
+                "$XSAPPNAME.Read"
+            ]
+        },
+        {
+            "name": "Admin",
+            "description": "Admin",
+            "scope-references": [
+                "$XSAPPNAME.Admin"
+            ]
+        }
+    ]
+}

@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RepTask Name="CONSOLIDADO" Description="" Type="REALTIME" RepVersion="2.0">
+  <SourceObjects
+        SourceType="ABAPAdapter"
+        TTFullyQualifiedName="FALSE"
+        VTFullyQualifiedName="FALSE"
+        RemoteSourceName="E8Q"
+        VirtualTableSchema="">
+    <SourceObject RemoteObjectUniqueName="ABAPTABLES.ZTBMM977" SourceDisplayName="ZTBMM977">
+      <SourceColumns>
+        <SourceColumn Name="ID_CONSOLID_ORIG" Datatype="NVARCHAR" Length="50" Nullable="false" PartOfPrimaryKey="true"></SourceColumn>
+        <SourceColumn Name="CONSOLIDADO" Datatype="NVARCHAR" Length="50" Nullable="false" PartOfPrimaryKey="true"></SourceColumn>
+		<SourceColumn Name="CONTADOR" Datatype="NVARCHAR" Length="3" Nullable="false" PartOfPrimaryKey="true"></SourceColumn>
+		<SourceColumn Name="MATNR" Datatype="NVARCHAR" Length="18" Nullable="true" PartOfPrimaryKey="false"></SourceColumn>
+		<SourceColumn Name="STATUS" Datatype="NVARCHAR" Length="1" Nullable="true" PartOfPrimaryKey="false"></SourceColumn>
+		<SourceColumn Name="MENSAGEM" Datatype="NVARCHAR" Length="220" Nullable="true" PartOfPrimaryKey="false"></SourceColumn>
+		<SourceColumn Name="LBKUM" Datatype="DECIMAL" Length="15" Nullable="true" PartOfPrimaryKey="false" Precision="10" Scale="3"></SourceColumn>
+		<SourceColumn Name="LBKUM_DOC" Datatype="DECIMAL" Length="15" Nullable="true" PartOfPrimaryKey="false" Precision="10" Scale="3"></SourceColumn>
+		<SourceColumn Name="MBLNR" Datatype="NVARCHAR" Length="10" Nullable="true" PartOfPrimaryKey="false"></SourceColumn>
+		<SourceColumn Name="MJAHR" Datatype="NVARCHAR" Length="4" Nullable="true" PartOfPrimaryKey="false"></SourceColumn>
+		<SourceColumn Name="DATA" Datatype="NVARCHAR" Length="8" Nullable="true" PartOfPrimaryKey="false"></SourceColumn>
+		<SourceColumn Name="WO" Datatype="NVARCHAR" Length="50" Nullable="true" PartOfPrimaryKey="false"></SourceColumn>
+		<SourceColumn Name="LIFNR" Datatype="NVARCHAR" Length="10" Nullable="true" PartOfPrimaryKey="false"></SourceColumn>
+		<SourceColumn Name="ITEM_TEXT" Datatype="NVARCHAR" Length="50" Nullable="true" PartOfPrimaryKey="false"></SourceColumn>        
+      </SourceColumns>
+      <Annotations Key="sap.im.customParameters">
+        <Annotation
+              Key="__DP_READER_OPTIONS__"
+              Value="&lt;PropertyGroup name=&quot;ZTBMM977&quot;&gt;&lt;PropertyEntry name=&quot;extractionmode&quot;&gt;F&lt;/PropertyEntry&gt;&lt;PropertyEntry name=&quot;extractionname&quot;&gt;&lt;/PropertyEntry&gt;&lt;PropertyEntry name=&quot;extractionmethod&quot;&gt;queue&lt;/PropertyEntry&gt;&lt;/PropertyGroup&gt;"></Annotation>
+        <Annotation
+              Key="__DP_CDC_READER_OPTIONS__"
+              Value="&lt;PropertyGroup name=&quot;ABAPTABLES.ZTBMM977&quot;&gt;&lt;PropertyEntry name=&quot;extractionperiod&quot;&gt;&lt;/PropertyEntry&gt;&lt;PropertyEntry name=&quot;extractionname&quot;&gt;&lt;/PropertyEntry&gt;&lt;/PropertyGroup&gt;"></Annotation>
+      </Annotations>
+      <Annotations Key="sap.ui.customParameters">
+        <Annotation
+              Key="__DP_READER_OPTIONS__"
+              Value="&lt;PropertyGroup displayName=&quot;ZTBMM977&quot; id=&quot;0&quot; isRepeatable=&quot;false&quot; name=&quot;ZTBMM977&quot; isEnabled=&quot;false&quot;&gt;&lt;PropertyEntry allowAlterWhenSuspended=&quot;false&quot; defaultValue=&quot;F&quot; displayName=&quot;Extraction mode&quot; id=&quot;0&quot; isRepeatable=&quot;false&quot; isRequired=&quot;false&quot; name=&quot;extractionmode&quot; type=&quot;ENUM&quot; isEnabled=&quot;true&quot;&gt;&lt;EnumValue displayName=&quot;Delta extraction&quot; name=&quot;D&quot;&gt;&lt;/EnumValue&gt;&lt;EnumValue displayName=&quot;Full extraction&quot; name=&quot;F&quot;&gt;&lt;/EnumValue&gt;F&lt;/PropertyEntry&gt;&lt;PropertyEntry allowAlterWhenSuspended=&quot;false&quot; displayName=&quot;Extraction name&quot; id=&quot;0&quot; isRepeatable=&quot;false&quot; isRequired=&quot;false&quot; name=&quot;extractionname&quot; type=&quot;STRING&quot; isEnabled=&quot;true&quot;&gt;&lt;/PropertyEntry&gt;&lt;PropertyEntry allowAlterWhenSuspended=&quot;false&quot; defaultValue=&quot;direct&quot; displayName=&quot;Extraction method&quot; id=&quot;0&quot; isRepeatable=&quot;false&quot; isRequired=&quot;false&quot; name=&quot;extractionmethod&quot; type=&quot;ENUM&quot; isEnabled=&quot;true&quot;&gt;&lt;EnumValue displayName=&quot;Direct extraction bypassing ODP queue&quot; name=&quot;direct&quot;&gt;&lt;/EnumValue&gt;&lt;EnumValue displayName=&quot;Extraction through ODP queue&quot; name=&quot;queue&quot;&gt;&lt;/EnumValue&gt;queue&lt;/PropertyEntry&gt;&lt;/PropertyGroup&gt;"></Annotation>
+        <Annotation
+              Key="__DP_CDC_READER_OPTIONS__"
+              Value="&#xA;&lt;PropertyGroup displayName=&quot;ZTBMM977&quot; id=&quot;0&quot; isRepeatable=&quot;false&quot; name=&quot;ABAPTABLES.ZTBMM977&quot;&gt;&#xA;    &lt;PropertyEntry allowAlterWhenSuspended=&quot;false&quot; displayName=&quot;Extraction period&quot; id=&quot;0&quot; isRepeatable=&quot;false&quot; isRequired=&quot;false&quot; name=&quot;extractionperiod&quot; type=&quot;STRING&quot;/&gt;&#xA;    &lt;PropertyEntry allowAlterWhenSuspended=&quot;false&quot; displayName=&quot;Extraction name&quot; id=&quot;0&quot; isRepeatable=&quot;false&quot; isRequired=&quot;false&quot; name=&quot;extractionname&quot; type=&quot;STRING&quot;/&gt;&#xA;&lt;/PropertyGroup&gt;&#xA;"></Annotation>
+      </Annotations>
+    </SourceObject>
+    <Annotations Key="sap.im.properties">
+      <Annotation Key="cdc" Value="true"/>
+    </Annotations>
+    <Annotations Key="sap.im.properties">
+      <Annotation Key="cdc" Value="true"/>
+    </Annotations>
+  </SourceObjects>
+  <TargetObjects>
+    <TargetObject
+          ObjectName="REGRASNAMESPACE_CONSOLIDADO"
+          Type="TABLE"
+          GeneratedByReptask="true"
+          DropTargetTableIfExists="false"
+          WriterType="UPSERT">
+      <TargetColumns>
+        <TargetColumn Name="ID_CONSOLID_ORIG" Datatype="NVARCHAR" Length="50" Nullable="false" PartOfPrimaryKey="true"></TargetColumn>
+        <TargetColumn Name="CONSOLIDADO" Datatype="NVARCHAR" Length="50" Nullable="false" PartOfPrimaryKey="true"></TargetColumn>
+		<TargetColumn Name="CONTADOR" Datatype="NVARCHAR" Length="3" Nullable="false" PartOfPrimaryKey="true"></TargetColumn>
+		<TargetColumn Name="MATNR" Datatype="NVARCHAR" Length="18" Nullable="true" PartOfPrimaryKey="false"></TargetColumn>
+		<TargetColumn Name="STATUS" Datatype="NVARCHAR" Length="1" Nullable="true" PartOfPrimaryKey="false"></TargetColumn>
+		<TargetColumn Name="MENSAGEM" Datatype="NVARCHAR" Length="220" Nullable="true" PartOfPrimaryKey="false"></TargetColumn>
+		<TargetColumn Name="LBKUM" Datatype="DECIMAL" Length="15" Nullable="true" PartOfPrimaryKey="false" Precision="10" Scale="3"></TargetColumn>
+		<TargetColumn Name="LBKUM_DOC" Datatype="DECIMAL" Length="15" Nullable="true" PartOfPrimaryKey="false" Precision="10" Scale="3"></TargetColumn>
+		<TargetColumn Name="MBLNR" Datatype="NVARCHAR" Length="10" Nullable="true" PartOfPrimaryKey="false"></TargetColumn>
+		<TargetColumn Name="MJAHR" Datatype="NVARCHAR" Length="4" Nullable="true" PartOfPrimaryKey="false"></TargetColumn>
+		<TargetColumn Name="DATA" Datatype="NVARCHAR" Length="8" Nullable="true" PartOfPrimaryKey="false"></TargetColumn>
+		<TargetColumn Name="WO" Datatype="NVARCHAR" Length="50" Nullable="true" PartOfPrimaryKey="false"></TargetColumn>
+		<TargetColumn Name="LIFNR" Datatype="NVARCHAR" Length="10" Nullable="true" PartOfPrimaryKey="false"></TargetColumn>
+		<TargetColumn Name="ITEM_TEXT" Datatype="NVARCHAR" Length="50" Nullable="true" PartOfPrimaryKey="false"></TargetColumn> 
+      </TargetColumns>
+    </TargetObject>
+  </TargetObjects>
+  <Mappings>
+    <Mapping
+          ObjectName="REGRASNAMESPACE_CONSOLIDADO"
+          RemoteObjectUniqueName="ABAPTABLES.ZTBMM977"
+          ReplicationBehavior="InitAndRealtime"
+          VTObjectName="ZTBMM977">
+      <TargetColumns>
+        <TargetColumn Name="ID_CONSOLID_ORIG" ProjectionExpression="&quot;ID_CONSOLID_ORIG&quot;"></TargetColumn>
+        <TargetColumn Name="CONSOLIDADO" ProjectionExpression="&quot;CONSOLIDADO&quot;"></TargetColumn>
+		<TargetColumn Name="CONTADOR" ProjectionExpression="&quot;CONTADOR&quot;"></TargetColumn>
+		<TargetColumn Name="MATNR" ProjectionExpression="&quot;MATNR&quot;"></TargetColumn>
+		<TargetColumn Name="STATUS" ProjectionExpression="&quot;STATUS&quot;"></TargetColumn>
+		<TargetColumn Name="MENSAGEM" ProjectionExpression="&quot;MENSAGEM&quot;"></TargetColumn>
+		<TargetColumn Name="LBKUM" ProjectionExpression="&quot;LBKUM&quot;"></TargetColumn>
+		<TargetColumn Name="LBKUM_DOC" ProjectionExpression="&quot;LBKUM_DOC&quot;"></TargetColumn>
+		<TargetColumn Name="MBLNR" ProjectionExpression="&quot;MBLNR&quot;"></TargetColumn>
+		<TargetColumn Name="MJAHR" ProjectionExpression="&quot;MJAHR&quot;"></TargetColumn>
+		<TargetColumn Name="DATA" ProjectionExpression="&quot;DATA&quot;"></TargetColumn>
+		<TargetColumn Name="WO" ProjectionExpression="&quot;WO&quot;"></TargetColumn>
+		<TargetColumn Name="LIFNR" ProjectionExpression="&quot;LIFNR&quot;"></TargetColumn>
+		<TargetColumn Name="ITEM_TEXT" ProjectionExpression="&quot;ITEM_TEXT&quot;"></TargetColumn>
+      </TargetColumns>
+    </Mapping>
+  </Mappings>
+</RepTask>

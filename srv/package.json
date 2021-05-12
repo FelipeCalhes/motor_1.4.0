@@ -1,0 +1,59 @@
+{
+    "name": "xsmotor-regras",
+    "version": "1.0.0",
+    "description": "motor de regras",
+    "repository": "<Add your repository here>",
+    "license": "UNLICENSED",
+    "private": true,
+    "dependencies": {
+        "@sap/cds": "^4",
+        "@sap/hana-client": "^2.6.61",
+        "@sap/xsenv": "^3.0.0",
+        "@sap/xssec": "^3.0.0",
+        "express": "^4",
+        "passport": "^0.4.1"
+    },
+    "scripts": {
+        "start": "cds run",
+        "env": "cp ./default-env.json ./db/default-env.json && cp ./default-env.json ./srv/default-env.json",
+        "build": "cds build/all --clean && cp ./default-env.json ./db/default-env.json && cp ./default-env.json ./srv/default-env.json && cp ./package.json ./srv/package.json"
+    },
+    "cds": {
+        "build": {
+            "target": ".",
+            "tasks": [
+                {
+                    "src": "db",
+                    "for": "hana",
+                    "options": {
+                        "model": [
+                            "db",
+                            "srv"
+                        ]
+                    }
+                },
+                {
+                    "src": "srv",
+                    "for": "node-cf",
+                    "options": {
+                        "model": [
+                            "db",
+                            "srv"
+                        ]
+                    }
+                }
+            ]
+        },
+        "hana": {
+            "deploy-format": "hdbtable"
+        },
+        "requires": {
+            "db": {
+                "kind": "hana"
+            },
+            "uaa": {
+                "kind": "xsuaa"
+            }
+        }
+    }
+}

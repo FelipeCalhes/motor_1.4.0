@@ -1,0 +1,44 @@
+_schema-version: '3.1'
+ID: xsmotor-de-regras
+version: 1.0.0
+description: Motor de Regras
+parameters:
+  enable-parallel-deployments: true
+build-parameters:
+  before-all:
+    - builder: custom
+      commands:
+        - npm install --production
+        - npx -p @sap/cds-dk cds build --production
+modules:
+  - name: xsmotor-regras
+    type: nodejs
+    path: ./
+    requires:
+      - name: motor-regras
+      - name: xsuaa-motor-regras
+    provides:
+      - name: srv-api
+        properties:
+          srv-url: '${default-url}'
+  
+resources:
+  - name: motor-regras
+    type: com.sap.xs.hdi-container
+    parameters:
+      service: hana
+      service-plan: hdi-shared
+    properties:
+      hdi-service-name: '${service-name}'
+  - name: cross-dbadmin
+    type: org.cloudfoundry.existing-service
+    parameters:
+      service: cross_dbadmin
+    properties:
+      ServiceName_1: '${service-name}'
+  - name: xsuaa-motor-regras
+    type: com.sap.xs.uaa
+    description: xsmotor-regras
+    parameters:
+      service-name: xsmotor-regras
+      service-plan: application

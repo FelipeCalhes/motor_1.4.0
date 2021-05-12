@@ -1,0 +1,116 @@
+{
+  "role": {
+    "name": "Role_R1",
+    "object_privileges": [
+      {
+        "name": "REGRASNAMESPACE_TIPOOS",
+        "type": "TABLE",
+        "privileges": [
+          "SELECT"
+        ]
+      },
+      {
+        "name": "REGRASNAMESPACE_MATERIAIS",
+        "type": "TABLE",
+        "privileges": [
+          "SELECT"
+        ]
+      },
+      {
+        "name": "SUB_ZVMM006_DS",
+        "type": "REMOTE SUBSCRIPTION",
+        "privileges": [
+          "ALTER"
+        ]
+      },
+      {
+        "name": "REGRASNAMESPACE_BOM",
+        "type": "TABLE",
+        "privileges": [
+          "SELECT"
+        ]
+      },
+      {
+        "name": "REGRASNAMESPACE_FORNECEDOR",
+        "type": "TABLE",
+        "privileges": [
+          "SELECT"
+        ]
+      },
+      {
+        "name": "REGRASNAMESPACE_REGRADECALCULO",
+        "type": "TABLE",
+        "privileges": [
+          "SELECT"
+        ]
+      },
+      {
+        "name": "REGRASNAMESPACE_PARAMETROS",
+        "type": "TABLE",
+        "privileges": [
+          "SELECT"
+        ]
+      },
+      {
+        "name": "REGRASNAMESPACE_ESTOQUE",
+        "type": "TABLE",
+        "privileges": [
+          "SELECT"
+        ]
+      },
+      {
+        "name": "REGRASNAMESPACE_TECNICOPOREPO",
+        "type": "TABLE",
+        "privileges": [
+          "SELECT",
+          "INSERT",
+          "ALTER",
+          "DELETE",
+          "UPDATE"
+        ]
+      },
+      {
+        "name": "SUB_ZVMM008_DS",
+        "type": "REMOTE SUBSCRIPTION",
+        "privileges": [
+          "ALTER"
+        ]
+      },
+      {
+        "name": "REGRASNAMESPACE_RETORNODABAIXA",
+        "type": "TABLE",
+        "privileges": [
+          "SELECT"
+        ]
+      },
+      {
+        "name": "REGRASNAMESPACE_CENTROSHELP",
+        "type": "TABLE",
+        "privileges": [
+          "SELECT"
+        ]
+      },
+      {
+        "name": "REGRASNAMESPACE_EMPRESASHELP",
+        "type": "TABLE",
+        "privileges": [
+          "SELECT"
+        ]
+      },
+      {
+        "name": "REGRASNAMESPACE_TIPOOSHELPODATA",
+        "type": "TABLE",
+        "privileges": [
+          "SELECT"
+        ]
+      },
+      {
+        "name": "REGRASNAMESPACE_TIPOWOBAIXAAUTOMATICA",
+        "type": "TABLE",
+        "privileges": [
+          "SELECT"
+        ]
+      }
+    ]
+  }
+}

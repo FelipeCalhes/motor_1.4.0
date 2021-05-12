@@ -1,0 +1,29 @@
+
+POST http://localhost:4004/motor-de-regras/importBOM  HTTP/1.1
+Content-Type: application/json;IEEE754Compatible=true
+
+{
+    "BOM":[
+        {
+            "tipoInstalacao":"C",
+            "idTipoOS":"3",
+            "codMaterialSAP":"22056339",
+            "qtdMin":"2",
+            "qtdMax":"8",
+            "unidadeConsumo":"UN"
+        },
+        {
+            "tipoInstalacao":"T",
+            "idTipoOS":"0003",
+            "codMaterialSAP":"22056339",
+            "qtdMin":"2",
+            "qtdMax":"5",
+            "unidadeConsumo":"UN"
+        }  
+    ]
+}
+
+###
+
+GET http://localhost:4004/motor-de-regras/killBOM HTTP/1.1
+###
