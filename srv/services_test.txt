@@ -23,6 +23,7 @@ service MotorDeRegras {
     entity FornecedorHelp as projection on p.FornecedorHelpOdata;
     entity LoginTecnico   as projection on p.LoginTecnico;
     entity RetornoDaBaixa as projection on p.RetornoDaBaixa;
+    entity ExpandTecnico  as projection on p.ExpandTecnico;
 
     entity importBOM {
         BOM : array of ObjBOM;

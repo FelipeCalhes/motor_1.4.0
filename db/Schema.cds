@@ -50,7 +50,7 @@ entity Fornecedor_VT {
     stcd2     : String(11);
 }
 
-entity FornecedorView      as
+entity FornecedorView       as
     select from Fornecedor_VT {
         lifnr     as lifnr,
         berid     as berid,
@@ -71,7 +71,7 @@ entity Estoque_VT {
     meins : String(3);
 }
 
-entity EstoqueView         as
+entity EstoqueView          as
     select from Estoque_VT {
         matnr as matnr,
         werks as werks,
@@ -88,7 +88,7 @@ entity Empresas {
     branch : String(4);
 }
 
-entity EmpresasHelp        as
+entity EmpresasHelp         as
     select from Empresas {
         bukrs  as empresa,
         branch as branch
@@ -104,7 +104,7 @@ entity Centros {
     j_1bbranch : String(4);
 }
 
-entity CentrosHelp         as
+entity CentrosHelp          as
     select from Centros {
         werks      as werks,
         lifnr      as fornecedorID,
@@ -118,13 +118,26 @@ entity TecnicoPorEPO {
                                on $self.CodFornecedorSAP = fornecedor.lifnr
 }
 
+entity ExpandTecnico        as
+    select from TecnicoPorEPO {
+        loginTecnico     as loginTecnico,
+        CodFornecedorSAP as CodFornecedorSAP,
+        fornecedor.name1 as descrFornecedor,
+        fornecedor.stcd1 as CNPJ
+    }
+    group by
+        loginTecnico,
+        CodFornecedorSAP,
+        fornecedor.name1,
+        fornecedor.stcd1;
+
 entity LoginTecnico {
     key loginTecnico     : String(120);
         CodFornecedorSAP : String(50);
         CNPJ             : String(10);
 }
 
-entity BOM2ODATA           as
+entity BOM2ODATA            as
     select from BOM
     left join Materiais mat
         on BOM.codMaterialSAP = mat.matnr
@@ -176,13 +189,13 @@ entity RespBaixa {
         item_text        : String(50);
 }
 
-entity TipoOsHelpOdata     as
+entity TipoOsHelpOdata      as
     select from TipoOs {
         tipo_Os as tipoOs,
         desc_os as descricaoOs
     };
 
-entity RetornoDaBaixa      as
+entity RetornoDaBaixa       as
     select from RespBaixa {
         consolidado      as consolidado,
         id_consolid_orig as consolidID,
@@ -216,7 +229,7 @@ entity Materiais_VT {
         meins : String(3);
 }
 
-entity MateriaisView       as
+entity MateriaisView        as
     select from Materiais_VT {
         matnr as matnr,
         spras as spras,
@@ -224,7 +237,7 @@ entity MateriaisView       as
         meins as meins
     };
 
-entity MateriaisHelpOdata  as
+entity MateriaisHelpOdata   as
     select from Materiais {
         matnr as material,
         maktx as descMaterial,
@@ -233,7 +246,18 @@ entity MateriaisHelpOdata  as
     where
         spras = 'P';
 
-entity FornecedorHelpOdata as
+entity FornecedorHelpOdata  as
+    select from Fornecedor {
+        lifnr as fornecedor,
+        name1 as nomeFornecedor,
+        stcd1 as cnpj
+    }
+    group by
+        lifnr,
+        name1,
+        stcd1;
+
+entity FornecedorHelpCentro as
     select from Fornecedor {
         lifnr     as fornecedor,
         name1     as nomeFornecedor,
@@ -246,7 +270,8 @@ entity FornecedorHelpOdata as
         stcd1,
         werks_mrp;
 
-entity MatCount            as
+
+entity MatCount             as
     select count(
         *
     ) as c : String(10) from Materiais;

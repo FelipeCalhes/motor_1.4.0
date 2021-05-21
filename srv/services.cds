@@ -136,4 +136,20 @@ service MotorDeRegras {
     }]) {
         kill : Boolean;
     }
+
+    entity ExpandTecnico @(restrict : [{
+        grant : [
+            'READ',
+            'WRITE'
+        ],
+        to    : 'Edit'
+    }]) as projection on p.ExpandTecnico;
+
+    entity Fornecedor @(restrict : [{
+        grant : [
+            'READ',
+            'WRITE'
+        ],
+        to    : 'Edit'
+    }]) as projection on p.Fornecedor;
 }

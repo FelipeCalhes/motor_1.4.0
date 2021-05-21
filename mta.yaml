@@ -1,6 +1,6 @@
 _schema-version: '3.1'
 ID: xsmotor-de-regras
-version: 1.0.0
+version: 1.1.0
 description: Motor de Regras
 parameters:
   enable-parallel-deployments: true
@@ -11,12 +11,15 @@ build-parameters:
         - npm install --production
         - npx -p @sap/cds-dk cds build --production
 modules:
-  - name: xsmotor-regras
+  - name: motor-backend
     type: nodejs
     path: ./
+    parameters: 
+      routes: # if not defined, a default route would be auto assigned unless no-route is specified
+        - route: "xsmotor-regras.cfapps.eu10.hana.ondemand.com"  
     requires:
       - name: motor-regras
-      - name: xsuaa-motor-regras
+      - name: xsmotor-regras
     provides:
       - name: srv-api
         properties:
@@ -36,7 +39,7 @@ resources:
       service: cross_dbadmin
     properties:
       ServiceName_1: '${service-name}'
-  - name: xsuaa-motor-regras
+  - name: xsmotor-regras
     type: com.sap.xs.uaa
     description: xsmotor-regras
     parameters:
