@@ -19,7 +19,10 @@ service MotorDeRegras {
             'READ',
             'WRITE'
         ],
-        to    : 'Edit'
+        to    : [
+            'Edit',
+            'system-user'
+        ]
     }]) as projection on p.BOM;
 
     //entity BOMUpd as projection on p.BOM;
@@ -29,7 +32,10 @@ service MotorDeRegras {
             'READ',
             'WRITE'
         ],
-        to    : 'Edit'
+        to    : [
+            'Edit',
+            'system-user'
+        ]
     }]) as projection on p.RegraDeCalculo;
 
     entity Parametros @(restrict : [{
@@ -37,7 +43,10 @@ service MotorDeRegras {
             'READ',
             'WRITE'
         ],
-        to    : 'Edit'
+        to    : [
+            'Edit',
+            'system-user'
+        ]
     }]) as projection on p.Parametros;
 
     entity TecnicoPorEPO @(restrict : [{
@@ -45,7 +54,10 @@ service MotorDeRegras {
             'READ',
             'WRITE'
         ],
-        to    : 'Edit'
+        to    : [
+            'Edit',
+            'system-user'
+        ]
     }]) as projection on p.TecnicoPorEPO;
 
     entity TipoOsHelp @(restrict : [{
@@ -53,7 +65,10 @@ service MotorDeRegras {
             'READ',
             'WRITE'
         ],
-        to    : 'Edit'
+        to    : [
+            'Edit',
+            'system-user'
+        ]
     }]) as projection on p.TipoOsHelpOdata;
 
     entity MateriaisHelp @(restrict : [{
@@ -61,7 +76,10 @@ service MotorDeRegras {
             'READ',
             'WRITE'
         ],
-        to    : 'Edit'
+        to    : [
+            'Edit',
+            'system-user'
+        ]
     }]) as projection on p.MateriaisHelpOdata;
 
     entity FornecedorHelp @(restrict : [{
@@ -69,7 +87,10 @@ service MotorDeRegras {
             'READ',
             'WRITE'
         ],
-        to    : 'Edit'
+        to    : [
+            'Edit',
+            'system-user'
+        ]
     }]) as projection on p.FornecedorHelpOdata;
 
     entity LoginTecnico @(restrict : [{
@@ -77,7 +98,10 @@ service MotorDeRegras {
             'READ',
             'WRITE'
         ],
-        to    : 'Edit'
+        to    : [
+            'Edit',
+            'system-user'
+        ]
     }]) as projection on p.LoginTecnico;
 
     entity RetornoDaBaixa @(restrict : [{
@@ -85,7 +109,10 @@ service MotorDeRegras {
             'READ',
             'WRITE'
         ],
-        to    : 'Edit'
+        to    : [
+            'Edit',
+            'system-user'
+        ]
     }]) as projection on p.RetornoDaBaixa;
 
     entity importBOM @(restrict : [{
@@ -93,7 +120,10 @@ service MotorDeRegras {
             'READ',
             'WRITE'
         ],
-        to    : 'Edit'
+        to    : [
+            'Edit',
+            'system-user'
+        ]
     }]) {
         BOM : array of ObjBOM;
     }
@@ -103,7 +133,10 @@ service MotorDeRegras {
             'READ',
             'WRITE'
         ],
-        to    : 'Edit'
+        to    : [
+            'Edit',
+            'system-user'
+        ]
     }]) {
         kill : Boolean;
     }
@@ -113,7 +146,10 @@ service MotorDeRegras {
             'READ',
             'WRITE'
         ],
-        to    : 'Edit'
+        to    : [
+            'Edit',
+            'system-user'
+        ]
     }]) as projection on p.TipoWoBaixaAutomatica;
 
 
@@ -122,7 +158,10 @@ service MotorDeRegras {
             'READ',
             'WRITE'
         ],
-        to    : 'Edit'
+        to    : [
+            'Edit',
+            'system-user'
+        ]
     }]) {
         TipoWoBaixaAutomatica : array of ObjTipoWo;
     }
@@ -132,7 +171,10 @@ service MotorDeRegras {
             'READ',
             'WRITE'
         ],
-        to    : 'Edit'
+        to    : [
+            'Edit',
+            'system-user'
+        ]
     }]) {
         kill : Boolean;
     }
@@ -142,7 +184,10 @@ service MotorDeRegras {
             'READ',
             'WRITE'
         ],
-        to    : 'Edit'
+        to    : [
+            'Edit',
+            'system-user'
+        ]
     }]) as projection on p.ExpandTecnico;
 
     entity Fornecedor @(restrict : [{
@@ -150,6 +195,9 @@ service MotorDeRegras {
             'READ',
             'WRITE'
         ],
-        to    : 'Edit'
+        to    : [
+            'Edit',
+            'system-user'
+        ]
     }]) as projection on p.Fornecedor;
 }
