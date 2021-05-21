@@ -27,4 +27,4 @@ mta_archives/
 # .idea
 
 # auto generated wildcard
-.env
+# .env
