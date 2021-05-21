@@ -1,0 +1,7 @@
+{
+  "default_access_role": {
+    "C91DA5470C684A3B8DC2D121E092CFC9": {
+      "schema": "C91DA5470C684A3B8DC2D121E092CFC9"
+    }
+  }
+}

@@ -1,0 +1,24 @@
+Archives WITH CHANGES for prd:
+
+1. db/cfg/ESTOQUE.hdbreptask
+    Changes the source
+
+2. db/src/replMateriais.hdbreptask
+    Changes the source
+
+3. db/src/VENDOR.hdbreptask
+    Changes the source
+    
+4. default-env.json
+    Changes app binds for db deployment
+
+5. default_access_role
+    Changes container name
+
+PS.
+
+db/cfg/.hdbsynonym
+    Does not change in this case because the DBADMIN has the same name in both environments
+
+package.json
+    Does not change in this case because there is no path definition (eg. cpi destination)

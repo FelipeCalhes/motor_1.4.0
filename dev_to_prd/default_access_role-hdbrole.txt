@@ -1,0 +1,39 @@
+{
+  "role": {
+    "name": "default_access_role",
+    "object_privileges": [
+      {
+        "name": "SUB_ZVMM006_DS",
+        "type": "REMOTE SUBSCRIPTION",
+        "privileges": [
+          "ALTER"
+        ]
+      },
+      {
+        "name": "REGRASNAMESPACE_BOM",
+        "type": "TABLE",
+        "privileges": [
+          "INSERT",
+          "SELECT",
+          "UPDATE"
+        ]
+      }
+    ],
+    "schema_privileges": [
+      {
+        "reference": "C91DA5470C684A3B8DC2D121E092CFC9",
+        "privileges": [
+          "INSERT",
+          "SELECT",
+          "UPDATE",
+          "EXECUTE",
+          "CREATE TEMPORARY TABLE",
+          "SELECT CDS METADATA",
+          "DELETE",
+          "CREATE ANY",
+          "ALTER"
+        ]
+      }
+    ]
+  }
+} 
