@@ -200,4 +200,15 @@ service MotorDeRegras {
             'system-user'
         ]
     }]) as projection on p.Fornecedor;
+
+    entity MateriaisExcecao @(restrict : [{
+        grant : [
+            'READ',
+            'WRITE'
+        ],
+        to    : [
+            'Edit',
+            'system-user'
+        ]
+    }]) as projection on p.MateriaisExcecao;
 }

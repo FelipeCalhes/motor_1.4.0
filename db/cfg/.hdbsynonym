@@ -26,26 +26,5 @@
         "schema"     : "DBADMIN",        // optional
         "object"     : "J_1BBRANCH_BUSINESSPLACE"
     }
-  },
-   "REGRASNAMESPACE_MATERIAIS_VT": {
-    "target": {
-
-        "schema"     : "DBADMIN",        // optional
-        "object"     : "ZVMM006_VT"
-    }
-  },
-   "REGRASNAMESPACE_FORNECEDOR_VT": {
-    "target": {
-
-        "schema"     : "DBADMIN",        // optional
-        "object"     : "ZVMM007_VT"
-    }
-  },
-   "REGRASNAMESPACE_ESTOQUE_VT": {
-    "target": {
-
-        "schema"     : "DBADMIN",        // optional
-        "object"     : "ZVMM008_VT"
-    }
   }
 }

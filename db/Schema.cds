@@ -41,48 +41,6 @@ entity Fornecedor {
 }
 
 @cds.persistence.exists
-entity Fornecedor_VT {
-    lifnr     : String(10);
-    berid     : String(10);
-    werks_mrp : String(10);
-    name1     : String(35);
-    stcd1     : String(16);
-    stcd2     : String(11);
-}
-
-entity FornecedorView       as
-    select from Fornecedor_VT {
-        lifnr     as lifnr,
-        berid     as berid,
-        werks_mrp as werks_mrp,
-        name1     as name1,
-        stcd1     as stcd1,
-        stcd2     as stcd2
-    };
-
-@cds.persistence.exists
-entity Estoque_VT {
-    matnr : String(18);
-    werks : String(4);
-    lifnr : String(10);
-    berid : String(10);
-    lblab : Decimal(13, 3);
-    lbins : Decimal(13, 3);
-    meins : String(3);
-}
-
-entity EstoqueView          as
-    select from Estoque_VT {
-        matnr as matnr,
-        werks as werks,
-        lifnr as lifnr,
-        berid as berid,
-        lblab as lblab,
-        lbins as lbins,
-        meins as meins
-    };
-
-@cds.persistence.exists
 entity Empresas {
     bukrs  : String(4);
     branch : String(4);
@@ -114,22 +72,22 @@ entity CentrosHelp          as
 entity TecnicoPorEPO {
     key loginTecnico     : String(120);
         CodFornecedorSAP : String(50);
-        fornecedor       : Association to one Fornecedor
-                               on $self.CodFornecedorSAP = fornecedor.lifnr
+        fornecedor       : Association to one FornecedorHelpOdata
+                               on $self.CodFornecedorSAP = fornecedor.fornecedor
 }
 
 entity ExpandTecnico        as
     select from TecnicoPorEPO {
         loginTecnico     as loginTecnico,
         CodFornecedorSAP as CodFornecedorSAP,
-        fornecedor.name1 as descrFornecedor,
-        fornecedor.stcd1 as CNPJ
+        fornecedor.fornecedor as descrFornecedor,
+        fornecedor.cnpj as CNPJ
     }
     group by
         loginTecnico,
         CodFornecedorSAP,
-        fornecedor.name1,
-        fornecedor.stcd1;
+        fornecedor.fornecedor,
+        fornecedor.cnpj;
 
 entity LoginTecnico {
     key loginTecnico     : String(120);
@@ -139,9 +97,9 @@ entity LoginTecnico {
 
 entity BOM2ODATA            as
     select from BOM
-    left join Materiais mat
+    left join Materiais as mat
         on BOM.codMaterialSAP = mat.matnr
-    left join TipoOs os
+    left join TipoOs as os
         on BOM.idTipoOS = os.tipo_Os
     {
         BOM.tipoInstalacao,
@@ -219,23 +177,8 @@ entity Materiais {
     key spras : String(1);
         maktx : String(40);
         meins : String(3);
+        mtart : String(4);
 }
-
-@cds.persistence.exists
-entity Materiais_VT {
-    key matnr : String(18);
-    key spras : String(1);
-        maktx : String(40);
-        meins : String(3);
-}
-
-entity MateriaisView        as
-    select from Materiais_VT {
-        matnr as matnr,
-        spras as spras,
-        maktx as maktx,
-        meins as meins
-    };
 
 entity MateriaisHelpOdata   as
     select from Materiais {
@@ -270,8 +213,11 @@ entity FornecedorHelpCentro as
         stcd1,
         werks_mrp;
 
-
 entity MatCount             as
     select count(
         *
     ) as c : String(10) from Materiais;
+
+entity MateriaisExcecao {
+    key material : String;
+}

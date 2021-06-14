@@ -1,6 +1,6 @@
 _schema-version: '3.1'
 ID: xsmotor-de-regras
-version: 1.1.1
+version: 1.2.0
 description: Motor de Regras
 parameters:
   enable-parallel-deployments: true

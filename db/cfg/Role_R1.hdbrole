@@ -112,21 +112,7 @@
         ]
       },
       {
-        "name": "REGRASNAMESPACE_ESTOQUEVIEW",
-        "type": "TABLE",
-        "privileges": [
-          "SELECT"
-        ]
-      },
-      {
-        "name": "REGRASNAMESPACE_FORNECEDORVIEW",
-        "type": "TABLE",
-        "privileges": [
-          "SELECT"
-        ]
-      },
-      {
-        "name": "REGRASNAMESPACE_MATERIAISVIEW",
+        "name": "REGRASNAMESPACE_MATERIAISEXCECAO",
         "type": "TABLE",
         "privileges": [
           "SELECT"
