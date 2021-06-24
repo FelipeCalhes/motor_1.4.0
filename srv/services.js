@@ -11,6 +11,8 @@ module.exports = (motor) => {
                 if (b.tipoInstalacao === r.tipoInstalacao && b.idTipoOS === r.idTipoOS && b.codMaterialSAP === r.codMaterialSAP) {
                     b.qtdMax = r.qtdMax
                     b.qtdMin = r.qtdMin
+                    b.pctBom = r.pctBom
+                    b.qtdTol = r.qtdTol
                     b.unidadeConsumo = r.unidadeConsumo
                     r.codMaterialSAP = 'Linha alterada'
                 }
@@ -23,6 +25,7 @@ module.exports = (motor) => {
                 bomTable.push(r)
             }
         })
+        console.log(JSON.stringify(bomTable))
         await srv.run(DELETE.from(BOM))
         try {
             await srv.run(INSERT.into(BOM).entries(bomTable))

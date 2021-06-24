@@ -6,6 +6,8 @@ define type ObjBOM {
     codMaterialSAP : String(40);
     qtdMin         : Decimal;
     qtdMax         : Decimal;
+    pctBom         : Decimal;
+    qtdTol         : Decimal;
     unidadeConsumo : String(3);
 }
 

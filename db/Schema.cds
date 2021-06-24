@@ -6,6 +6,8 @@ entity BOM {
     key codMaterialSAP : String(40);
         qtdMin         : Decimal;
         qtdMax         : Decimal;
+        pctBom         : Decimal;
+        qtdTol         : Decimal;
         unidadeConsumo : String(3);
         tipoOs         : Association to one TipoOs
                              on tipoOs.tipo_Os = $self.idTipoOS;

@@ -28,3 +28,5 @@ mta_archives/
 
 # auto generated wildcard
 # .env
+# auto generated wildcard
+.env

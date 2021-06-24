@@ -43,12 +43,12 @@
                 "instance_name": "cross_dbadmin",
                 "binding_name": null,
                 "credentials": {
-                    "password": "ClaroScp#1234",
+                    "password": "!@#123QWEqwe",
                     "schema": "DBADMIN",
                     "tags": [
                         "hana"
                     ],
-                    "user": "DBADMIN"
+                    "user": "DBADM"
                 },
                 "syslog_drain_url": "",
                 "volume_mounts": []

@@ -10,6 +10,8 @@ Content-Type: application/json;IEEE754Compatible=true
             "codMaterialSAP":"22056339",
             "qtdMin":"2",
             "qtdMax":"8",
+            "pctBom":"2",
+            "qtdTol":"8",
             "unidadeConsumo":"UN"
         },
         {
@@ -18,6 +20,8 @@ Content-Type: application/json;IEEE754Compatible=true
             "codMaterialSAP":"22056339",
             "qtdMin":"2",
             "qtdMax":"5",
+            "pctBom":"2",
+            "qtdTol":"8",
             "unidadeConsumo":"UN"
         }  
     ]

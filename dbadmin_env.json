@@ -1,0 +1,25 @@
+{
+    "user-provided": [
+        {
+            "name": "cross_dbadmin",
+            "instance_name": "cross_dbadmin",
+            "label": "user-provided",
+            "tags": [
+                "hana",
+                "endpoint:https://api.cf.eu10.hana.ondemand.com",
+                "org:Claro-dev",
+                "space:Portal de materiais"
+            ],
+            "plan": "",
+            "credentials": {
+                "driver": "com.sap.db.jdbc.Driver",
+                "password": "ClaroScp#1234",
+                "schema": "DBADMIN",
+                "tags": [
+                    "hana"
+                ],
+                "user": "DBADMIN"
+            }
+        }
+    ]
+}
