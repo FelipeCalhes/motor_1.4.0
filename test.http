@@ -6,27 +6,45 @@ Content-Type: application/json;IEEE754Compatible=true
     "BOM":[
         {
             "tipoInstalacao":"C",
-            "idTipoOS":"3",
-            "codMaterialSAP":"22056339",
+            "idTipoOS":"0003",
+            "codMaterialSAP":"teste123",
             "qtdMin":"2",
             "qtdMax":"8",
-            "pctBom":"2",
-            "qtdTol":"8",
-            "unidadeConsumo":"UN"
+            "pctBom":"1",
+            "qtdTol":"0",
+            "unidadeConsumo":"UN",
+            "aprovacaoClaro":false
         },
         {
             "tipoInstalacao":"T",
-            "idTipoOS":"0003",
-            "codMaterialSAP":"22056339",
+            "idTipoOS":"0004",
+            "codMaterialSAP":"teste321",
             "qtdMin":"2",
-            "qtdMax":"5",
-            "pctBom":"2",
-            "qtdTol":"8",
-            "unidadeConsumo":"UN"
+            "qtdMax":"3",
+            "pctBom":"0",
+            "qtdTol":"2",
+            "unidadeConsumo":"UN",
+            "aprovacaoClaro":false
         }  
     ]
 }
+###
 
+
+PATCH http://localhost:4004/motor-de-regras/BOM(tipoInstalacao=%27C%27,idTipoOS=%270003%27,codMaterialSAP=%27teste321%27)  HTTP/1.1
+Content-Type: application/json;IEEE754Compatible=true
+
+{
+    "tipoInstalacao":"C",
+    "idTipoOS":"0003",
+    "codMaterialSAP":"teste321",
+    "qtdMin":"2",
+    "qtdMax":"9",
+    "pctBom":"0",
+    "qtdTol":"2",
+    "unidadeConsumo":"UN",
+    "aprovacaoClaro":false
+}
 ###
 
 GET http://localhost:4004/motor-de-regras/killBOM HTTP/1.1

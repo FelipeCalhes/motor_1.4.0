@@ -9,6 +9,7 @@ define type ObjBOM {
     pctBom         : Decimal;
     qtdTol         : Decimal;
     unidadeConsumo : String(3);
+    aprovacaoClaro : Boolean;
 }
 
 define type ObjTipoWo {
@@ -16,16 +17,8 @@ define type ObjTipoWo {
 }
 
 service MotorDeRegras {
-    entity BOM @(restrict : [{
-        grant : [
-            'READ',
-            'WRITE'
-        ],
-        to    : [
-            'Edit',
-            'system-user'
-        ]
-    }]) as projection on p.BOM;
+
+    entity BOM  as projection on p.BOM;
 
     //entity BOMUpd as projection on p.BOM;
 
@@ -117,16 +110,7 @@ service MotorDeRegras {
         ]
     }]) as projection on p.RetornoDaBaixa;
 
-    entity importBOM @(restrict : [{
-        grant : [
-            'READ',
-            'WRITE'
-        ],
-        to    : [
-            'Edit',
-            'system-user'
-        ]
-    }]) {
+    entity importBOM {
         BOM : array of ObjBOM;
     }
 

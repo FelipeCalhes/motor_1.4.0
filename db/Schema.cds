@@ -6,9 +6,10 @@ entity BOM {
     key codMaterialSAP : String(40);
         qtdMin         : Decimal;
         qtdMax         : Decimal;
-        pctBom         : Decimal;
-        qtdTol         : Decimal;
+        pctBom         : Decimal(13,3);
+        qtdTol         : Decimal(13,0);
         unidadeConsumo : String(3);
+        aprovacaoClaro : Boolean default false;
         tipoOs         : Association to one TipoOs
                              on tipoOs.tipo_Os = $self.idTipoOS;
         materiais      : Association to one Materiais
