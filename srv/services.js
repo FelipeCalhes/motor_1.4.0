@@ -1,5 +1,6 @@
 module.exports = (motor) => {
 
+    //teste pull
     motor.before('CREATE', 'BOM', async (req) => {
         if (req.data.qtdTol > 0) {
             req.data.pctBom = 100 * req.data.qtdTol / req.data.qtdMax
