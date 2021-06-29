@@ -20,9 +20,9 @@ Content-Type: application/json;IEEE754Compatible=true
             "idTipoOS":"0004",
             "codMaterialSAP":"teste321",
             "qtdMin":"2",
-            "qtdMax":"3",
+            "qtdMax":"6",
             "pctBom":"0",
-            "qtdTol":"2",
+            "qtdTol":"4",
             "unidadeConsumo":"UN",
             "aprovacaoClaro":false
         }  
@@ -39,9 +39,9 @@ Content-Type: application/json;IEEE754Compatible=true
     "idTipoOS":"0003",
     "codMaterialSAP":"teste321",
     "qtdMin":"2",
-    "qtdMax":"9",
+    "qtdMax":"18",
     "pctBom":"0",
-    "qtdTol":"2",
+    "qtdTol":"4",
     "unidadeConsumo":"UN",
     "aprovacaoClaro":false
 }

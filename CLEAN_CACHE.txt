@@ -1,0 +1,7 @@
+
+df -h 
+df -ih
+
+rm -rf /home/user/.local/share/Trash/files
+rm -rf /home/user/.npm
+rm -rf /home/user/.cache
