@@ -63,7 +63,6 @@ module.exports = (motor) => {
                 bomTable.push(r)
             }
         })
-        console.log(JSON.stringify(reqArr))
         await srv.run(DELETE.from(BOM))
         try {
             await srv.run(INSERT.into(BOM).entries(bomTable))
