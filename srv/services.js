@@ -6,7 +6,7 @@ module.exports = (motor) => {
         } else if (req.data.pctBom > 0) {
             req.data.qtdTol = req.data.pctBom * req.data.qtdMax / 100
         }
-    })//coment coment commente
+    })
 
     motor.before('UPDATE', 'BOM', async (req) => {
         if (req.data.qtdTol > 0) {
@@ -62,7 +62,6 @@ module.exports = (motor) => {
                 bomTable.push(r)
             }
         })
-        console.log(JSON.stringify(reqArr))
         await srv.run(DELETE.from(BOM))
         try {
             await srv.run(INSERT.into(BOM).entries(bomTable))
