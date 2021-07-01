@@ -2,17 +2,33 @@ module.exports = (motor) => {
 
     motor.before('CREATE', 'BOM', async (req) => {
         if (req.data.qtdTol > 0) {
-            req.data.pctBom = 100 * req.data.qtdTol / req.data.qtdMax
+            req.data.pctBom = Math.trunc(100 * 100 * req.data.qtdTol / req.data.qtdMax) / 100
         } else if (req.data.pctBom > 0) {
-            req.data.qtdTol = req.data.pctBom * req.data.qtdMax / 100
+            req.data.qtdTol = Math.trunc(100 * req.data.pctBom * req.data.qtdMax / 100) / 100
         }
     })
 
     motor.before('UPDATE', 'BOM', async (req) => {
-        if (req.data.qtdTol > 0) {
-            req.data.pctBom = 100 * req.data.qtdTol / req.data.qtdMax
-        } else if (req.data.pctBom > 0) {
-            req.data.qtdTol = req.data.pctBom * req.data.qtdMax / 100
+        const srv = await cds.connect.to('db');
+        const { BOM } = srv.entities
+        bomTable = await srv.run(SELECT.one.from(BOM).where({
+            codMaterialSAP: req.data.codMaterialSAP,
+            idTipoOS: req.data.idTipoOS,
+            tipoInstalacao: req.data.tipoInstalacao
+        }))
+        if (!req.data.qtdMax) {
+            req.data.qtdMax = bomTable.qtdMax
+        }
+        if (!req.data.qtdTol) {
+            if (!req.data.pctBom) {
+                req.data.pctBom = bomTable.pctBom
+                req.data.qtdTol = Math.trunc(100 * req.data.pctBom * req.data.qtdMax / 100) / 100
+            } else {
+                req.data.qtdTol = Math.trunc(100 * req.data.pctBom * req.data.qtdMax / 100) / 100
+            }
+        } else {
+            if (req.data.qtdMax == 0 || req.data.qtdMax === '' || req.data.qtdMax === null) { req.reject(400, 'qtdMax incorreta') }
+            req.data.pctBom = Math.trunc(100 * 100 * req.data.qtdTol / req.data.qtdMax) / 100
         }
     })
 
@@ -23,12 +39,6 @@ module.exports = (motor) => {
         bomTable = await srv.run(SELECT.from(BOM))
         backupBom = []
         bomTable.forEach((b) => {
-            if (b.qtdTol === '' || b.qtdTol === null) {
-                b.qtdTol = 0
-            }
-            if (b.pctBom === '' || b.pctBom === null) {
-                b.pctBom = 0
-            }
             backupBom.push(b)
             reqArr.forEach((r) => {
                 if (b.tipoInstalacao === r.tipoInstalacao && b.idTipoOS === r.idTipoOS && b.codMaterialSAP === r.codMaterialSAP) {
@@ -36,11 +46,11 @@ module.exports = (motor) => {
                     b.qtdMin = r.qtdMin
                     if (r.qtdTol > 0) {
                         b.qtdTol = r.qtdTol
-                        r.pctBom = String(100 * r.qtdTol / r.qtdMax)
+                        r.pctBom = String(Math.trunc(100 * 100 * r.qtdTol / r.qtdMax) / 100)
                         b.pctBom = r.pctBom
                     } else if (r.pctBom > 0) {
                         b.pctBom = r.pctBom
-                        r.qtdTol = String(r.pctBom * r.qtdMax / 100)
+                        r.qtdTol = String(Math.trunc(100 * r.pctBom * r.qtdMax / 100) / 100)
                         b.qtdTol = r.qtdTol
                     }
                     b.qtdTol = r.qtdTol
@@ -53,9 +63,9 @@ module.exports = (motor) => {
         reqArr.forEach((r) => {
             if (r.codMaterialSAP != 'Linha alterada') {
                 if (r.qtdTol > 0) {
-                    r.pctBom = String(100 * r.qtdTol / r.qtdMax)
+                    r.pctBom = String(Math.trunc(100 * 100 * r.qtdTol / r.qtdMax) / 100)
                 } else if (r.pctBom > 0) {
-                    r.qtdTol = String(r.pctBom * r.qtdMax / 100)
+                    r.qtdTol = String(Math.trunc(100 * r.pctBom * r.qtdMax / 100) / 100)
                 }
                 let zeroEsquerda = '0000' + r.idTipoOS
                 r.idTipoOS = zeroEsquerda.slice(-4)

@@ -6,8 +6,8 @@ entity BOM {
     key codMaterialSAP : String(40);
         qtdMin         : Decimal;
         qtdMax         : Decimal;
-        pctBom         : Decimal(13,3);
-        qtdTol         : Decimal(13,0);
+        pctBom         : String(16);
+        qtdTol         : String(16);
         unidadeConsumo : String(3);
         aprovacaoClaro : Boolean default false;
         tipoOs         : Association to one TipoOs
