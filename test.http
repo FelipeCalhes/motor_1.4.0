@@ -5,38 +5,26 @@ Content-Type: application/json;IEEE754Compatible=true
 {
     "BOM":[
         {
-            "tipoInstalacao":"C",
-            "idTipoOS":"0003",
-            "codMaterialSAP":"teste1234",
-            "qtdMin":"2",
-            "qtdMax":"8",
-            "pctBom":"1",
-            "qtdTol":"",
-            "unidadeConsumo":"UN",
-            "aprovacaoClaro":false
-        },
-        {
             "tipoInstalacao":"T",
             "idTipoOS":"0004",
-            "codMaterialSAP":"teste4321",
-            "qtdMin":"2",
-            "qtdMax":"12",
-            "pctBom":"",
-            "qtdTol":"8",
-            "unidadeConsumo":"UN",
-            "aprovacaoClaro":false
+            "codMaterialSAP":"teste54321",
+            "qtdMin":"0",
+            "qtdMax":"0",
+            "pctBom":"0",
+            "qtdTol":"0",
+            "unidadeConsumo":"",
+            "aprovacaoClaro":true
         }  
     ]
 }
 ###
 
 
-PATCH http://localhost:4004/motor-de-regras/BOM(tipoInstalacao=%27%27,idTipoOS=%270101%27,codMaterialSAP=%2722057341%27)  HTTP/1.1
+PATCH http://localhost:4004/motor-de-regras/BOM(tipoInstalacao=%27C%27,idTipoOS=%270001%27,codMaterialSAP=%2722056331%27)  HTTP/1.1
 Content-Type: application/json;IEEE754Compatible=true
 
 {
-    "pctBom":"15",
-    "qtdTol":"75"
+    "aprovacaoClaro":false
 }
 ###
 

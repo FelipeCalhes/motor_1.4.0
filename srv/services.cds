@@ -18,7 +18,16 @@ define type ObjTipoWo {
 
 service MotorDeRegras {
 
-    entity BOM as projection on p.BOM;
+    entity BOM @(restrict : [{
+        grant : [
+            'READ',
+            'WRITE'
+        ],
+        to    : [
+            'Edit',
+            'system-user'
+        ]
+    }]) as projection on p.BOM;
 
     //entity BOMUpd as projection on p.BOM;
 

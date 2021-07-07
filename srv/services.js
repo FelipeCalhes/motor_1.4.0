@@ -2,9 +2,9 @@ module.exports = (motor) => {
 
     motor.before('CREATE', 'BOM', async (req) => {
         if (req.data.qtdTol > 0) {
-            req.data.pctBom = Math.trunc(100 * 100 * req.data.qtdTol / req.data.qtdMax) / 100
+            req.data.pctBom = String(Math.trunc(100 * 100 * req.data.qtdTol / req.data.qtdMax) / 100)
         } else if (req.data.pctBom > 0) {
-            req.data.qtdTol = Math.trunc(100 * req.data.pctBom * req.data.qtdMax / 100) / 100
+            req.data.qtdTol = String(Math.trunc(100 * req.data.pctBom * req.data.qtdMax / 100) / 100)
         }
     })
 
@@ -22,13 +22,13 @@ module.exports = (motor) => {
         if (!req.data.qtdTol) {
             if (!req.data.pctBom) {
                 req.data.pctBom = bomTable.pctBom
-                req.data.qtdTol = Math.trunc(100 * req.data.pctBom * req.data.qtdMax / 100) / 100
+                req.data.qtdTol = String(Math.trunc(100 * req.data.pctBom * req.data.qtdMax / 100) / 100)
             } else {
-                req.data.qtdTol = Math.trunc(100 * req.data.pctBom * req.data.qtdMax / 100) / 100
+                req.data.qtdTol = String(Math.trunc(100 * req.data.pctBom * req.data.qtdMax / 100) / 100)
             }
         } else {
             if (req.data.qtdMax == 0 || req.data.qtdMax === '' || req.data.qtdMax === null) { req.reject(400, 'qtdMax incorreta') }
-            req.data.pctBom = Math.trunc(100 * 100 * req.data.qtdTol / req.data.qtdMax) / 100
+            req.data.pctBom = String(Math.trunc(100 * 100 * req.data.qtdTol / req.data.qtdMax) / 100)
         }
     })
 
@@ -44,6 +44,7 @@ module.exports = (motor) => {
                 if (b.tipoInstalacao === r.tipoInstalacao && b.idTipoOS === r.idTipoOS && b.codMaterialSAP === r.codMaterialSAP) {
                     b.qtdMax = r.qtdMax
                     b.qtdMin = r.qtdMin
+                    b.aprovacaoClaro = r.aprovacaoClaro
                     if (r.qtdTol > 0) {
                         b.qtdTol = r.qtdTol
                         r.pctBom = String(Math.trunc(100 * 100 * r.qtdTol / r.qtdMax) / 100)
