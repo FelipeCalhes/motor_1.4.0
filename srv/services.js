@@ -8,7 +8,7 @@ module.exports = (motor) => {
         }
     })
 
-    motor.before('UPDATE', 'BOM', async (req) => {
+    motor.on('UPDATE', 'BOM', async (req) => {
         const srv = await cds.connect.to('db');
         const { BOM } = srv.entities
         bomTable = await srv.run(SELECT.one.from(BOM).where({
@@ -30,6 +30,28 @@ module.exports = (motor) => {
             if (req.data.qtdMax == 0 || req.data.qtdMax === '' || req.data.qtdMax === null) { req.reject(400, 'qtdMax incorreta') }
             req.data.pctBom = String(Math.trunc(100 * 100 * req.data.qtdTol / req.data.qtdMax) / 100)
         }
+        
+        if(!req.data.qtdMin){
+            req.data.qtdMin = bomTable.qtdMin
+        }
+        if (typeof req.data.aprovacaoClaro === 'undefined') {
+            req.data.aprovacaoClaro = bomTable.aprovacaoClaro
+        }
+        await srv.run(UPDATE(BOM)
+            .set({
+                qtdMin: req.data.qtdMin,
+                qtdMax: req.data.qtdMax,
+                pctBom: req.data.pctBom,
+                qtdTol: req.data.qtdTol,
+                aprovacaoClaro: req.data.aprovacaoClaro
+            })
+            .where({
+                codMaterialSAP: req.data.codMaterialSAP,
+                idTipoOS: req.data.idTipoOS,
+                tipoInstalacao: req.data.tipoInstalacao
+            }))
+
+        return req.data
     })
 
     motor.on('CREATE', 'importBOM', async (req) => {

@@ -29,8 +29,6 @@ service MotorDeRegras {
         ]
     }]) as projection on p.BOM;
 
-    //entity BOMUpd as projection on p.BOM;
-
     entity RegraDeCalculo @(restrict : [{
         grant : [
             'READ',

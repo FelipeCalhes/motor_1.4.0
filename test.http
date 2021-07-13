@@ -7,7 +7,7 @@ Content-Type: application/json;IEEE754Compatible=true
         {
             "tipoInstalacao":"T",
             "idTipoOS":"0004",
-            "codMaterialSAP":"teste54321",
+            "codMaterialSAP":"teste002",
             "qtdMin":"0",
             "qtdMax":"0",
             "pctBom":"0",
@@ -20,7 +20,24 @@ Content-Type: application/json;IEEE754Compatible=true
 ###
 
 
-PATCH http://localhost:4004/motor-de-regras/BOM(tipoInstalacao=%27C%27,idTipoOS=%270001%27,codMaterialSAP=%2722056331%27)  HTTP/1.1
+POST http://localhost:4004/motor-de-regras/BOM  HTTP/1.1
+Content-Type: application/json;IEEE754Compatible=true
+
+{
+    "tipoInstalacao":"T",
+    "idTipoOS":"0004",
+    "codMaterialSAP":"teste002",
+    "qtdMin":"0",
+    "qtdMax":"0",
+    "pctBom":"0",
+    "qtdTol":"0",
+    "unidadeConsumo":"",
+    "aprovacaoClaro":true
+}  
+### 
+    
+
+PATCH http://localhost:4004/motor-de-regras/BOM(tipoInstalacao=%27T%27,idTipoOS=%270004%27,codMaterialSAP=%27teste002%27)  HTTP/1.1
 Content-Type: application/json;IEEE754Compatible=true
 
 {

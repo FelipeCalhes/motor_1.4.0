@@ -1,11 +1,4 @@
 {
-   "REGRASNAMESPACE_TIPOOS": {
-    "target": {
-
-        "schema"     : "DBADMIN",        // optional
-        "object"     : "ZTBMM907_TIPO_OS"
-    }
-  },
    "REGRASNAMESPACE_RESPBAIXA": {
     "target": {
 

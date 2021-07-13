@@ -9,7 +9,7 @@ entity BOM {
         pctBom         : String(16);
         qtdTol         : String(16);
         unidadeConsumo : String(3);
-        aprovacaoClaro : Boolean default false;
+        aprovacaoClaro : Boolean;
         tipoOs         : Association to one TipoOs
                              on tipoOs.tipo_Os = $self.idTipoOS;
         materiais      : Association to one Materiais
