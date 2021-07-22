@@ -5,19 +5,5 @@
         "schema"     : "DBADMIN",        // optional
         "object"     : "ZTBMM977_CONSOLIDADO"
     }
-  },
-   "REGRASNAMESPACE_CENTROS": {
-    "target": {
-
-        "schema"     : "DBADMIN",        // optional
-        "object"     : "T001W_BRANCHES"
-    }
-  },
-   "REGRASNAMESPACE_EMPRESAS": {
-    "target": {
-
-        "schema"     : "DBADMIN",        // optional
-        "object"     : "J_1BBRANCH_BUSINESSPLACE"
-    }
   }
 }

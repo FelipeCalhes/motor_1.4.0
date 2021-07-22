@@ -6,10 +6,10 @@
     "license": "UNLICENSED",
     "private": true,
     "dependencies": {
-        "@sap/cds": "^4",
-        "@sap/hana-client": "^2.6.61",
-        "@sap/xsenv": "^3.0.0",
-        "@sap/xssec": "^3.0.0",
+        "@sap/cds": "^4.6.6",
+        "@sap/hana-client": "^2.9.23",
+        "@sap/xsenv": "^3.1.1",
+        "@sap/xssec": "^3.2.2",
         "express": "^4",
         "passport": "^0.4.1"
     },

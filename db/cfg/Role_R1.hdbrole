@@ -84,14 +84,14 @@
         ]
       },
       {
-        "name": "REGRASNAMESPACE_CENTROSHELP",
+        "name": "REGRASNAMESPACE_CENTROS",
         "type": "TABLE",
         "privileges": [
           "SELECT"
         ]
       },
       {
-        "name": "REGRASNAMESPACE_EMPRESASHELP",
+        "name": "REGRASNAMESPACE_EMPRESAS",
         "type": "TABLE",
         "privileges": [
           "SELECT"
@@ -114,6 +114,13 @@
       {
         "name": "REGRASNAMESPACE_MATERIAISEXCECAO",
         "type": "TABLE",
+        "privileges": [
+          "SELECT"
+        ]
+      },
+      {
+        "name": "MOTORDEREGRAS_FORNECEDORHELP",
+        "type": "VIEW",
         "privileges": [
           "SELECT"
         ]

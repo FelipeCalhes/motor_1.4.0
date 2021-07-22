@@ -49,12 +49,6 @@ entity Empresas {
     branch : String(4);
 }
 
-entity EmpresasHelp         as
-    select from Empresas {
-        bukrs  as empresa,
-        branch as branch
-    };
-
 @cds.persistence.exists
 entity Centros {
     werks      : String(4);
@@ -64,13 +58,6 @@ entity Centros {
     lifnr      : String(10);
     j_1bbranch : String(4);
 }
-
-entity CentrosHelp          as
-    select from Centros {
-        werks      as werks,
-        lifnr      as fornecedorID,
-        j_1bbranch as branch
-    };
 
 entity TecnicoPorEPO {
     key loginTecnico     : String(120);
@@ -125,7 +112,6 @@ entity BOM2ODATA            as
 
 @cds.persistence.exists
 entity TipoOs {
-    key mandt     : String(3);
     key tipo_Os   : String(4);
         desc_os   : String(50);
         aplicacao : String(1);

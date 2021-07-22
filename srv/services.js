@@ -30,8 +30,8 @@ module.exports = (motor) => {
             if (req.data.qtdMax == 0 || req.data.qtdMax === '' || req.data.qtdMax === null) { req.reject(400, 'qtdMax incorreta') }
             req.data.pctBom = String(Math.trunc(100 * 100 * req.data.qtdTol / req.data.qtdMax) / 100)
         }
-        
-        if(!req.data.qtdMin){
+
+        if (!req.data.qtdMin) {
             req.data.qtdMin = bomTable.qtdMin
         }
         if (typeof req.data.aprovacaoClaro === 'undefined') {
@@ -58,7 +58,21 @@ module.exports = (motor) => {
         const srv = await cds.connect.to('db');
         const { BOM } = srv.entities
         reqArr = req.data.BOM
-        bomTable = await srv.run(SELECT.from(BOM))
+
+        //if(reqArr.length > 100){
+        //    //logica pra dropar DELETE INSERT
+        //} else {
+        //    //o resto
+        //}
+
+        let codMaterialSAP = []
+
+        reqArr.forEach((r) => {
+            codMaterialSAP.push(r.codMaterialSAP)
+        })
+
+        bomTable = await srv.run(SELECT.from(BOM).where({ codMaterialSAP: codMaterialSAP }))//{codMaterialSAP : req.data.BOM.codMaterialSAP}))
+        //var select = await srv.run()
         backupBom = []
         bomTable.forEach((b) => {
             backupBom.push(b)
