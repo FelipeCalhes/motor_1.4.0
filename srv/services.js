@@ -8,9 +8,25 @@ module.exports = (motor) => {
         }
     })
 
-    motor.on('UPDATE', 'BOM', async (req) => {
+    motor.on('upsert_bom', async () => {
+        try {
+            const db = await cds.connect.to('db')
+            const dbClass = require("sap-hdbext-promisfied")
+            let dbConn = new dbClass(await dbClass.createConnection(db.options.credentials))
+            const hdbext = require("@sap/hdbext")
+            const sp = await dbConn.loadProcedurePromisified(hdbext, null, 'UPSERT_BOM')
+            const output = await dbConn.callProcedurePromisified(sp, [])
+            console.log(output.results)
+            return true
+        } catch (error) {
+            console.error(error)
+            return false
+        }
+    })
+
+    /*motor.on('UPDATE', 'BOM', async (req) => {
         const srv = await cds.connect.to('db');
-        const { BOM } = srv.entities
+        const { BOM, BOM_TRANSITORIA } = srv.entities
         bomTable = await srv.run(SELECT.one.from(BOM).where({
             codMaterialSAP: req.data.codMaterialSAP,
             idTipoOS: req.data.idTipoOS,
@@ -37,87 +53,33 @@ module.exports = (motor) => {
         if (typeof req.data.aprovacaoClaro === 'undefined') {
             req.data.aprovacaoClaro = bomTable.aprovacaoClaro
         }
-        await srv.run(UPDATE(BOM)
-            .set({
-                qtdMin: req.data.qtdMin,
-                qtdMax: req.data.qtdMax,
-                pctBom: req.data.pctBom,
-                qtdTol: req.data.qtdTol,
-                aprovacaoClaro: req.data.aprovacaoClaro
-            })
-            .where({
-                codMaterialSAP: req.data.codMaterialSAP,
-                idTipoOS: req.data.idTipoOS,
-                tipoInstalacao: req.data.tipoInstalacao
-            }))
-
+        console.log(JSON.stringify(req.data))
+        await srv.run(INSERT.into(BOM_TRANSITORIA).entries({
+            tipoInstalacao: req.data.tipoInstalacao,
+            idTipoOS: req.data.idTipoOS,
+            codMaterialSAP: req.data.codMaterialSAP,
+            qtdMin:req.data.qtdMin,
+            qtdMax:req.data.qtdMax,
+            pctBom:req.data.pctBom,
+            qtdTol:req.data.qtdTol,
+            unidadeConsumo:'',
+            aprovacaoClaro:req.data.aprovacaoClaro
+        }))
+        await srv.run("COMMIT")            
+        const db = await cds.connect.to('db')
+        const dbClass = require("sap-hdbext-promisfied")
+        let dbConn = new dbClass(await dbClass.createConnection(db.options.credentials))
+        const hdbext = require("@sap/hdbext")
+        const sp = await dbConn.loadProcedurePromisified(hdbext, null, 'UPSERT_BOM')
+        const output = await dbConn.callProcedurePromisified(sp, [])
         return req.data
-    })
+    })*/
 
     motor.on('CREATE', 'importBOM', async (req) => {
         const srv = await cds.connect.to('db');
-        const { BOM } = srv.entities
-        reqArr = req.data.BOM
-
-        //if(reqArr.length > 100){
-        //    //logica pra dropar DELETE INSERT
-        //} else {
-        //    //o resto
-        //}
-
-        let codMaterialSAP = []
-
-        reqArr.forEach((r) => {
-            codMaterialSAP.push(r.codMaterialSAP)
-        })
-
-        bomTable = await srv.run(SELECT.from(BOM).where({ codMaterialSAP: codMaterialSAP }))//{codMaterialSAP : req.data.BOM.codMaterialSAP}))
-        //var select = await srv.run()
-        backupBom = []
-        bomTable.forEach((b) => {
-            backupBom.push(b)
-            reqArr.forEach((r) => {
-                if (b.tipoInstalacao === r.tipoInstalacao && b.idTipoOS === r.idTipoOS && b.codMaterialSAP === r.codMaterialSAP) {
-                    b.qtdMax = r.qtdMax
-                    b.qtdMin = r.qtdMin
-                    b.aprovacaoClaro = r.aprovacaoClaro
-                    if (r.qtdTol > 0) {
-                        b.qtdTol = r.qtdTol
-                        r.pctBom = String(Math.trunc(100 * 100 * r.qtdTol / r.qtdMax) / 100)
-                        b.pctBom = r.pctBom
-                    } else if (r.pctBom > 0) {
-                        b.pctBom = r.pctBom
-                        r.qtdTol = String(Math.trunc(100 * r.pctBom * r.qtdMax / 100) / 100)
-                        b.qtdTol = r.qtdTol
-                    }
-                    b.qtdTol = r.qtdTol
-                    b.pctBom = r.pctBom
-                    b.unidadeConsumo = r.unidadeConsumo
-                    r.codMaterialSAP = 'Linha alterada'
-                }
-            })
-        })
-        reqArr.forEach((r) => {
-            if (r.codMaterialSAP != 'Linha alterada') {
-                if (r.qtdTol > 0) {
-                    r.pctBom = String(Math.trunc(100 * 100 * r.qtdTol / r.qtdMax) / 100)
-                } else if (r.pctBom > 0) {
-                    r.qtdTol = String(Math.trunc(100 * r.pctBom * r.qtdMax / 100) / 100)
-                }
-                let zeroEsquerda = '0000' + r.idTipoOS
-                r.idTipoOS = zeroEsquerda.slice(-4)
-                bomTable.push(r)
-            }
-        })
-        await srv.run(DELETE.from(BOM))
-        try {
-            await srv.run(INSERT.into(BOM).entries(bomTable))
-        }
-        catch (err) {
-            await srv.run(INSERT.into(BOM).entries(backupBom))
-            req.reject(400, 'Erro ao gravar Tabela')
-        }
-        return (req.data)
+        const { BOM_TRANSITORIA } = srv.entities
+        await srv.run(INSERT.into(BOM_TRANSITORIA).entries(req.data.BOM))
+        return req.data
     })
 
     motor.on('READ', 'killBOM', async (req) => {

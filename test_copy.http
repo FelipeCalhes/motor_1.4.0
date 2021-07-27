@@ -1,0 +1,81 @@
+POST http://localhost:4004/motor-de-regras/$batch HTTP/1.1
+Content-Type: application/json;IEEE754Compatible=true
+
+{
+    "requests": [
+        {
+            "atomicityGroup": "g-0",
+            "id": "g1_0",
+            "method": "PATCH",
+            "url": "/BOM(tipoInstalacao='C',idTipoOS='0040',codMaterialSAP='22026189')",
+            "headers": {
+                "content-type": "application/json; odata.metadata=minimal; odata.streaming=true",
+                "odata-version": "4.0"
+            },
+            "body": {
+                "qtdMin":"5","qtdMax":"50","pctBom":"10"
+                }
+        },
+        {
+            "atomicityGroup": "g-0",
+            "id": "g1_0",
+            "method": "PATCH",
+            "url": "/BOM(tipoInstalacao='C',idTipoOS='0033',codMaterialSAP='22026189')",
+            "headers": {
+                "content-type": "application/json; odata.metadata=minimal; odata.streaming=true",
+                "odata-version": "4.0"
+            },
+            "body": {
+                "qtdMin":"5","qtdMax":"20","pctBom":"20"
+                }
+        }
+    ]
+}
+
+###
+
+POST http://localhost:4004/motor-de-regras/$batch HTTP/1.1
+Content-Type: application/json;IEEE754Compatible=true
+ 
+Content-Length: ###
+ 
+--batch_36522ad7-fc75-4b56-8c71-56071383e77b
+Content-Type: application/http;IEEE754Compatible=true
+ 
+PATCH http://localhost:4004/motor-de-regras/BOM HTTP/1.1
+Content-Type: application/json;IEEE754Compatible=true
+ 
+{
+    "tipoInstalacao":"T",
+    "idTipoOS":"0004",
+    "codMaterialSAP":"22056331",
+    "qtdMin":"0",
+    "qtdMax":"0",
+    "pctBom":"0",
+    "qtdTol":"0",
+    "unidadeConsumo":"",
+    "aprovacaoClaro":true
+}
+--batch_36522ad7-fc75-4b56-8c71-56071383e77b
+Content-Type: multipart/mixed; boundary=changeset_77162fcd-b8da-41ac-a9f8-9357efbbd
+ 
+--changeset_77162fcd-b8da-41ac-a9f8-9357efbbd
+Content-Type: application/http;IEEE754Compatible=true
+Content-ID: 1
+ 
+PATCH http://localhost:4004/motor-de-regras/BOM HTTP/1.1
+Content-Type: application/json;IEEE754Compatible=true
+ 
+{
+    "tipoInstalacao":"E",
+    "idTipoOS":"0002",
+    "codMaterialSAP":"teste002",
+    "qtdMin":"0",
+    "qtdMax":"0",
+    "pctBom":"0",
+    "qtdTol":"0",
+    "unidadeConsumo":"",
+    "aprovacaoClaro":true    
+}
+
+###

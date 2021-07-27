@@ -1,5 +1,5 @@
 {
-   "REGRASNAMESPACE_RESPBAIXA": {
+   "REGRASNAMESPACE_RESPBAIXAVIRTUAL": {
     "target": {
 
         "schema"     : "DBADMIN",        // optional

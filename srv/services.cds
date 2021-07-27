@@ -6,8 +6,8 @@ define type ObjBOM {
     codMaterialSAP : String(40);
     qtdMin         : Decimal;
     qtdMax         : Decimal;
-    pctBom         : String(16);
-    qtdTol         : String(16);
+    pctBom         : Decimal;
+    qtdTol         : Decimal;
     unidadeConsumo : String(3);
     aprovacaoClaro : Boolean;
 }
@@ -18,6 +18,8 @@ define type ObjTipoWo {
 
 service MotorDeRegras {
 
+    function upsert_bom() returns Boolean;
+
     entity BOM @(restrict : [{
         grant : [
             'READ',
@@ -27,7 +29,18 @@ service MotorDeRegras {
             'Edit',
             'system-user'
         ]
-    }]) as projection on p.BOM;
+    }]) as projection on p.BOM;    
+    
+    entity BOM_TRANSITORIA @(restrict : [{
+        grant : [
+            'READ',
+            'WRITE'
+        ],
+        to    : [
+            'Edit',
+            'system-user'
+        ]
+    }]) as projection on p.BOM_TRANSITORIA;
 
     entity RegraDeCalculo @(restrict : [{
         grant : [

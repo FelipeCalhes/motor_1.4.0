@@ -1,47 +1,90 @@
+## Generated mta.yaml based on template version 0.4.0
+## appName = motor de regras
+## language=nodejs; multiTenant=false
+## approuter=
 _schema-version: '3.1'
 ID: xsmotor-de-regras
 version: 1.3.0
 description: Motor de Regras
 parameters:
   enable-parallel-deployments: true
+
 build-parameters:
   before-all:
     - builder: custom
       commands:
         - npm install --production
         - npx -p @sap/cds-dk@4.1.5 cds build --production
+
 modules:
+  # --------------------- SERVER MODULE ------------------------
   - name: motor-backend
-    type: nodejs
+    # ------------------------------------------------------------
+    type: nodejs  
     path: ./
-    parameters: 
+    parameters:
       routes: # if not defined, a default route would be auto assigned unless no-route is specified
-        - route: "xsmotor-regras.cfapps.eu10.hana.ondemand.com"  
+        - route: "xsmotor-regras.cfapps.eu10.hana.ondemand.com"     
     requires:
-      - name: motor-regras
+      # Resources extracted from CAP configuration
       - name: xsmotor-regras
+      - name: motor-regras
+      - name: cross_dbadmin
     provides:
-      - name: srv-api
+      - name: srv-api # required by consumers of CAP services (e.g. approuter)
         properties:
-          srv-url: '${default-url}'
-  
+          srv-url: ${default-url}
+
+  # -------------------- SIDECAR MODULE ------------------------
+  - name: motor-db-deploy
+    # ------------------------------------------------------------
+    type: hdb
+    path: db  
+    parameters:
+      buildpack: nodejs_buildpack
+    requires:
+      # 'hana' and 'xsuaa' resources extracted from CAP configuration
+      - name: motor-regras
+        properties:
+          TARGET_CONTAINER: '~{hdi-service-name}'
+      - name: cross_dbadmin
+      # - name: workflow
+
 resources:
+  # services extracted from CAP configuration
+  # 'service-plan' can be configured via 'cds.requires.<name>.vcap.plan'
+  # ------------------------------------------------------------
   - name: motor-regras
+    # ------------------------------------------------------------
     type: com.sap.xs.hdi-container
     parameters:
-      service: hana
+      service: hana # or 'hanatrial' on trial landscapes
       service-plan: hdi-shared
     properties:
-      hdi-service-name: '${service-name}'
-  - name: cross-dbadmin
+      hdi-service-name: ${service-name}
+  # ------------------------------------------------------------
+  - name: xsmotor-regras
+    # ------------------------------------------------------------
+    type: com.sap.xs.uaa
+    description: xsmotor-regras
+    properties:
+      service-name: xsmotor-regras
+      service-plan: application
+  # ------------------------------------------------------------
+  - name: cross_dbadmin
+    # ------------------------------------------------------------
     type: org.cloudfoundry.existing-service
     parameters:
       service: cross_dbadmin
     properties:
       ServiceName_1: '${service-name}'
-  - name: xsmotor-regras
-    type: com.sap.xs.uaa
-    description: xsmotor-regras
-    parameters:
-      service-name: xsmotor-regras
-      service-plan: application
+  # ------------------------------------------------------------
+  ### # ------------------------------------------------------------
+  ### - name: workflow
+  ###   # ------------------------------------------------------------
+  ###   type: com.sap.xs.hdi-container
+  ###   parameters:
+  ###     service: hana # or 'hanatrial' on trial landscapes
+  ###     service-plan: hdi-shared
+  ###   properties:
+  ###     service-name: ${service-name}

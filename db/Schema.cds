@@ -6,14 +6,26 @@ entity BOM {
     key codMaterialSAP : String(40);
         qtdMin         : Decimal;
         qtdMax         : Decimal;
-        pctBom         : String(16);
-        qtdTol         : String(16);
+        pctBom         : Decimal;
+        qtdTol         : Decimal;
         unidadeConsumo : String(3);
         aprovacaoClaro : Boolean;
         tipoOs         : Association to one TipoOs
                              on tipoOs.tipo_Os = $self.idTipoOS;
         materiais      : Association to one Materiais
                              on materiais.matnr = $self.codMaterialSAP;
+}
+
+entity BOM_TRANSITORIA {
+    key tipoInstalacao : String(1);
+    key idTipoOS       : String(200);
+    key codMaterialSAP : String(40);
+        qtdMin         : Decimal;
+        qtdMax         : Decimal;
+        pctBom         : Decimal;
+        qtdTol         : Decimal;
+        unidadeConsumo : String(3);
+        aprovacaoClaro : Boolean;
 }
 
 entity RegraDeCalculo {
@@ -68,10 +80,10 @@ entity TecnicoPorEPO {
 
 entity ExpandTecnico        as
     select from TecnicoPorEPO {
-        loginTecnico     as loginTecnico,
-        CodFornecedorSAP as CodFornecedorSAP,
+        loginTecnico          as loginTecnico,
+        CodFornecedorSAP      as CodFornecedorSAP,
         fornecedor.fornecedor as descrFornecedor,
-        fornecedor.cnpj as CNPJ
+        fornecedor.cnpj       as CNPJ
     }
     group by
         loginTecnico,
@@ -118,6 +130,24 @@ entity TipoOs {
 }
 
 @cds.persistence.exists
+entity RespBaixaVirtual {
+    key mandt            : String(3);
+    key id_consolid_orig : String(50);
+    key consolidado      : String(50);
+    key contador         : Integer;
+        matnr            : String(18);
+        status           : String(1);
+        mensagem         : String(220);
+        lbkum            : Decimal(13, 3);
+        lbkum_doc        : Decimal(13, 3);
+        mblnr            : String(10);
+        mjahr            : String(4);
+        data             : String(8);
+        wo               : String(50);
+        lifnr            : String(10);
+        item_text        : String(50);
+}
+
 entity RespBaixa {
     key mandt            : String(3);
     key id_consolid_orig : String(50);
@@ -154,7 +184,23 @@ entity RetornoDaBaixa       as
         lbkum_doc        as quantidadeDoc,
         mblnr            as mblnr,
         mjahr            as mjahr,
-        data             as data,
+        CONCAT(
+            CONCAT(
+                CONCAT(
+                    CONCAT(
+                        LEFT(
+                            data, 4
+                        ), '-'
+                    ), LEFT(
+                        RIGHT(
+                            data, 4
+                        ), 2
+                    )
+                ), '-'
+            ), RIGHT(
+                data, 2
+            )
+        )                as data : Date,
         wo               as workOrderID,
         lifnr            as fornecedorID,
         item_text        as aplicacao
@@ -171,18 +217,18 @@ entity Materiais {
 
 entity MateriaisHelpOdata   as
     select from Materiais {
-        matnr as material,
-        maktx as descMaterial,
-        meins as unidade
+        key matnr as material,
+            maktx as descMaterial,
+            meins as unidade
     }
     where
         spras = 'P';
 
 entity FornecedorHelpOdata  as
     select from Fornecedor {
-        lifnr as fornecedor,
-        name1 as nomeFornecedor,
-        stcd1 as cnpj
+        key lifnr as fornecedor,
+            name1 as nomeFornecedor,
+            stcd1 as cnpj
     }
     group by
         lifnr,
@@ -191,10 +237,10 @@ entity FornecedorHelpOdata  as
 
 entity FornecedorHelpCentro as
     select from Fornecedor {
-        lifnr     as fornecedor,
-        name1     as nomeFornecedor,
-        stcd1     as cnpj,
-        werks_mrp as centro
+        key lifnr     as fornecedor,
+            name1     as nomeFornecedor,
+            stcd1     as cnpj,
+            werks_mrp as centro
     }
     group by
         lifnr,
@@ -209,4 +255,8 @@ entity MatCount             as
 
 entity MateriaisExcecao {
     key material : String;
+}
+
+entity TesteSidecar {
+    key sideDeploy : String;
 }

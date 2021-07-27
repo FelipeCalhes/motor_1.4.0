@@ -1,8 +1,0 @@
-<RepTask Name="TIPOOS_" Description="" Type="REALTIME" RepVersion="2.0">
-  <SourceObjects SourceType="" TTFullyQualifiedName="FALSE" VTFullyQualifiedName="FALSE" RemoteSourceName="" VirtualTableSchema="">
-    <SourceObject/>
-  </SourceObjects>
-  <TargetObjects>
-    <TargetObject/>
-  </TargetObjects>
-</RepTask>

@@ -8,10 +8,12 @@
     "dependencies": {
         "@sap/cds": "^4.6.6",
         "@sap/hana-client": "^2.9.23",
+        "@sap/hdbext": "^7.3.0",
         "@sap/xsenv": "^3.1.1",
         "@sap/xssec": "^3.2.2",
         "express": "^4",
-        "passport": "^0.4.1"
+        "passport": "^0.4.1",
+        "sap-hdbext-promisfied": "^2.202107.1"
     },
     "engines": {
         "node": "^14"
