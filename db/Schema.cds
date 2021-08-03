@@ -9,7 +9,7 @@ entity BOM {
         pctBom         : Decimal;
         qtdTol         : Decimal;
         unidadeConsumo : String(3);
-        aprovacaoClaro : Boolean;
+        aprovacaoClaro : Boolean default false;
         tipoOs         : Association to one TipoOs
                              on tipoOs.tipo_Os = $self.idTipoOS;
         materiais      : Association to one Materiais
@@ -25,7 +25,7 @@ entity BOM_TRANSITORIA {
         pctBom         : Decimal;
         qtdTol         : Decimal;
         unidadeConsumo : String(3);
-        aprovacaoClaro : Boolean;
+        aprovacaoClaro : Boolean default false;
 }
 
 entity RegraDeCalculo {
