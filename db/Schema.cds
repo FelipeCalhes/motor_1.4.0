@@ -33,6 +33,7 @@ entity RegraDeCalculo {
         BOM          : Integer;
         estoque      : Integer;
         atribTecnico : Integer;
+        atribAcessor : Integer;
 }
 
 entity TipoWoBaixaAutomatica {
