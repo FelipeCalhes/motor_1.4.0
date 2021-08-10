@@ -46,6 +46,26 @@ entity Parametros {
 }
 
 @cds.persistence.exists
+entity REMOTECONSOLID {
+    key mandt            : String(3);
+    key id_consolid_orig : String(50);
+    key consolidado      : String(50);
+    key contador         : Integer;
+        matnr            : String(18);
+        status           : String(1);
+        mensagem         : String(220);
+        lbkum            : Decimal(13, 3);
+        lbkum_doc        : Decimal(13, 3);
+        mblnr            : String(10);
+        mjahr            : String(4);
+        data             : String(8);
+        wo               : String(50);
+        lifnr            : String(10);
+        item_text        : String(50);
+        uuid             : String(40);
+}
+
+@cds.persistence.exists
 entity Fornecedor {
     lifnr     : String(10);
     berid     : String(10);
@@ -262,6 +282,6 @@ entity TesteSidecar {
 }
 
 entity AcessoTerminal {
-    key terminal:  String(40);
-    key acessorio:  String(40);
+    key terminal  : String(40);
+    key acessorio : String(40);
 }

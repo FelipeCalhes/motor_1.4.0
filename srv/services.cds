@@ -20,6 +20,8 @@ service MotorDeRegras {
 
     function upsert_bom() returns Boolean;
 
+    entity REMOTECONSOLID as projection on p.REMOTECONSOLID
+
     entity BOM @(restrict : [{
         grant : [
             'READ',
