@@ -144,10 +144,14 @@ module.exports = (motor) => {
         const srv = await cds.connect.to('db')
         const { AcessoTerminal } = srv.entities
         
-        await srv.run(INSERT.into(AcessoTerminal).entries({
-            acessorio: req.data.acessorio,
-            terminal: req.data.terminal
-        }))
+        try {
+            await srv.run(INSERT.into(AcessoTerminal).entries({
+                acessorio: req.data.acessorio,
+                terminal: req.data.terminal
+            }))
+        } catch (err) {
+            req.reject(err.error, err.message);
+        }        
 
         return req.data
     })
