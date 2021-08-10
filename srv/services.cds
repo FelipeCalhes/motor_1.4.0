@@ -226,4 +226,15 @@ service MotorDeRegras {
             'system-user'
         ]
     }]) as projection on p.MateriaisExcecao;
+
+    entity AcessoTerminal @(restrict : [{
+        grant: [
+            'READ',
+            'WRITE'
+        ],
+        to    : [
+            'Edit',
+            'system-user'
+        ]
+    }]) as projection on p.AcessoTerminal;
 }
