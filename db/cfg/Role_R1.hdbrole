@@ -124,6 +124,13 @@
         "privileges": [
           "SELECT"
         ]
+      },
+      {
+        "name": "MOTORDEREGRAS_REMOTECONSOLID",
+        "type": "TABLE",
+        "privileges": [
+          "SELECT"
+        ]
       }
     ]
   }
