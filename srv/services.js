@@ -155,4 +155,50 @@ module.exports = (motor) => {
 
         return req.data
     })
+
+    motor.on('GET', 'killAcessoTerminal', async (req) => {
+        const srv = await cds.connect.to('db');
+        const { killAcessoTerminal } = srv.entities
+
+        let resp
+        try {
+            await srv.run(DELETE.from(killAcessoTerminal))
+            resp = { 'kill': true }
+        }
+        catch (err) {
+            resp = { 'kill': false }
+            req.reject(400, 'Erro ao deletar tabela')
+        }
+        return resp
+    })
+
+    motor.on('CREATE', 'importAcessoTerminal', async (req) => {
+        const srv = await cds.connect.to('db');
+        const { AcessoTerminal } = srv.entities
+
+        reqArr = req.data.AcessoTerminal
+
+        backup = await srv.run(SELECT.from(AcessoTerminal))
+        repetidos = []
+        insert = []
+        reqArr.forEach((r) => {
+            backup.forEach((b) => {
+                if (b.acessorio === r.acessorio && b.terminal === r.terminal) {
+                    repetidos.push({acessorio: r.acessorio, terminal: r.termina})
+                }
+            })
+        })
+        reqArr.forEach((r) => {            
+            if (!(repetidos.find(element => element.acessorio === r.acessorio && element.terminal === r.terminal))) {
+                insert.push(r)
+            }
+        })
+        try {
+            await srv.run(INSERT.into(AcessoTerminal).entries(insert))
+        }
+        catch (err) {
+            req.reject(400, err.message)
+        }
+        return (req.data)
+    })
 }

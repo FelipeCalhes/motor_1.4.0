@@ -16,6 +16,11 @@ define type ObjTipoWo {
     tipoWo : String(20);
 }
 
+define type ObjAcessoTerminal {
+    terminal  : String(40);
+    acessorio : String(40);
+}
+
 service MotorDeRegras {
 
     function upsert_bom() returns Boolean;
@@ -239,4 +244,31 @@ service MotorDeRegras {
             'system-user'
         ]
     }]) as projection on p.AcessoTerminal;
+
+    entity killAcessoTerminal  @(restrict : [{
+        grant : [
+            'READ',
+            'WRITE'
+        ],
+        to    : [
+            'Edit',
+            'system-user'
+        ]
+    }]) {
+        kill : Boolean;
+    }
+
+    entity importAcessoTerminal @(restrict : [{
+        grant : [
+            'READ',
+            'WRITE'
+        ],
+        to    : [
+            'Edit',
+            'system-user'
+        ]
+    }]) {
+        AcessoTerminal : array of ObjAcessoTerminal;
+    }
+
 }
