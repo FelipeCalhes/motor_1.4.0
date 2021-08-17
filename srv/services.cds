@@ -25,7 +25,16 @@ service MotorDeRegras {
 
     function upsert_bom() returns Boolean;
 
-    entity REMOTECONSOLID as projection on p.REMOTECONSOLID
+    entity REMOTECONSOLID @(restrict : [{
+        grant : [
+            'READ',
+            'WRITE'
+        ],
+        to    : [
+            'Edit',
+            'system-user'
+        ]
+    }]) as projection on p.REMOTECONSOLID
 
     entity BOM @(restrict : [{
         grant : [
@@ -270,5 +279,4 @@ service MotorDeRegras {
     }]) {
         AcessoTerminal : array of ObjAcessoTerminal;
     }
-
 }
