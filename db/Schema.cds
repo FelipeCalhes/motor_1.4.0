@@ -193,6 +193,7 @@ entity RetornoDaBaixa       as
         lbkum_doc        as quantidadeDoc,
         mblnr            as mblnr,
         mjahr            as mjahr,
+        zeile            as zeile,
         CONCAT(
             CONCAT(
                 CONCAT(
@@ -212,7 +213,9 @@ entity RetornoDaBaixa       as
         )                as data : Date,
         wo               as workOrderID,
         lifnr            as fornecedorID,
-        item_text        as aplicacao
+        item_text        as aplicacao,
+        erdat            as erdat,
+        erzet            as erzet
     };
 
 @cds.persistence.exists
