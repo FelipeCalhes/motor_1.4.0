@@ -59,11 +59,14 @@ entity REMOTECONSOLID {
         lbkum_doc        : Decimal(13, 3);
         mblnr            : String(10);
         mjahr            : String(4);
+        zeile            : String(4);
         data             : String(8);
         wo               : String(50);
         lifnr            : String(10);
         item_text        : String(50);
         uuid             : String(40);
+        erdat            : String(8);
+        erzet            : String(6);
 }
 
 @cds.persistence.exists
@@ -150,25 +153,6 @@ entity TipoOs {
         aplicacao : String(1);
 }
 
-@cds.persistence.exists
-entity RespBaixaVirtual {
-    key mandt            : String(3);
-    key id_consolid_orig : String(50);
-    key consolidado      : String(50);
-    key contador         : Integer;
-        matnr            : String(18);
-        status           : String(1);
-        mensagem         : String(220);
-        lbkum            : Decimal(13, 3);
-        lbkum_doc        : Decimal(13, 3);
-        mblnr            : String(10);
-        mjahr            : String(4);
-        data             : String(8);
-        wo               : String(50);
-        lifnr            : String(10);
-        item_text        : String(50);
-}
-
 entity RespBaixa {
     key mandt            : String(3);
     key id_consolid_orig : String(50);
@@ -181,10 +165,14 @@ entity RespBaixa {
         lbkum_doc        : Decimal(13, 3);
         mblnr            : String(10);
         mjahr            : String(4);
+        zeile            : String(4);
         data             : String(8);
         wo               : String(50);
         lifnr            : String(10);
         item_text        : String(50);
+        uuid             : String(40);
+        erdat            : String(8);
+        erzet            : String(6);
 }
 
 entity TipoOsHelpOdata      as

@@ -1,9 +1,0 @@
-{
-   "REGRASNAMESPACE_RESPBAIXAVIRTUAL": {
-    "target": {
-
-        "schema"     : "DBADMIN",        // optional
-        "object"     : "ZTBMM977_CONSOLIDADO"
-    }
-  }
-}
