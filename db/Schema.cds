@@ -277,3 +277,8 @@ entity AcessoTerminal {
     key terminal  : String(40);
     key acessorio : String(40);
 }
+
+entity AcessoTerminal_Transitoria {
+    key terminal  : String(40);
+    key acessorio : String(40);
+}

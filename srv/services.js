@@ -143,7 +143,7 @@ module.exports = (motor) => {
     motor.on('CREATE', 'AcessoTerminal', async (req) => {
         const srv = await cds.connect.to('db')
         const { AcessoTerminal } = srv.entities
-        
+
         try {
             await srv.run(INSERT.into(AcessoTerminal).entries({
                 acessorio: req.data.acessorio,
@@ -151,7 +151,7 @@ module.exports = (motor) => {
             }))
         } catch (err) {
             req.reject(err.error, err.message);
-        }        
+        }
 
         return req.data
     })
@@ -174,8 +174,13 @@ module.exports = (motor) => {
 
     motor.on('CREATE', 'importAcessoTerminal', async (req) => {
         const srv = await cds.connect.to('db');
-        const { AcessoTerminal } = srv.entities
+        const { AcessoTerminal_Transitoria } = srv.entities
+        await srv.run(INSERT.into(AcessoTerminal_Transitoria).entries(req.data.AcessoTerminal))
+        return req.data
 
+        /*
+        const srv = await cds.connect.to('db');
+        const { AcessoTerminal } = srv.entities
         reqArr = req.data.AcessoTerminal
 
         backup = await srv.run(SELECT.from(AcessoTerminal))
@@ -199,6 +204,22 @@ module.exports = (motor) => {
         catch (err) {
             req.reject(400, err.message)
         }
-        return (req.data)
+        return (req.data)*/
+    })
+
+    motor.on('upsert_acessoTerminal', async () => {
+        try {
+            const db = await cds.connect.to('db')
+            const dbClass = require("sap-hdbext-promisfied")
+            let dbConn = new dbClass(await dbClass.createConnection(db.options.credentials))
+            const hdbext = require("@sap/hdbext")
+            const sp = await dbConn.loadProcedurePromisified(hdbext, null, 'UPSERT_ACESSOTERMINAL')
+            const output = await dbConn.callProcedurePromisified(sp, [])
+            console.log(output.results)
+            return true
+        } catch (error) {
+            console.error(error)
+            return false
+        }
     })
 }

@@ -2,6 +2,10 @@
 df -h 
 df -ih
 
+rm -rf ./node_modules 
+rm -rf ./db/node_modules 
+rm -rf ./mta_archives 
 rm -rf /home/user/.local/share/Trash/files
 rm -rf /home/user/.npm
 rm -rf /home/user/.cache
+mbt build
