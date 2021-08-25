@@ -68,6 +68,29 @@ entity REMOTECONSOLID {
         erdat            : String(8);
         erzet            : String(6);
 }
+/*
+entity REMOTECONSOLID       as
+    select from REMOTECONSOLID2 {
+        mandt,
+        id_consolid_orig,
+        consolidado,
+        contador,
+        matnr,
+        status,
+        mensagem,
+        lbkum,
+        lbkum_doc,
+        mblnr,
+        mjahr,
+        zeile,
+        data,
+        wo,
+        lifnr,
+        item_text,
+        uuid,
+        erdat,
+        erzet
+    };*/
 
 @cds.persistence.exists
 entity Fornecedor {

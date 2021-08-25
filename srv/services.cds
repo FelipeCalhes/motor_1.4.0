@@ -27,6 +27,8 @@ service MotorDeRegras {
 
     function upsert_acessoTerminal() returns Boolean;
 
+    function replicate_baixa() returns Boolean;
+
     entity REMOTECONSOLID @(restrict : [{
         grant : [
             'READ',

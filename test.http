@@ -2,6 +2,11 @@ GET http://localhost:4004/motor-de-regras/upsert_bom() HTTP/1.1
 Content-Type: application/json;IEEE754Compatible=true
 ###
 
+GET http://localhost:4004/motor-de-regras/upsert_acessoTerminal() HTTP/1.1
+Content-Type: application/json;IEEE754Compatible=true
+###
+
+
 POST http://localhost:4004/motor-de-regras/importBOM  HTTP/1.1
 Content-Type: application/json;IEEE754Compatible=true
 
@@ -110,7 +115,7 @@ Content-Type: application/json;IEEE754Compatible=true
 }
 ###
 
-GET http://localhost:4004/motor-de-regras/killBOM HTTP/1.1
+GET http://localhost:4004/motor-de-regras/REMOTECONSOLID HTTP/1.1
 ###
 
 ###
@@ -121,3 +126,23 @@ Content-Type: application/json; IEEE754Compatible=true
     "acessorio": "312412",
     "terminal": "312412"
 }
+###
+
+
+POST http://localhost:4004/motor-de-regras/importAcessoTerminal  HTTP/1.1
+Content-Type: application/json;IEEE754Compatible=true
+
+{
+    "AcessoTerminal":[
+        {
+            "terminal":"teste1234",
+            "acessorio":"22025109"
+        },
+        {
+            "terminal":"teste1234",
+            "acessorio":"22056346"
+        }
+    ]  
+}
+
+###

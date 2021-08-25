@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<RepTask Name="VENDOR" Description="" Type="REALTIME" RepVersion="2.0">
+<RepTask Name="VENDOR" Description="alter" Type="REALTIME" RepVersion="2.0">
   <SourceObjects
         SourceType="ABAPAdapter"
         TTFullyQualifiedName="FALSE"
