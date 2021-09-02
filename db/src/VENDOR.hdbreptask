@@ -4,7 +4,7 @@
         SourceType="ABAPAdapter"
         TTFullyQualifiedName="FALSE"
         VTFullyQualifiedName="FALSE"
-        RemoteSourceName="E8Q"
+        RemoteSourceName="ECP"
         VirtualTableSchema="">
     <SourceObject RemoteObjectUniqueName="SAPI.ZVMM007_DS" SourceDisplayName="ZVMM007_DS">
       <SourceColumns>

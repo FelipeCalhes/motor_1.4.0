@@ -196,6 +196,7 @@ entity RespBaixa {
         uuid             : String(40);
         erdat            : String(8);
         erzet            : String(6);
+        repTime: String(50);
 }
 
 entity TipoOsHelpOdata      as
