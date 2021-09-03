@@ -1,18 +1,23 @@
 Archives WITH CHANGES for prd:
 
+
+ONLY N.5 SHOULD BE NECESSARY
+
+
 1. db/cfg/ESTOQUE.hdbreptask
-    Changes the source
+    hdbreptasks only changes if the name of the source or tables are changed from DEV to PRD
+    Changes the source (not the case)
 
 2. db/src/replMateriais.hdbreptask
-    Changes the source
+    Changes the source (not the case)
 
-3. db/src/VENDOR.hdbreptask
-    Changes the source
+3. db/src/VENDOR.hdbreptask 
+    Changes the source (not the case)
     
 4. default-env.json
-    Changes app binds for db deployment
+    Changes app binds for db deployment through npm start (not the case)
 
-5. default_access_role
+5. default_access_role VERY IMPORTANT
     Changes container name
 
 PS.
