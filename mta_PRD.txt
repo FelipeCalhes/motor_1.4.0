@@ -22,9 +22,9 @@ modules:
     # ------------------------------------------------------------
     type: nodejs  
     path: ./
-    parameters:  # comentado, vai como default
+    parameters: 
       routes: # if not defined, a default route would be auto assigned unless no-route is specified
-        - route: "xsmotor-regras.cfapps.eu10.hana.ondemand.com"     
+        - route: "claro-prd-prd-xsmotor-regras.cfapps.br10.hana.ondemand.com"     
     requires:
       # Resources extracted from CAP configuration
       - name: xsmotor-regras
