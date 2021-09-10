@@ -3,7 +3,10 @@ using regrasNamespace as p from '../db/Schema';
 define type ObjBOM {
     tipoInstalacao : String(1);
     idTipoOS       : String(200);
+    regiao         : String(50);
     codMaterialSAP : String(40);
+    agrupador      : String(50);
+    tecnologia     : String(50);
     qtdMin         : Decimal;
     qtdMax         : Decimal;
     pctBom         : Decimal;
@@ -21,13 +24,47 @@ define type ObjAcessoTerminal {
     acessorio : String(40);
 }
 
+define type ObjAgrupadores {
+    agrupador  : String(50);
+    tecnologia : String(50);
+    material   : String(40);
+}
+
+define type ObjRegioes {
+    regiao         : String(50);
+    municipio      : String(50);
+    descrMunicipio : String(200);
+}
+
 service MotorDeRegras {
 
     function upsert_bom() returns Boolean;
-
+    function upsert_agrupadores() returns Boolean;
+    function upsert_regioes() returns Boolean;
     function upsert_acessoTerminal() returns Boolean;
-
     function replicate_baixa() returns Boolean;
+
+    entity Agrupadores @(restrict : [{
+        grant : [
+            'READ',
+            'WRITE'
+        ],
+        to    : [
+            'Edit',
+            'system-user'
+        ]
+    }]) as projection on p.Agrupadores
+
+    entity Regioes @(restrict : [{
+        grant : [
+            'READ',
+            'WRITE'
+        ],
+        to    : [
+            'Edit',
+            'system-user'
+        ]
+    }]) as projection on p.Regioes
 
     entity REMOTECONSOLID @(restrict : [{
         grant : [
@@ -49,8 +86,8 @@ service MotorDeRegras {
             'Edit',
             'system-user'
         ]
-    }]) as projection on p.BOM;    
-    
+    }]) as projection on p.BOM;
+
     entity BOM_TRANSITORIA @(restrict : [{
         grant : [
             'READ',
@@ -163,6 +200,32 @@ service MotorDeRegras {
         BOM : array of ObjBOM;
     }
 
+    entity importAgrupadores @(restrict : [{
+        grant : [
+            'READ',
+            'WRITE'
+        ],
+        to    : [
+            'Edit',
+            'system-user'
+        ]
+    }]) {
+        Agrupadores : array of ObjAgrupadores;
+    }
+
+    entity importRegioes @(restrict : [{
+        grant : [
+            'READ',
+            'WRITE'
+        ],
+        to    : [
+            'Edit',
+            'system-user'
+        ]
+    }]) {
+        regioes : array of ObjRegioes;
+    }
+
     entity killBOM @(restrict : [{
         grant : [
             'READ',
@@ -248,7 +311,7 @@ service MotorDeRegras {
     }]) as projection on p.MateriaisExcecao;
 
     entity AcessoTerminal @(restrict : [{
-        grant: [
+        grant : [
             'READ',
             'WRITE'
         ],
@@ -258,7 +321,7 @@ service MotorDeRegras {
         ]
     }]) as projection on p.AcessoTerminal;
 
-    entity killAcessoTerminal  @(restrict : [{
+    entity killAcessoTerminal @(restrict : [{
         grant : [
             'READ',
             'WRITE'
@@ -283,4 +346,15 @@ service MotorDeRegras {
     }]) {
         AcessoTerminal : array of ObjAcessoTerminal;
     }
+
+    entity GrupoView @(restrict : [{
+        grant : [
+            'READ',
+            'WRITE'
+        ],
+        to    : [
+            'Edit',
+            'system-user'
+        ]
+    }]) as projection on p.GrupoView;
 }

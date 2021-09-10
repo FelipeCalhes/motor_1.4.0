@@ -3,7 +3,10 @@ namespace regrasNamespace;
 entity BOM {
     key tipoInstalacao : String(1);
     key idTipoOS       : String(200);
-    key codMaterialSAP : String(40);
+    key regiao         : String(50) default 'Nacional';
+    key codMaterialSAP : String(40) default 'N/A';
+    key agrupador      : String(50) default 'N/A';
+    key tecnologia     : String(50) default 'N/A';
         qtdMin         : Decimal;
         qtdMax         : Decimal;
         pctBom         : Decimal;
@@ -16,10 +19,46 @@ entity BOM {
                              on materiais.matnr = $self.codMaterialSAP;
 }
 
+entity Regioes {
+    key regiao         : String(50);
+    key municipio      : String(50);
+        descrMunicipio : String(200);
+}
+
+entity Regioes_Transitoria {
+    key regiao         : String(50);
+    key municipio      : String(50);
+        descrMunicipio : String(200);
+}
+
+entity Agrupadores {
+    key agrupador  : String(50);
+    key tecnologia : String(50);
+    key material   : String(40);
+}
+
+entity GrupoView            as
+    select from Agrupadores {
+        agrupador,
+        tecnologia
+    }
+    group by
+        agrupador,
+        tecnologia;
+
+entity Agrupadores_Transitoria {
+    key agrupador  : String(50);
+    key tecnologia : String(50);
+    key material   : String(40);
+}
+
 entity BOM_TRANSITORIA {
     key tipoInstalacao : String(1);
     key idTipoOS       : String(200);
-    key codMaterialSAP : String(40);
+    key regiao         : String(50) default 'Nacional';
+    key codMaterialSAP : String(40) default 'N/A';
+    key agrupador      : String(50) default 'N/A';
+    key tecnologia     : String(50);
         qtdMin         : Decimal;
         qtdMax         : Decimal;
         pctBom         : Decimal;
@@ -68,29 +107,6 @@ entity REMOTECONSOLID {
         erdat            : String(8);
         erzet            : String(6);
 }
-/*
-entity REMOTECONSOLID       as
-    select from REMOTECONSOLID2 {
-        mandt,
-        id_consolid_orig,
-        consolidado,
-        contador,
-        matnr,
-        status,
-        mensagem,
-        lbkum,
-        lbkum_doc,
-        mblnr,
-        mjahr,
-        zeile,
-        data,
-        wo,
-        lifnr,
-        item_text,
-        uuid,
-        erdat,
-        erzet
-    };*/
 
 @cds.persistence.exists
 entity Fornecedor {
@@ -196,7 +212,7 @@ entity RespBaixa {
         uuid             : String(40);
         erdat            : String(8);
         erzet            : String(6);
-        repTime: String(50);
+        repTime          : String(50);
 }
 
 entity TipoOsHelpOdata      as

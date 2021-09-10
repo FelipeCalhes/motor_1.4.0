@@ -6,7 +6,10 @@ BEGIN
     UPSERT REGRASNAMESPACE_BOM
         SELECT TIPOINSTALACAO,
         IDTIPOOS,
+        REGIAO,
         CODMATERIALSAP,
+        AGRUPADOR,
+        TECNOLOGIA,
         QTDMIN,
         QTDMAX,
         CASE
