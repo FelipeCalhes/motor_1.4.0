@@ -131,14 +131,14 @@ module.exports = (motor) => {
     motor.on('CREATE', 'importAgrupadores', async (req) => {
         const srv = await cds.connect.to('db');
         const { Agrupadores_Transitoria } = srv.entities
-        await srv.run(INSERT.into(Agrupadores_Transitoria).entries(req.data.Agrupadores))
+        await srv.run(INSERT.into(Agrupadores_Transitoria).entries(req.data.agrupadores))
         return req.data
     })
 
     motor.on('CREATE', 'importRegioes', async (req) => {
         const srv = await cds.connect.to('db');
         const { Regioes_Transitoria } = srv.entities
-        await srv.run(INSERT.into(Regioes_Transitoria).entries(req.data.Regioes))
+        await srv.run(INSERT.into(Regioes_Transitoria).entries(req.data.regioes))
         return req.data
     })
 

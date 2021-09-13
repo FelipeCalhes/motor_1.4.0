@@ -7,6 +7,24 @@ Content-Type: application/json;IEEE754Compatible=true
 ###
 
 
+POST http://localhost:4004/motor-de-regras/importRegioes  HTTP/1.1
+Content-Type: application/json;IEEE754Compatible=true
+
+{
+    "regioes":
+    [{
+        "regiao":"Zona Rural",
+        "municipio":"3550506",
+        "descrMunicipio":"São Pedro do Turvo"
+    },
+    {
+        "regiao":"Zona Urbana",
+        "municipio":"3550308",
+        "descrMunicipio":"São Paulo"
+    }]
+}
+###
+
 POST http://localhost:4004/motor-de-regras/importBOM  HTTP/1.1
 Content-Type: application/json;IEEE754Compatible=true
 

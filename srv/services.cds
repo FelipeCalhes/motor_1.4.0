@@ -210,7 +210,7 @@ service MotorDeRegras {
             'system-user'
         ]
     }]) {
-        Agrupadores : array of ObjAgrupadores;
+        agrupadores : array of ObjAgrupadores;
     }
 
     entity importRegioes @(restrict : [{

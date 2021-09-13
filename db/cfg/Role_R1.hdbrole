@@ -131,6 +131,13 @@
         "privileges": [
           "SELECT"
         ]
+      },
+      {
+        "name": "MOTORDEREGRAS_AGRUPADORES",
+        "type": "TABLE",
+        "privileges": [
+          "SELECT"
+        ]
       }
     ]
   }
