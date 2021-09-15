@@ -128,16 +128,69 @@ module.exports = (motor) => {
         return req.data
     })
 
+    motor.before('DELETE', 'Agrupadores', async (req) => {
+        const srv = await cds.connect.to('db');
+        const { LogAgrupadores } = srv.entities
+        let select = await srv.run(SELECT.one.from(LogAgrupadores).where({ agrupador: req.data.agrupador, tecnologia: req.data.tecnologia, material: req.data.material }))
+        if (select) {
+            await srv.run(DELETE.from(LogAgrupadores).where({ agrupador: req.data.agrupador, tecnologia: req.data.tecnologia, material: req.data.material }))
+        }
+    })
+
+    motor.before('CREATE', 'Agrupadores', async (req) => {
+        const srv = await cds.connect.to('db');
+        const { LogAgrupadores } = srv.entities
+        let log = []
+        let hoje = new Date()
+        let timestamp =
+            ('0000' + JSON.stringify(hoje.getFullYear())).slice(-4)
+            + '-' + ('00' + JSON.stringify(hoje.getMonth() + 1)).slice(-2)
+            + '-' + ('00' + JSON.stringify(hoje.getDate())).slice(-2)
+            + 'T' + ('00' + JSON.stringify(hoje.getHours())).slice(-2)
+            + ':' + ('00' + JSON.stringify(hoje.getMinutes())).slice(-2)
+            + ':' + ('00' + JSON.stringify(hoje.getSeconds())).slice(-2)
+        log.push({
+            agrupador: req.data.agrupador,
+            tecnologia: req.data.tecnologia,
+            material: req.data.material,
+            usuario: req.user.id,
+            dataHora: timestamp
+        })
+        await srv.run(INSERT.into(LogAgrupadores).entries(log))
+    })
+
     motor.on('CREATE', 'importAgrupadores', async (req) => {
         const srv = await cds.connect.to('db');
-        const { Agrupadores_Transitoria } = srv.entities
+        const { Agrupadores_Transitoria, LogAgrupadores_Transitoria } = srv.entities
         await srv.run(INSERT.into(Agrupadores_Transitoria).entries(req.data.agrupadores))
+
+        let log = []
+        let hoje = new Date()
+        let timestamp =
+            ('0000' + JSON.stringify(hoje.getFullYear())).slice(-4)
+            + '-' + ('00' + JSON.stringify(hoje.getMonth() + 1)).slice(-2)
+            + '-' + ('00' + JSON.stringify(hoje.getDate())).slice(-2)
+            + 'T' + ('00' + JSON.stringify(hoje.getHours())).slice(-2)
+            + ':' + ('00' + JSON.stringify(hoje.getMinutes())).slice(-2)
+            + ':' + ('00' + JSON.stringify(hoje.getSeconds())).slice(-2)
+
+        req.data.agrupadores.forEach((a) => {
+            log.push({
+                agrupador: a.agrupador,
+                tecnologia: a.tecnologia,
+                material: a.material,
+                usuario: req.user.id,
+                dataHora: timestamp
+            })
+        })
+
+        await srv.run(INSERT.into(LogAgrupadores_Transitoria).entries(log))
         return req.data
     })
 
     motor.on('CREATE', 'importRegioes', async (req) => {
         const srv = await cds.connect.to('db');
-        const { Regioes_Transitoria } = srv.entities
+        const { Regioes_Transitoria, Municipios_Transitoria } = srv.entities
         await srv.run(INSERT.into(Regioes_Transitoria).entries(req.data.regioes))
         return req.data
     })

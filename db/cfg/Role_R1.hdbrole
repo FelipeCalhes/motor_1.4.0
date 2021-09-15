@@ -138,6 +138,20 @@
         "privileges": [
           "SELECT"
         ]
+      },
+      {
+        "name": "MOTORDEREGRAS_REGIOES",
+        "type": "TABLE",
+        "privileges": [
+          "SELECT"
+        ]
+      },
+      {
+        "name": "MOTORDEREGRAS_MUNICIPIOS",
+        "type": "TABLE",
+        "privileges": [
+          "SELECT"
+        ]
       }
     ]
   }

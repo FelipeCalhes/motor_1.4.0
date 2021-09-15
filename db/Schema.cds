@@ -3,10 +3,10 @@ namespace regrasNamespace;
 entity BOM {
     key tipoInstalacao : String(1);
     key idTipoOS       : String(200);
-    key regiao         : String(50) default 'Nacional';
-    key codMaterialSAP : String(40) default 'N/A';
-    key agrupador      : String(50) default 'N/A';
-    key tecnologia     : String(50) default 'N/A';
+    key regiao         : String(50) default '';
+    key codMaterialSAP : String(40) default '';
+    key agrupador      : String(50) default '';
+    key tecnologia     : String(50) default '';
         qtdMin         : Decimal;
         qtdMax         : Decimal;
         pctBom         : Decimal;
@@ -20,13 +20,21 @@ entity BOM {
 }
 
 entity Regioes {
-    key regiao         : String(50);
+    key regiao    : String(50);
+    key municipio : Association to Municipios;
+}
+
+entity Municipios {
     key municipio      : String(50);
         descrMunicipio : String(200);
 }
 
 entity Regioes_Transitoria {
-    key regiao         : String(50);
+    key regiao              : String(50);
+    key municipio_municipio : String(50);
+}
+
+entity Municipios_Transitoria {
     key municipio      : String(50);
         descrMunicipio : String(200);
 }
@@ -36,6 +44,36 @@ entity Agrupadores {
     key tecnologia : String(50);
     key material   : String(40);
 }
+
+entity LogAgrupadores {
+    key agrupador  : String(50);
+    key tecnologia : String(50);
+    key material   : String(40);
+        usuario    : String(120);
+        dataHora   : String(50);
+}
+
+entity LogAgrupadores_Transitoria {
+    key agrupador  : String(50);
+    key tecnologia : String(50);
+    key material   : String(40);
+        usuario    : String(120);
+        dataHora   : String(50);
+}
+
+entity AgrupadoresView 
+    as select from Agrupadores as ag
+    left join LogAgrupadores as log 
+        on ag.agrupador = log.agrupador
+        and ag.tecnologia = log.tecnologia
+        and ag.material = log.material 
+        {
+            ag.agrupador,
+            ag.tecnologia,
+            ag.material,
+            log.usuario,
+            log.dataHora
+        };
 
 entity GrupoView            as
     select from Agrupadores {
@@ -55,10 +93,10 @@ entity Agrupadores_Transitoria {
 entity BOM_TRANSITORIA {
     key tipoInstalacao : String(1);
     key idTipoOS       : String(200);
-    key regiao         : String(50) default 'Nacional';
-    key codMaterialSAP : String(40) default 'N/A';
-    key agrupador      : String(50) default 'N/A';
-    key tecnologia     : String(50);
+    key regiao         : String(50) default '';
+    key codMaterialSAP : String(40) default '';
+    key agrupador      : String(50) default '';
+    key tecnologia     : String(50) default '';
         qtdMin         : Decimal;
         qtdMax         : Decimal;
         pctBom         : Decimal;

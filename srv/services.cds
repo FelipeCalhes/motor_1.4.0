@@ -31,9 +31,8 @@ define type ObjAgrupadores {
 }
 
 define type ObjRegioes {
-    regiao         : String(50);
-    municipio      : String(50);
-    descrMunicipio : String(200);
+    regiao              : String(50);
+    municipio_municipio : String(50);
 }
 
 service MotorDeRegras {
@@ -65,6 +64,17 @@ service MotorDeRegras {
             'system-user'
         ]
     }]) as projection on p.Regioes
+
+    entity Municipios @(restrict : [{
+        grant : [
+            'READ',
+            'WRITE'
+        ],
+        to    : [
+            'Edit',
+            'system-user'
+        ]
+    }]) as projection on p.Municipios
 
     entity REMOTECONSOLID @(restrict : [{
         grant : [
@@ -357,4 +367,15 @@ service MotorDeRegras {
             'system-user'
         ]
     }]) as projection on p.GrupoView;
+
+    entity AgrupadoresView @(restrict : [{
+        grant : [
+            'READ',
+            'WRITE'
+        ],
+        to    : [
+            'Edit',
+            'system-user'
+        ]
+    }]) as projection on p.AgrupadoresView;
 }
