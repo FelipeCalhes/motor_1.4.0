@@ -43,37 +43,19 @@ entity Agrupadores {
     key agrupador  : String(50);
     key tecnologia : String(50);
     key material   : String(40);
+        usuario    : String(120);
+        dataHora   : String(50);
+        materiais  : Association to one Materiais
+                         on materiais.matnr = $self.material;
 }
 
-entity LogAgrupadores {
+entity Agrupadores_Transitoria {
     key agrupador  : String(50);
     key tecnologia : String(50);
     key material   : String(40);
         usuario    : String(120);
         dataHora   : String(50);
 }
-
-entity LogAgrupadores_Transitoria {
-    key agrupador  : String(50);
-    key tecnologia : String(50);
-    key material   : String(40);
-        usuario    : String(120);
-        dataHora   : String(50);
-}
-
-entity AgrupadoresView 
-    as select from Agrupadores as ag
-    left join LogAgrupadores as log 
-        on ag.agrupador = log.agrupador
-        and ag.tecnologia = log.tecnologia
-        and ag.material = log.material 
-        {
-            ag.agrupador,
-            ag.tecnologia,
-            ag.material,
-            log.usuario,
-            log.dataHora
-        };
 
 entity GrupoView            as
     select from Agrupadores {
@@ -84,11 +66,6 @@ entity GrupoView            as
         agrupador,
         tecnologia;
 
-entity Agrupadores_Transitoria {
-    key agrupador  : String(50);
-    key tecnologia : String(50);
-    key material   : String(40);
-}
 
 entity BOM_TRANSITORIA {
     key tipoInstalacao : String(1);

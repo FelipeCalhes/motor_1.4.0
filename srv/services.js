@@ -28,6 +28,8 @@ module.exports = (motor) => {
         const srv = await cds.connect.to('db');
         const { BOM_TRANSITORIA } = srv.entities
         await srv.run(INSERT.into(BOM_TRANSITORIA).entries(req.data.BOM))
+        //const tx = srv.tx()
+        //await tx.run(INSERT.into(BOM_TRANSITORIA).entries(req.data.BOM))
         return req.data
     })
 
@@ -127,15 +129,15 @@ module.exports = (motor) => {
         await srv.run(INSERT.into(AcessoTerminal_Transitoria).entries(req.data.AcessoTerminal))
         return req.data
     })
-
-    motor.before('DELETE', 'Agrupadores', async (req) => {
-        const srv = await cds.connect.to('db');
-        const { LogAgrupadores } = srv.entities
-        let select = await srv.run(SELECT.one.from(LogAgrupadores).where({ agrupador: req.data.agrupador, tecnologia: req.data.tecnologia, material: req.data.material }))
-        if (select) {
-            await srv.run(DELETE.from(LogAgrupadores).where({ agrupador: req.data.agrupador, tecnologia: req.data.tecnologia, material: req.data.material }))
-        }
-    })
+    /*
+        motor.before('DELETE', 'Agrupadores', async (req) => {
+            const srv = await cds.connect.to('db');
+            const { LogAgrupadores } = srv.entities
+            let select = await srv.run(SELECT.one.from(LogAgrupadores).where({ agrupador: req.data.agrupador, tecnologia: req.data.tecnologia, material: req.data.material }))
+            if (select) {
+                await srv.run(DELETE.from(LogAgrupadores).where({ agrupador: req.data.agrupador, tecnologia: req.data.tecnologia, material: req.data.material }))
+            }
+        })*/
 
     motor.before('CREATE', 'Agrupadores', async (req) => {
         const srv = await cds.connect.to('db');
@@ -149,22 +151,21 @@ module.exports = (motor) => {
             + 'T' + ('00' + JSON.stringify(hoje.getHours())).slice(-2)
             + ':' + ('00' + JSON.stringify(hoje.getMinutes())).slice(-2)
             + ':' + ('00' + JSON.stringify(hoje.getSeconds())).slice(-2)
-        log.push({
-            agrupador: req.data.agrupador,
-            tecnologia: req.data.tecnologia,
-            material: req.data.material,
-            usuario: req.user.id,
-            dataHora: timestamp
-        })
-        await srv.run(INSERT.into(LogAgrupadores).entries(log))
+        req.data.usuario = req.user.id
+        req.data.dataHora = timestamp
+        //log.push({
+        //    agrupador: req.data.agrupador,
+        //    tecnologia: req.data.tecnologia,
+        //    material: req.data.material,
+        //    usuario: req.user.id,
+        //    dataHora: timestamp
+        //})
+        //await srv.run(INSERT.into(LogAgrupadores).entries(log))
     })
 
     motor.on('CREATE', 'importAgrupadores', async (req) => {
         const srv = await cds.connect.to('db');
-        const { Agrupadores_Transitoria, LogAgrupadores_Transitoria } = srv.entities
-        await srv.run(INSERT.into(Agrupadores_Transitoria).entries(req.data.agrupadores))
-
-        let log = []
+        const { Agrupadores_Transitoria } = srv.entities
         let hoje = new Date()
         let timestamp =
             ('0000' + JSON.stringify(hoje.getFullYear())).slice(-4)
@@ -175,16 +176,17 @@ module.exports = (motor) => {
             + ':' + ('00' + JSON.stringify(hoje.getSeconds())).slice(-2)
 
         req.data.agrupadores.forEach((a) => {
-            log.push({
-                agrupador: a.agrupador,
-                tecnologia: a.tecnologia,
-                material: a.material,
-                usuario: req.user.id,
-                dataHora: timestamp
-            })
+            a.usuario = req.user.id
+            a.dataHora = timestamp
+            //log.push({
+            //    agrupador: a.agrupador,
+            //    tecnologia: a.tecnologia,
+            //    material: a.material,
+            //    usuario: req.user.id,
+            //    dataHora: timestamp
+            //})
         })
-
-        await srv.run(INSERT.into(LogAgrupadores_Transitoria).entries(log))
+        await srv.run(INSERT.into(Agrupadores_Transitoria).entries(req.data.agrupadores))
         return req.data
     })
 
@@ -227,6 +229,21 @@ module.exports = (motor) => {
         }
     })
 
+    motor.on('READ', 'killAgrupadores', async (req) => {
+        const srv = await cds.connect.to('db');
+        const { Agrupadores } = srv.entities
+        let resp
+        try {
+            await srv.run(DELETE.from(Agrupadores))
+            resp = { 'kill': true }
+        }
+        catch (err) {
+            resp = { 'kill': false }
+            req.reject(400, 'Erro ao deletar tabela')
+        }
+        return resp
+    })
+
     motor.on('upsert_regioes', async () => {
         try {
             const db = await cds.connect.to('db')
@@ -256,6 +273,16 @@ module.exports = (motor) => {
         } catch (error) {
             console.error(error)
             return false
+        }
+    })
+
+    motor.before('CREATE', 'Regioes', async (req) => {
+        const srv = await cds.connect.to('db');
+        const { Regioes } = srv.entities
+        let reg = []
+        reg = await srv.run(SELECT.from(Regioes).where({ municipio_municipio: req.data.municipio_municipio }))
+        if (reg.length > 0) {
+            req.reject(400, 'regiao already exists')
         }
     })
 }

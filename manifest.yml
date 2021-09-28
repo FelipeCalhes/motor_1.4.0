@@ -3,4 +3,4 @@ applications:
 - name: xsmotor-regras
   random-route: false
   path: ./
-  memory: 1024M
+  memory: 2048M

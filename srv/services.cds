@@ -28,6 +28,8 @@ define type ObjAgrupadores {
     agrupador  : String(50);
     tecnologia : String(50);
     material   : String(40);
+    usuario    : String(120);
+    dataHora   : String(50);
 }
 
 define type ObjRegioes {
@@ -248,6 +250,19 @@ service MotorDeRegras {
     }]) {
         kill : Boolean;
     }
+    
+    entity killAgrupadores @(restrict : [{
+        grant : [
+            'READ',
+            'WRITE'
+        ],
+        to    : [
+            'Edit',
+            'system-user'
+        ]
+    }]) {
+        kill : Boolean;
+    }
 
     entity TipoWoBaixaAutomatica @(restrict : [{
         grant : [
@@ -367,15 +382,4 @@ service MotorDeRegras {
             'system-user'
         ]
     }]) as projection on p.GrupoView;
-
-    entity AgrupadoresView @(restrict : [{
-        grant : [
-            'READ',
-            'WRITE'
-        ],
-        to    : [
-            'Edit',
-            'system-user'
-        ]
-    }]) as projection on p.AgrupadoresView;
 }

@@ -22,7 +22,8 @@ modules:
     # ------------------------------------------------------------
     type: nodejs  
     path: ./
-    parameters:  # comentado, vai como default
+    parameters:  # comentado, vai como default    
+      memory: 2048M
       routes: # if not defined, a default route would be auto assigned unless no-route is specified
         - route: "xsmotor-regras.cfapps.eu10.hana.ondemand.com"     
     requires:
