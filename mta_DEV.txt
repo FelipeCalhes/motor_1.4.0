@@ -4,7 +4,7 @@
 ## approuter=
 _schema-version: '3.1'
 ID: xsmotor-de-regras
-version: 1.3.0
+version: 1.3.3
 description: Motor de Regras
 parameters:
   enable-parallel-deployments: true
@@ -22,9 +22,10 @@ modules:
     # ------------------------------------------------------------
     type: nodejs  
     path: ./
-    parameters: 
+    parameters:  # comentado, vai como default    
+      memory: 2048M
       routes: # if not defined, a default route would be auto assigned unless no-route is specified
-        - route: "claro-prd-prd-xsmotor-regras.cfapps.br10.hana.ondemand.com"     
+        - route: "xsmotor-regras.cfapps.eu10.hana.ondemand.com"     
     requires:
       # Resources extracted from CAP configuration
       - name: xsmotor-regras
