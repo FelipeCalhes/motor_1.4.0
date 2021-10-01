@@ -20,9 +20,11 @@ modules:
   # --------------------- SERVER MODULE ------------------------
   - name: motor-backend
     # ------------------------------------------------------------
-    type: nodejs  
+    type: nodejs
     path: ./
     parameters: 
+      memory: 2048MB
+      disk-quota: 2048MB 
       routes: # if not defined, a default route would be auto assigned unless no-route is specified
         - route: "claro-prd-prd-xsmotor-regras.cfapps.br10.hana.ondemand.com"     
     requires:
