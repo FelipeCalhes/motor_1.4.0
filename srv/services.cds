@@ -177,17 +177,6 @@ service MotorDeRegras {
         ]
     }]) as projection on p.FornecedorHelpOdata;
 
-    entity LoginTecnico @(restrict : [{
-        grant : [
-            'READ',
-            'WRITE'
-        ],
-        to    : [
-            'Edit',
-            'system-user'
-        ]
-    }]) as projection on p.LoginTecnico;
-
     entity RetornoDaBaixa @(restrict : [{
         grant : [
             'READ',

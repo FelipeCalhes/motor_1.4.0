@@ -3,13 +3,6 @@
     "name": "default_access_role",
     "object_privileges": [
       {
-        "name": "SUB_ZVMM006_DS",
-        "type": "REMOTE SUBSCRIPTION",
-        "privileges": [
-          "ALTER"
-        ]
-      },
-      {
         "name": "REGRASNAMESPACE_BOM",
         "type": "TABLE",
         "privileges": [

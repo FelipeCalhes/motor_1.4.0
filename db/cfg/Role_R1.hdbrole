@@ -17,13 +17,6 @@
         ]
       },
       {
-        "name": "SUB_ZVMM006_DS",
-        "type": "REMOTE SUBSCRIPTION",
-        "privileges": [
-          "ALTER"
-        ]
-      },
-      {
         "name": "REGRASNAMESPACE_BOM",
         "type": "TABLE",
         "privileges": [
@@ -67,13 +60,6 @@
           "ALTER",
           "DELETE",
           "UPDATE"
-        ]
-      },
-      {
-        "name": "SUB_ZVMM008_DS",
-        "type": "REMOTE SUBSCRIPTION",
-        "privileges": [
-          "ALTER"
         ]
       },
       {
@@ -151,6 +137,17 @@
         "type": "TABLE",
         "privileges": [
           "SELECT"
+        ]
+      },
+      {
+        "name": "REGRASNAMESPACE_LOGINTECNICOMOTOR",
+        "type": "TABLE",
+        "privileges": [
+          "SELECT",
+          "UPDATE",
+          "INSERT",
+          "DELETE",
+          "ALTER"
         ]
       }
     ]

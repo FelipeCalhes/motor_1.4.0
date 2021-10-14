@@ -19,6 +19,23 @@ entity BOM {
                              on materiais.matnr = $self.codMaterialSAP;
 }
 
+entity Estoque {
+    key matnr : String(18);
+    key werks : String(4);
+    key charg : String(10);
+    key sobkz : String(1);
+    key lifnr : String(10);
+        lblab : Decimal(13, 3); 
+        lbins : Decimal(13, 3);
+        meins : String(3); 
+}
+
+entity LoginTecnicoMotor {
+    key loginTecnico     : String(120);
+        CodFornecedorSAP : String(50);
+        CNPJ             : String(16);
+}
+
 entity Regioes {
     key regiao    : String(50);
     key municipio : Association to Municipios;
@@ -65,7 +82,6 @@ entity GrupoView            as
     group by
         agrupador,
         tecnologia;
-
 
 entity BOM_TRANSITORIA {
     key tipoInstalacao : String(1);
@@ -123,7 +139,6 @@ entity REMOTECONSOLID {
         erzet            : String(6);
 }
 
-@cds.persistence.exists
 entity Fornecedor {
     lifnr     : String(10);
     berid     : String(10);
@@ -133,13 +148,11 @@ entity Fornecedor {
     stcd2     : String(11);
 }
 
-@cds.persistence.exists
 entity Empresas {
     bukrs  : String(4);
     branch : String(4);
 }
 
-@cds.persistence.exists
 entity Centros {
     werks      : String(4);
     name1      : String(30);
@@ -169,12 +182,6 @@ entity ExpandTecnico        as
         fornecedor.fornecedor,
         fornecedor.cnpj;
 
-entity LoginTecnico {
-    key loginTecnico     : String(120);
-        CodFornecedorSAP : String(50);
-        CNPJ             : String(10);
-}
-
 entity BOM2ODATA            as
     select from BOM
     left join Materiais as mat
@@ -200,7 +207,6 @@ entity BOM2ODATA            as
         BOM.unidadeConsumo
     };
 
-@cds.persistence.exists
 entity TipoOs {
     key tipo_Os   : String(4);
         desc_os   : String(50);
@@ -273,7 +279,6 @@ entity RetornoDaBaixa       as
         erzet            as erzet
     };
 
-@cds.persistence.exists
 entity Materiais {
     key matnr : String(18);
     key spras : String(1);
