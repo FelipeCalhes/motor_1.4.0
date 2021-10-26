@@ -10,13 +10,15 @@ module.exports = (motor) => {
 
     motor.on('upsert_bom', async () => {
         try {
-            const db = await cds.connect.to('db')
-            const dbClass = require("sap-hdbext-promisfied")
-            let dbConn = new dbClass(await dbClass.createConnection(db.options.credentials))
-            const hdbext = require("@sap/hdbext")
-            const sp = await dbConn.loadProcedurePromisified(hdbext, null, 'UPSERT_BOM')
-            const output = await dbConn.callProcedurePromisified(sp, [])
-            console.log(output.results)
+            const srv = await cds.connect.to('db');
+            await srv.run('CALL UPSERT_BOM()')
+            //const db = await cds.connect.to('db')
+            //const dbClass = require("sap-hdbext-promisfied")
+            //let dbConn = new dbClass(await dbClass.createConnection(db.options.credentials))
+            //const hdbext = require("@sap/hdbext")
+            //const sp = await dbConn.loadProcedurePromisified(hdbext, null, 'UPSERT_BOM')
+            //const output = await dbConn.callProcedurePromisified(sp, [])
+            //console.log(output.results)
             return true
         } catch (error) {
             console.error(error)
@@ -199,13 +201,21 @@ module.exports = (motor) => {
 
     motor.on('upsert_acessoTerminal', async () => {
         try {
-            const db = await cds.connect.to('db')
-            const dbClass = require("sap-hdbext-promisfied")
-            let dbConn = new dbClass(await dbClass.createConnection(db.options.credentials))
-            const hdbext = require("@sap/hdbext")
-            const sp = await dbConn.loadProcedurePromisified(hdbext, null, 'UPSERT_ACESSOTERMINAL')
-            const output = await dbConn.callProcedurePromisified(sp, [])
-            console.log(output.results)
+            const srv = await cds.connect.to('db');
+            await srv.run('CALL UPSERT_ACESSOTERMINAL()')
+
+            //const tx = cds.transaction()
+            //var vProcedure = 'CALL UPSERT_ACESSOTERMINAL()'
+            //await tx.run(vProcedure) //.then(tx.commit)
+
+            //const dbClass = require("sap-hdbext-promisfied")
+            //let dbConn = new dbClass(await dbClass.createConnection(db.options.credentials))
+            //const hdbext = require("@sap/hdbext")
+            //const sp = await dbConn.loadProcedurePromisified(hdbext, null, 'UPSERT_ACESSOTERMINAL')
+            //const output = await dbConn.callProcedurePromisified(sp, [])
+            //dbConn.closeConnection()
+            //console.log(output.results)
+
             return true
         } catch (error) {
             console.error(error)
@@ -215,13 +225,20 @@ module.exports = (motor) => {
 
     motor.on('upsert_agrupadores', async () => {
         try {
-            const db = await cds.connect.to('db')
-            const dbClass = require("sap-hdbext-promisfied")
-            let dbConn = new dbClass(await dbClass.createConnection(db.options.credentials))
-            const hdbext = require("@sap/hdbext")
-            const sp = await dbConn.loadProcedurePromisified(hdbext, null, 'UPSERT_AGRUPADORES')
-            const output = await dbConn.callProcedurePromisified(sp, [])
-            console.log(output.results)
+            const srv = await cds.connect.to('db');
+            await srv.run('CALL UPSERT_AGRUPADORES()')
+
+            //const tx = cds.transaction()
+            //var vProcedure = 'CALL UPSERT_AGRUPADORES()'
+            //await tx.run(vProcedure) //.then(tx.commit)
+
+            //const db = await cds.connect.to('db')
+            //const dbClass = require("sap-hdbext-promisfied")
+            //let dbConn = new dbClass(await dbClass.createConnection(db.options.credentials))
+            //const hdbext = require("@sap/hdbext")
+            //const sp = await dbConn.loadProcedurePromisified(hdbext, null, 'UPSERT_AGRUPADORES')
+            //const output = await dbConn.callProcedurePromisified(sp, [])
+            //console.log(output.results)
             return true
         } catch (error) {
             console.error(error)
@@ -245,14 +262,16 @@ module.exports = (motor) => {
     })
 
     motor.on('upsert_regioes', async () => {
-        try {
-            const db = await cds.connect.to('db')
-            const dbClass = require("sap-hdbext-promisfied")
-            let dbConn = new dbClass(await dbClass.createConnection(db.options.credentials))
-            const hdbext = require("@sap/hdbext")
-            const sp = await dbConn.loadProcedurePromisified(hdbext, null, 'UPSERT_REGIOES')
-            const output = await dbConn.callProcedurePromisified(sp, [])
-            console.log(output.results)
+        try {            
+            const srv = await cds.connect.to('db');
+            await srv.run('CALL UPSERT_REGIOES()')
+            //const db = await cds.connect.to('db')
+            //const dbClass = require("sap-hdbext-promisfied")
+            //let dbConn = new dbClass(await dbClass.createConnection(db.options.credentials))
+            //const hdbext = require("@sap/hdbext")
+            //const sp = await dbConn.loadProcedurePromisified(hdbext, null, 'UPSERT_REGIOES')
+            //const output = await dbConn.callProcedurePromisified(sp, [])
+            //console.log(output.results)
             return true
         } catch (error) {
             console.error(error)
@@ -262,13 +281,15 @@ module.exports = (motor) => {
 
     motor.on('replicate_baixa', async () => {
         try {
-            const db = await cds.connect.to('db')
-            const dbClass = require("sap-hdbext-promisfied")
-            let dbConn = new dbClass(await dbClass.createConnection(db.options.credentials))
-            const hdbext = require("@sap/hdbext")
-            const sp = await dbConn.loadProcedurePromisified(hdbext, null, 'REPLICATE_BAIXA')
-            const output = await dbConn.callProcedurePromisified(sp, [])
-            console.log(output.results)
+            const srv = await cds.connect.to('db');
+            await srv.run('CALL REPLICATE_BAIXA()')
+            //const db = await cds.connect.to('db')
+            //const dbClass = require("sap-hdbext-promisfied")
+            //let dbConn = new dbClass(await dbClass.createConnection(db.options.credentials))
+            //const hdbext = require("@sap/hdbext")
+            //const sp = await dbConn.loadProcedurePromisified(hdbext, null, 'REPLICATE_BAIXA')
+            //const output = await dbConn.callProcedurePromisified(sp, [])
+            //console.log(output.results)
             return true
         } catch (error) {
             console.error(error)
