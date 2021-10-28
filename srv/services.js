@@ -8,17 +8,68 @@ module.exports = (motor) => {
         }
     })
 
+    motor.after('CREATE', 'BOM', async (req) => {                
+        let srv = await cds.connect.to('db');
+        await srv.run('CALL UPDATE_TOTALITEMS()')
+    })
+
+    motor.after('CREATE', 'Parametros', async (req) => {                
+        let srv = await cds.connect.to('db');
+        await srv.run('CALL RESET_TOTALITEMS()')
+    })
+    
+    motor.after('UPDATE', 'Parametros', async (req) => {                
+        let srv = await cds.connect.to('db');
+        await srv.run('CALL RESET_TOTALITEMS()')
+    })
+    
+    motor.after('CREATE', 'RegraDeCalculo', async (req) => {                
+        let srv = await cds.connect.to('db');
+        await srv.run('CALL UPDATE_TOTALITEMS()')
+    })
+    
+    motor.after('UPDATE', 'RegraDeCalculo', async (req) => {                
+        let srv = await cds.connect.to('db');
+        await srv.run('CALL UPDATE_TOTALITEMS()')
+    })
+    
+    motor.after('CREATE', 'Regioes', async (req) => {                
+        let srv = await cds.connect.to('db');
+        await srv.run('CALL UPDATE_TOTALITEMS()')
+    })
+    
+    motor.after('UPDATE', 'Regioes', async (req) => {                
+        let srv = await cds.connect.to('db');
+        await srv.run('CALL UPDATE_TOTALITEMS()')
+    })
+    
+    motor.after('CREATE', 'Agrupadores', async (req) => {                
+        let srv = await cds.connect.to('db');
+        await srv.run('CALL UPDATE_TOTALITEMS()')
+    })
+    
+    motor.after('UPDATE', 'Agrupadores', async (req) => {                
+        let srv = await cds.connect.to('db');
+        await srv.run('CALL UPDATE_TOTALITEMS()')
+    })
+    
+    motor.after('CREATE', 'MateriaisExcecao', async (req) => {                
+        let srv = await cds.connect.to('db');
+        await srv.run('CALL UPDATE_TOTALITEMS()')
+    })
+    
+    motor.after('UPDATE', 'MateriaisExcecao', async (req) => {                
+        let srv = await cds.connect.to('db');
+        await srv.run('CALL UPDATE_TOTALITEMS()')
+    })
+
+
+
     motor.on('upsert_bom', async () => {
         try {
             const srv = await cds.connect.to('db');
             await srv.run('CALL UPSERT_BOM()')
-            //const db = await cds.connect.to('db')
-            //const dbClass = require("sap-hdbext-promisfied")
-            //let dbConn = new dbClass(await dbClass.createConnection(db.options.credentials))
-            //const hdbext = require("@sap/hdbext")
-            //const sp = await dbConn.loadProcedurePromisified(hdbext, null, 'UPSERT_BOM')
-            //const output = await dbConn.callProcedurePromisified(sp, [])
-            //console.log(output.results)
+            await srv.run('CALL UPDATE_TOTALITEMS()')
             return true
         } catch (error) {
             console.error(error)
@@ -30,8 +81,6 @@ module.exports = (motor) => {
         const srv = await cds.connect.to('db');
         const { BOM_TRANSITORIA } = srv.entities
         await srv.run(INSERT.into(BOM_TRANSITORIA).entries(req.data.BOM))
-        //const tx = srv.tx()
-        //await tx.run(INSERT.into(BOM_TRANSITORIA).entries(req.data.BOM))
         return req.data
     })
 
@@ -131,15 +180,6 @@ module.exports = (motor) => {
         await srv.run(INSERT.into(AcessoTerminal_Transitoria).entries(req.data.AcessoTerminal))
         return req.data
     })
-    /*
-        motor.before('DELETE', 'Agrupadores', async (req) => {
-            const srv = await cds.connect.to('db');
-            const { LogAgrupadores } = srv.entities
-            let select = await srv.run(SELECT.one.from(LogAgrupadores).where({ agrupador: req.data.agrupador, tecnologia: req.data.tecnologia, material: req.data.material }))
-            if (select) {
-                await srv.run(DELETE.from(LogAgrupadores).where({ agrupador: req.data.agrupador, tecnologia: req.data.tecnologia, material: req.data.material }))
-            }
-        })*/
 
     motor.before('CREATE', 'Agrupadores', async (req) => {
         const srv = await cds.connect.to('db');
@@ -155,14 +195,6 @@ module.exports = (motor) => {
             + ':' + ('00' + JSON.stringify(hoje.getSeconds())).slice(-2)
         req.data.usuario = req.user.id
         req.data.dataHora = timestamp
-        //log.push({
-        //    agrupador: req.data.agrupador,
-        //    tecnologia: req.data.tecnologia,
-        //    material: req.data.material,
-        //    usuario: req.user.id,
-        //    dataHora: timestamp
-        //})
-        //await srv.run(INSERT.into(LogAgrupadores).entries(log))
     })
 
     motor.on('CREATE', 'importAgrupadores', async (req) => {
@@ -180,13 +212,6 @@ module.exports = (motor) => {
         req.data.agrupadores.forEach((a) => {
             a.usuario = req.user.id
             a.dataHora = timestamp
-            //log.push({
-            //    agrupador: a.agrupador,
-            //    tecnologia: a.tecnologia,
-            //    material: a.material,
-            //    usuario: req.user.id,
-            //    dataHora: timestamp
-            //})
         })
         await srv.run(INSERT.into(Agrupadores_Transitoria).entries(req.data.agrupadores))
         return req.data
@@ -203,19 +228,6 @@ module.exports = (motor) => {
         try {
             const srv = await cds.connect.to('db');
             await srv.run('CALL UPSERT_ACESSOTERMINAL()')
-
-            //const tx = cds.transaction()
-            //var vProcedure = 'CALL UPSERT_ACESSOTERMINAL()'
-            //await tx.run(vProcedure) //.then(tx.commit)
-
-            //const dbClass = require("sap-hdbext-promisfied")
-            //let dbConn = new dbClass(await dbClass.createConnection(db.options.credentials))
-            //const hdbext = require("@sap/hdbext")
-            //const sp = await dbConn.loadProcedurePromisified(hdbext, null, 'UPSERT_ACESSOTERMINAL')
-            //const output = await dbConn.callProcedurePromisified(sp, [])
-            //dbConn.closeConnection()
-            //console.log(output.results)
-
             return true
         } catch (error) {
             console.error(error)
@@ -227,18 +239,7 @@ module.exports = (motor) => {
         try {
             const srv = await cds.connect.to('db');
             await srv.run('CALL UPSERT_AGRUPADORES()')
-
-            //const tx = cds.transaction()
-            //var vProcedure = 'CALL UPSERT_AGRUPADORES()'
-            //await tx.run(vProcedure) //.then(tx.commit)
-
-            //const db = await cds.connect.to('db')
-            //const dbClass = require("sap-hdbext-promisfied")
-            //let dbConn = new dbClass(await dbClass.createConnection(db.options.credentials))
-            //const hdbext = require("@sap/hdbext")
-            //const sp = await dbConn.loadProcedurePromisified(hdbext, null, 'UPSERT_AGRUPADORES')
-            //const output = await dbConn.callProcedurePromisified(sp, [])
-            //console.log(output.results)
+            await srv.run('CALL UPDATE_TOTALITEMS()')
             return true
         } catch (error) {
             console.error(error)
@@ -265,13 +266,7 @@ module.exports = (motor) => {
         try {            
             const srv = await cds.connect.to('db');
             await srv.run('CALL UPSERT_REGIOES()')
-            //const db = await cds.connect.to('db')
-            //const dbClass = require("sap-hdbext-promisfied")
-            //let dbConn = new dbClass(await dbClass.createConnection(db.options.credentials))
-            //const hdbext = require("@sap/hdbext")
-            //const sp = await dbConn.loadProcedurePromisified(hdbext, null, 'UPSERT_REGIOES')
-            //const output = await dbConn.callProcedurePromisified(sp, [])
-            //console.log(output.results)
+            await srv.run('CALL UPDATE_TOTALITEMS()')
             return true
         } catch (error) {
             console.error(error)
@@ -283,13 +278,6 @@ module.exports = (motor) => {
         try {
             const srv = await cds.connect.to('db');
             await srv.run('CALL REPLICATE_BAIXA()')
-            //const db = await cds.connect.to('db')
-            //const dbClass = require("sap-hdbext-promisfied")
-            //let dbConn = new dbClass(await dbClass.createConnection(db.options.credentials))
-            //const hdbext = require("@sap/hdbext")
-            //const sp = await dbConn.loadProcedurePromisified(hdbext, null, 'REPLICATE_BAIXA')
-            //const output = await dbConn.callProcedurePromisified(sp, [])
-            //console.log(output.results)
             return true
         } catch (error) {
             console.error(error)

@@ -342,3 +342,35 @@ entity AcessoTerminal_Transitoria {
     key terminal  : String(40);
     key acessorio : String(40);
 }
+
+@cds.persistence.exists
+entity TotalItemTab {
+    key workOrderID : String(50);
+        contrato : String(50);
+        tipoWo : String(20);
+        idTecnico : String(100);
+        fornecedorSAP : String(10);
+        dataAtendimento : Date;
+        municipio : String(100);
+        enviado : Boolean default false;
+        statusFinalizacao : String(50);
+        totalItems : Integer;
+        sla : String(10);
+        status : Integer;
+}
+
+@cds.persistence.exists
+entity TotalItemView {
+    key workOrderID : String(50);
+        contrato : String(50);
+        tipoWo : String(20);
+        idTecnico : String(100);
+        fornecedorSAP : String(10);
+        dataAtendimento : Date;
+        municipio : String(100);
+        enviado : Boolean default false;
+        statusFinalizacao : String(50);
+        totalItems : Integer;
+        sla : String(10);
+        status : Integer;
+}

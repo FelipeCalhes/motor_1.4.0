@@ -1,0 +1,14 @@
+{
+    "ServiceName_2":{
+        "object_owner":{
+            "container_roles": [
+                "TotalItem#"
+            ]
+        },
+        "application_user":{
+            "container_roles": [
+                "TotalItem"
+            ]
+        }
+    }
+}

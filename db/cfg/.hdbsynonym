@@ -1,0 +1,14 @@
+{
+   "REGRASNAMESPACE_TOTALITEMVIEW": {
+    "target": {
+        "schema"     : "D0174AC5F7CE43B1BD76B9A44D8F6E29",        // optional
+        "object"     : "PORTALMATERIAIS_TOTALITEMVIEW"
+    }
+  },
+  "REGRASNAMESPACE_TOTALITEMTAB": {
+    "target": {
+        "schema"     : "D0174AC5F7CE43B1BD76B9A44D8F6E29",        // optional
+        "object"     : "PORTALMATERIAIS_TOTALITEMTAB"
+    }
+  }
+}
