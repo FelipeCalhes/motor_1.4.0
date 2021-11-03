@@ -10,7 +10,7 @@ module.exports = (motor) => {
 
     motor.after('CREATE', 'BOM', async (req) => {                
         let srv = await cds.connect.to('db');
-        await srv.run('CALL UPDATE_TOTALITEMS()')
+        await srv.run('CALL UPSERT_TOTALITEMS()')
     })
 
     motor.after('CREATE', 'Parametros', async (req) => {                
@@ -25,42 +25,42 @@ module.exports = (motor) => {
     
     motor.after('CREATE', 'RegraDeCalculo', async (req) => {                
         let srv = await cds.connect.to('db');
-        await srv.run('CALL UPDATE_TOTALITEMS()')
+        await srv.run('CALL UPSERT_TOTALITEMS()')
     })
     
     motor.after('UPDATE', 'RegraDeCalculo', async (req) => {                
         let srv = await cds.connect.to('db');
-        await srv.run('CALL UPDATE_TOTALITEMS()')
+        await srv.run('CALL UPSERT_TOTALITEMS()')
     })
     
     motor.after('CREATE', 'Regioes', async (req) => {                
         let srv = await cds.connect.to('db');
-        await srv.run('CALL UPDATE_TOTALITEMS()')
+        await srv.run('CALL UPSERT_TOTALITEMS()')
     })
     
     motor.after('UPDATE', 'Regioes', async (req) => {                
         let srv = await cds.connect.to('db');
-        await srv.run('CALL UPDATE_TOTALITEMS()')
+        await srv.run('CALL UPSERT_TOTALITEMS()')
     })
     
     motor.after('CREATE', 'Agrupadores', async (req) => {                
         let srv = await cds.connect.to('db');
-        await srv.run('CALL UPDATE_TOTALITEMS()')
+        await srv.run('CALL UPSERT_TOTALITEMS()')
     })
     
     motor.after('UPDATE', 'Agrupadores', async (req) => {                
         let srv = await cds.connect.to('db');
-        await srv.run('CALL UPDATE_TOTALITEMS()')
+        await srv.run('CALL UPSERT_TOTALITEMS()')
     })
     
     motor.after('CREATE', 'MateriaisExcecao', async (req) => {                
         let srv = await cds.connect.to('db');
-        await srv.run('CALL UPDATE_TOTALITEMS()')
+        await srv.run('CALL UPSERT_TOTALITEMS()')
     })
     
     motor.after('UPDATE', 'MateriaisExcecao', async (req) => {                
         let srv = await cds.connect.to('db');
-        await srv.run('CALL UPDATE_TOTALITEMS()')
+        await srv.run('CALL UPSERT_TOTALITEMS()')
     })
 
 

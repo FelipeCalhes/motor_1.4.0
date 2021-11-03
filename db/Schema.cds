@@ -20,14 +20,15 @@ entity BOM {
 }
 
 entity Estoque {
-    key matnr : String(18);
-    key werks : String(4);
-    key charg : String(10);
-    key sobkz : String(1);
-    key lifnr : String(10);
-        lblab : Decimal(13, 3); 
-        lbins : Decimal(13, 3);
-        meins : String(3); 
+    key matnr     : String(18);
+    key werks     : String(4);
+    key charg     : String(10);
+    key sobkz     : String(1);
+    key lifnr     : String(10);
+        lblab     : Decimal(13, 3);
+        lbins     : Decimal(13, 3);
+        meins     : String(3);
+        timestamp : Timestamp;
 }
 
 entity LoginTecnicoMotor {
@@ -345,32 +346,96 @@ entity AcessoTerminal_Transitoria {
 
 @cds.persistence.exists
 entity TotalItemTab {
-    key workOrderID : String(50);
-        contrato : String(50);
-        tipoWo : String(20);
-        idTecnico : String(100);
-        fornecedorSAP : String(10);
-        dataAtendimento : Date;
-        municipio : String(100);
-        enviado : Boolean default false;
+    key workOrderID       : String(50);
+        contrato          : String(50);
+        tipoWo            : String(20);
+        idTecnico         : String(100);
+        fornecedorSAP     : String(10);
+        dataAtendimento   : Date;
+        municipio         : String(100);
+        enviado           : Boolean default false;
         statusFinalizacao : String(50);
-        totalItems : Integer;
-        sla : String(10);
-        status : Integer;
+        totalItems        : Integer;
+        sla               : String(10);
+        status            : Integer;
 }
 
 @cds.persistence.exists
 entity TotalItemView {
-    key workOrderID : String(50);
-        contrato : String(50);
-        tipoWo : String(20);
-        idTecnico : String(100);
-        fornecedorSAP : String(10);
-        dataAtendimento : Date;
-        municipio : String(100);
-        enviado : Boolean default false;
+    key workOrderID       : String(50);
+        contrato          : String(50);
+        tipoWo            : String(20);
+        idTecnico         : String(100);
+        fornecedorSAP     : String(10);
+        dataAtendimento   : Date;
+        municipio         : String(100);
+        enviado           : Boolean default false;
         statusFinalizacao : String(50);
-        totalItems : Integer;
-        sla : String(10);
-        status : Integer;
+        totalItems        : Integer;
+        sla               : String(10);
+        status            : Integer;
 }
+
+@cds.persistence.exists
+entity Material {
+    key workOrderID_workOrderID : String(50);
+    key material                : String;
+        linha                   : Integer;
+        quantidade              : Decimal;
+        unidade                 : String(3);
+}
+
+@cds.persistence.exists
+entity WorkOrder {
+    key workOrderID       : String(50);
+        apptNumber        : String(50);
+        idTecnico         : String(100);
+        dataAtendimento   : Date;
+        tecnologia        : String(50) default '';
+        municipio         : String(100);
+        codIBGE           : String(50) default '';
+        tipoWo            : String(20);
+        justificativa     : String;
+        byPassVal         : Boolean;
+        contrato          : String(50);
+        tipoEdificacao    : String(1);
+        fornecedorSAP     : String(10);
+        aprovador         : String(120);
+        timeAprovacao     : String(50);
+        enviado           : Boolean default false;
+        foraTOA           : Boolean default false;
+        statusFinalizacao : String(50);
+        seriaisNovos      : Decimal(13, 2);
+}
+
+entity EstoqueLastChange    as
+    select from Estoque {
+        matnr,
+        lifnr
+    }
+    where
+        timestamp = (
+            select MAX(
+                timestamp
+            ) as max from Estoque
+        )
+    group by
+        matnr,
+        lifnr;
+
+entity UpdateList           as
+    select from Material as mat
+    inner join WorkOrder as wo
+        on wo.workOrderID = mat.workOrderID_workOrderID
+    inner join EstoqueLastChange as ch
+        on  LTRIM(
+            ch.matnr, '0'
+        ) = mat.material
+        and LTRIM(
+            ch.lifnr, '0'
+        ) = wo.fornecedorSAP
+    {
+        wo.workOrderID
+    }
+    group by
+        wo.workOrderID;
