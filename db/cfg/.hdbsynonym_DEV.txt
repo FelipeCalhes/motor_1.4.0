@@ -1,25 +1,25 @@
 {
    "REGRASNAMESPACE_TOTALITEMVIEW": {
     "target": {
-        "schema"     : "538533B1D4964DFB8E748DB7585A77B0",        // optional
+        "schema"     : "D0174AC5F7CE43B1BD76B9A44D8F6E29",        // optional
         "object"     : "PORTALMATERIAIS_TOTALITEMVIEW"
     }
   },
   "REGRASNAMESPACE_TOTALITEMTAB": {
     "target": {
-        "schema"     : "538533B1D4964DFB8E748DB7585A77B0",        // optional
+        "schema"     : "D0174AC5F7CE43B1BD76B9A44D8F6E29",        // optional
         "object"     : "PORTALMATERIAIS_TOTALITEMTAB"
     }
   },
   "REGRASNAMESPACE_MATERIAL": {
     "target": {
-        "schema"     : "538533B1D4964DFB8E748DB7585A77B0",        // optional
+        "schema"     : "D0174AC5F7CE43B1BD76B9A44D8F6E29",        // optional
         "object"     : "PORTALMATERIAIS_MATERIAL"
     }
   },
   "REGRASNAMESPACE_WORKORDER": {
     "target": {
-        "schema"     : "538533B1D4964DFB8E748DB7585A77B0",        // optional
+        "schema"     : "D0174AC5F7CE43B1BD76B9A44D8F6E29",        // optional
         "object"     : "PORTALMATERIAIS_WORKORDER"
     }
   }

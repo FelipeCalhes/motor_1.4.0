@@ -46,23 +46,23 @@
                     "hana",
                     "database",
                     "relational",
-                    "endpoint:https://api.cf.eu10.hana.ondemand.com",
-                    "org:Claro-dev",
-                    "space:dev"
+                    "endpoint:https://api.cf.br10.hana.ondemand.com",
+                    "org:Claro-prd",
+                    "space:prd"
                 ],
                 "plan": "hdi-shared",
                 "credentials": {
                     "certificate": "-----BEGIN CERTIFICATE-----\nMIIDrzCCApegAwIBAgIQCDvgVpBCRrGhdWrJWZHHSjANBgkqhkiG9w0BAQUFADBh\nMQswCQYDVQQGEwJVUzEVMBMGA1UEChMMRGlnaUNlcnQgSW5jMRkwFwYDVQQLExB3\nd3cuZGlnaWNlcnQuY29tMSAwHgYDVQQDExdEaWdpQ2VydCBHbG9iYWwgUm9vdCBD\nQTAeFw0wNjExMTAwMDAwMDBaFw0zMTExMTAwMDAwMDBaMGExCzAJBgNVBAYTAlVT\nMRUwEwYDVQQKEwxEaWdpQ2VydCBJbmMxGTAXBgNVBAsTEHd3dy5kaWdpY2VydC5j\nb20xIDAeBgNVBAMTF0RpZ2lDZXJ0IEdsb2JhbCBSb290IENBMIIBIjANBgkqhkiG\n9w0BAQEFAAOCAQ8AMIIBCgKCAQEA4jvhEXLeqKTTo1eqUKKPC3eQyaKl7hLOllsB\nCSDMAZOnTjC3U/dDxGkAV53ijSLdhwZAAIEJzs4bg7/fzTtxRuLWZscFs3YnFo97\nnh6Vfe63SKMI2tavegw5BmV/Sl0fvBf4q77uKNd0f3p4mVmFaG5cIzJLv07A6Fpt\n43C/dxC//AH2hdmoRBBYMql1GNXRor5H4idq9Joz+EkIYIvUX7Q6hL+hqkpMfT7P\nT19sdl6gSzeRntwi5m3OFBqOasv+zbMUZBfHWymeMr/y7vrTC0LUq7dBMtoM1O/4\ngdW7jVg/tRvoSSiicNoxBN33shbyTApOB6jtSj1etX+jkMOvJwIDAQABo2MwYTAO\nBgNVHQ8BAf8EBAMCAYYwDwYDVR0TAQH/BAUwAwEB/zAdBgNVHQ4EFgQUA95QNVbR\nTLtm8KPiGxvDl7I90VUwHwYDVR0jBBgwFoAUA95QNVbRTLtm8KPiGxvDl7I90VUw\nDQYJKoZIhvcNAQEFBQADggEBAMucN6pIExIK+t1EnE9SsPTfrgT1eXkIoyQY/Esr\nhMAtudXH/vTBH1jLuG2cenTnmCmrEbXjcKChzUyImZOMkXDiqw8cvpOp/2PV5Adg\n06O/nVsJ8dWO41P0jmP6P6fbtGbfYmbW0W5BjfIttep3Sp+dWOIrWcBAI+0tKIJF\nPnlUkiaY4IBIqDfv8NZ5YBberOgOzW6sRBc4L0na4UU+Krk2U886UAb3LujEV0ls\nYSEY1QSteDwsOoBrp+uvFRTp2InBuThs4pFsiv9kuXclVzDAGySj4dzp30d8tbQk\nCAUw7C29C79Fv1C5qfPrmAESrciIxpg0X40KPMbp1ZWVbd4=\n-----END CERTIFICATE-----",
                     "driver": "com.sap.db.jdbc.Driver",
-                    "hdi_password": "Gy9zKpaf9SacaDIXrYJnn0JuXUZFvKl2OxCG0Rs3MKSk2qywc0RN6i061ZkJAnEoHsx4xQr4orCdpn6FyGaS4.9AwK21u8ThDmOyVc-_g.GS2xlEtkFnDDxp8U3o2Rwe",
-                    "hdi_user": "D0174AC5F7CE43B1BD76B9A44D8F6E29_3Q1VG3NRZ3S5SGN62DXUTEBY9_DT",
-                    "host": "69abe08f-1503-4988-9197-452520906b96.hana.prod-eu10.hanacloud.ondemand.com",
-                    "password": "Jg6dBJbfXNsKdlnRAZOm3sKy7PgrWvQGmCmEDIRXayvH5DBGf83crJ8zlNZvddrTmzWO4PMhXhajPpguXnr6qSNoLDwvC-bW__.GCMr8GurS3PSCvr47sSXpH9CSYpeS",
+                    "hdi_password": "Nn27sbL7AcRq3H5DzpZPazFR_Levtx3FyLlm5Gn75IiQjuXN1O4g6OfkryKpwuoddcWzg1xYgQO9U_Mk3pxxCRoLnqqBXan82ny50KTZbKedLjNiD3OpSnGLu5.F2Agd",
+                    "hdi_user": "538533B1D4964DFB8E748DB7585A77B0_1TEWB58FQOT0WT4PG1Y98YBKA_DT",
+                    "host": "0019e2fb-6c8d-4976-87a7-8457d5171df4.hana.prod-br10.hanacloud.ondemand.com",
+                    "password": "Vj5UzWxwWJcR5Ec.pnSrT_.h7tFQCrU.jzN2t3vwBt58VaDPBGee-k4SIzzvMbW7_bnRrcXyZpwsNOxAukTRpiwgwBKO.zG2NQo.pV1is3VsKnxebxUO7n9Rnf-0uZsH",
                     "port": "443",
-                    "schema": "D0174AC5F7CE43B1BD76B9A44D8F6E29",
+                    "schema": "538533B1D4964DFB8E748DB7585A77B0",
                     "service_key_name": "key",
-                    "url": "jdbc:sap://69abe08f-1503-4988-9197-452520906b96.hana.prod-eu10.hanacloud.ondemand.com:443?encrypt=true\u0026validateCertificate=true\u0026currentschema=D0174AC5F7CE43B1BD76B9A44D8F6E29",
-                    "user": "D0174AC5F7CE43B1BD76B9A44D8F6E29_3Q1VG3NRZ3S5SGN62DXUTEBY9_RT"
+                    "url": "jdbc:sap://0019e2fb-6c8d-4976-87a7-8457d5171df4.hana.prod-br10.hanacloud.ondemand.com:443?encrypt=true\u0026validateCertificate=true\u0026currentschema=538533B1D4964DFB8E748DB7585A77B0",
+                    "user": "538533B1D4964DFB8E748DB7585A77B0_1TEWB58FQOT0WT4PG1Y98YBKA_RT"
                 }
             }
         ],
@@ -74,12 +74,12 @@
                 "instance_name": "cross_dbadmin",
                 "binding_name": null,
                 "credentials": {
-                    "password": "!@#123QWEqwe",
+                    "password": "ClaroScp#4321",
                     "schema": "DBADMIN",
                     "tags": [
                         "hana"
                     ],
-                    "user": "DBADM"
+                    "user": "DBADMIN"
                 },
                 "syslog_drain_url": "",
                 "volume_mounts": []
@@ -108,27 +108,27 @@
                 "label": "xsuaa",
                 "tags": [
                     "xsuaa",
-                    "endpoint:https://api.cf.eu10.hana.ondemand.com",
-                    "org:Claro-dev",
-                    "space:dev"
+                    "endpoint:https://api.cf.br10.hana.ondemand.com",
+                    "org:Claro-prd",
+                    "space:prd"
                 ],
                 "plan": "application",
                 "credentials": {
-                    "apiurl": "https://api.authentication.eu10.hana.ondemand.com",
-                    "clientid": "sb-xsmotor-regras!t72316",
-                    "clientsecret": "LfMJK2Era360d/ciUmfy/2JDB8s=",
-                    "identityzone": "claro-dev",
-                    "identityzoneid": "5262016d-1e6d-4037-86ea-5757b568e9f4",
-                    "sburl": "https://internal-xsuaa.authentication.eu10.hana.ondemand.com",
+                    "apiurl": "https://api.authentication.br10.hana.ondemand.com",
+                    "clientid": "sb-xsmotor-regras!t396",
+                    "clientsecret": "qaYo/QWMMExTHl4W8hKUDHlNq/Q=",
+                    "identityzone": "claro-prd",
+                    "identityzoneid": "7314c6aa-bd6f-47fc-bb10-5607eaf71159",
+                    "sburl": "https://internal-xsuaa.authentication.br10.hana.ondemand.com",
                     "service_key_name": "key",
-                    "subaccountid": "5262016d-1e6d-4037-86ea-5757b568e9f4",
-                    "tenantid": "5262016d-1e6d-4037-86ea-5757b568e9f4",
+                    "subaccountid": "7314c6aa-bd6f-47fc-bb10-5607eaf71159",
+                    "tenantid": "7314c6aa-bd6f-47fc-bb10-5607eaf71159",
                     "tenantmode": "dedicated",
-                    "uaadomain": "authentication.eu10.hana.ondemand.com",
-                    "url": "https://claro-dev.authentication.eu10.hana.ondemand.com",
-                    "verificationkey": "-----BEGIN PUBLIC KEY-----MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA0x1REN7OmB+wRhoJJdrK3kEu7N50lyjQcwADXV70Ae+JUOggp3hAHsvgOMch4ALNu2Rzgt1GcalHItsYmxQWUxDLoi7Gu3lFXGYixwLPf0M4nd/Lb21wLLyyfRyQkFVCPPRY1rtdy8zvCl0sIOs/p0ftDBSr1L6cnAlW0eaTP4peVXm+FMSUzEjy6NHhllmcLt1w49GNMkBUWs+mHoH92UP9MtRoCyIneJ0VNj+nR2jgJmZrIbqVymdnhJmZi/u0s9qIn/76/MOWPrTtwGWLCLOF/0j3lsRK4I92I4kegfmQ8umqMY8tnqdotEBBhBP8LeZuw4GLoe7BjZQDj81qTwIDAQAB-----END PUBLIC KEY-----",
-                    "xsappname": "xsmotor-regras!t72316",
-                    "zoneid": "5262016d-1e6d-4037-86ea-5757b568e9f4"
+                    "uaadomain": "authentication.br10.hana.ondemand.com",
+                    "url": "https://claro-prd.authentication.br10.hana.ondemand.com",
+                    "verificationkey": "-----BEGIN PUBLIC KEY-----MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAp/Bd/85wWygKPVMtAC86PTti1kKZHyB0YCfLLFH9Vh0dhkWgYUy3B8Ut6DmIwno6WQjHaLeX7RsDTkSE7CZ96p9soB6vg+ZSbOAEnrjIn8Kgj/TQyZtxLq9tUPPwH/Y5DrcJs4X/KC05W+r4Q3pypQBDAzPAzQqQgXyEZXAq97z/PsiCWUVIDPYBQL590P6qn+v4gpoDtKUmsfO9egNHGvbGUaMksIMawfuA/YjZdTdS/6DG7znNQWo4Y6Yoa3YyyJAgN5l59sSrR9rhKNpc+GKBBFI1SoxF0Vvd59rx0tOMCnTEUISHlVWcWTV3fn5D20Vk452M3p8TASNvmjfkIQIDAQAB-----END PUBLIC KEY-----",
+                    "xsappname": "xsmotor-regras!t396",
+                    "zoneid": "7314c6aa-bd6f-47fc-bb10-5607eaf71159"
                 }
             }
         ]
