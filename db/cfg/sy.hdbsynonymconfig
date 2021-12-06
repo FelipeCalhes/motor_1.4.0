@@ -1,0 +1,26 @@
+{
+    "REGRASNAMESPACE_TOTALITEMVIEW": {
+     "target": {
+        "schema.configure" : "hanadev01db/schema",         // optional
+         "object"     : "PORTALMATERIAIS_TOTALITEMVIEW"
+     }
+   },
+   "REGRASNAMESPACE_TOTALITEMTAB": {
+     "target": {
+        "schema.configure" : "hanadev01db/schema",        // optional
+         "object"     : "PORTALMATERIAIS_TOTALITEMTAB"
+     }
+   },
+   "REGRASNAMESPACE_MATERIAL": {
+     "target": {
+        "schema.configure" : "hanadev01db/schema",         // optional
+         "object"     : "PORTALMATERIAIS_MATERIAL"
+     }
+   },
+   "REGRASNAMESPACE_WORKORDER": {
+     "target": {
+        "schema.configure" : "hanadev01db/schema",        // optional
+         "object"     : "PORTALMATERIAIS_WORKORDER"
+     }
+   }
+ }
