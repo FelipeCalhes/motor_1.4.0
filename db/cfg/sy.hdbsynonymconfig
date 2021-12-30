@@ -22,5 +22,11 @@
         "schema.configure" : "hanadev01db/schema",        // optional
          "object"     : "PORTALMATERIAIS_WORKORDER"
      }
+   },
+   "REGRASNAMESPACE_BOM" : {
+    "target": {
+        "schema.configure" : "motor-regras/schema",        // optional
+         "object"     : "REGRASNAMESPACE_BOM"
+     }
    }
  }
