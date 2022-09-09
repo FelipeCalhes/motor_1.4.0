@@ -4,7 +4,7 @@
 ## approuter=
 _schema-version: '3.1'
 ID: xsmotor-de-regras
-version: 1.4.0
+version: 1.6.0
 description: Motor de Regras
 parameters:
   enable-parallel-deployments: true
@@ -33,7 +33,7 @@ modules:
       - name: xsmotor-regras
       - name: motor-regras
       - name: cross_dbadmin
-      - name: hanadev01db
+      ###- name: hanadev01db
     provides:
       - name: srv-api # required by consumers of CAP services (e.g. approuter)
         properties:
@@ -52,7 +52,7 @@ modules:
       - name: motor-regras
         properties:
           TARGET_CONTAINER: motor-regras
-          #TARGET_CONTAINER: '~{hdi-service-name}'
+          #TARGET_CONTAINER: motor-regras
       - name: cross_dbadmin
       - name: hanadev01db
       # - name: workflow

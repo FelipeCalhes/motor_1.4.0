@@ -10,3 +10,5 @@ rm -rf /home/user/.npm
 rm -rf /home/user/.cache
 
 mbt build
+cf login
+cf deploy ./mta_archives/xsmotor-de-regras_1.6.0.mtar

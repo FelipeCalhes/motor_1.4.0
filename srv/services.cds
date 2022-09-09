@@ -19,6 +19,10 @@ define type ObjTipoWo {
     tipoWo : String(20);
 }
 
+define type ObjFornecedor {
+    fornecedor : String(10);
+}
+
 define type ObjAcessoTerminal {
     terminal  : String(40);
     acessorio : String(40);
@@ -37,6 +41,10 @@ define type ObjRegioes {
     municipio_municipio : String(50);
 }
 
+define type ObjMateriaisExcecao {
+    material              : String(50);
+}
+
 service MotorDeRegras {
 
     function upsert_bom() returns Boolean;
@@ -44,6 +52,17 @@ service MotorDeRegras {
     function upsert_regioes() returns Boolean;
     function upsert_acessoTerminal() returns Boolean;
     function replicate_baixa() returns Boolean;
+    
+    entity FornecedorBaixaAutomatica @(restrict : [{
+        grant : [
+            'READ',
+            'WRITE'
+        ],
+        to    : [
+            'Edit',
+            'system-user'
+        ]
+    }]) as projection on p.FornecedorBaixaAutomatica 
 
     entity Agrupadores @(restrict : [{
         grant : [
@@ -120,7 +139,7 @@ service MotorDeRegras {
             'Edit',
             'system-user'
         ]
-    }]) as projection on p.RegraDeCalculo;
+    }]) as projection on p.RegraDeCalculo_P;
 
     entity Parametros @(restrict : [{
         grant : [
@@ -131,7 +150,7 @@ service MotorDeRegras {
             'Edit',
             'system-user'
         ]
-    }]) as projection on p.Parametros;
+    }]) as projection on p.Parametros_P;
 
     entity TecnicoPorEPO @(restrict : [{
         grant : [
@@ -186,7 +205,7 @@ service MotorDeRegras {
             'Edit',
             'system-user'
         ]
-    }]) as projection on p.RetornoDaBaixa;
+    }]) as projection on p.RetornoDaBaixa_P;
 
     entity importBOM @(restrict : [{
         grant : [
@@ -199,6 +218,19 @@ service MotorDeRegras {
         ]
     }]) {
         BOM : array of ObjBOM;
+    }    
+    
+    entity importMateriaisExcecao @(restrict : [{
+        grant : [
+            'READ',
+            'WRITE'
+        ],
+        to    : [
+            'Edit',
+            'system-user'
+        ]
+    }]) {
+        MateriaisExcecao : array of ObjMateriaisExcecao;
     }
 
     entity importAgrupadores @(restrict : [{
@@ -226,6 +258,19 @@ service MotorDeRegras {
     }]) {
         regioes : array of ObjRegioes;
     }
+    
+    entity importFornecedorBaixaAutomatica @(restrict : [{
+        grant : [
+            'READ',
+            'WRITE'
+        ],
+        to    : [
+            'Edit',
+            'system-user'
+        ]
+    }]) {
+        fornecedor : array of ObjFornecedor;
+    } 
 
     entity killBOM @(restrict : [{
         grant : [
@@ -252,6 +297,19 @@ service MotorDeRegras {
     }]) {
         kill : Boolean;
     }
+    
+    entity killFornecedorBaixaAutomatica @(restrict : [{
+        grant : [
+            'READ',
+            'WRITE'
+        ],
+        to    : [
+            'Edit',
+            'system-user'
+        ]
+    }]) {
+        kill : Boolean;
+    }
 
     entity TipoWoBaixaAutomatica @(restrict : [{
         grant : [
@@ -262,7 +320,7 @@ service MotorDeRegras {
             'Edit',
             'system-user'
         ]
-    }]) as projection on p.TipoWoBaixaAutomatica;
+    }]) as projection on p.TipoWoBaixaAutomatica_P;
 
 
     entity importTipoWoBaixaAutomatica @(restrict : [{
@@ -311,7 +369,7 @@ service MotorDeRegras {
             'Edit',
             'system-user'
         ]
-    }]) as projection on p.Fornecedor;
+    }]) as projection on p.Fornecedor_P;
 
     entity MateriaisExcecao @(restrict : [{
         grant : [
@@ -322,7 +380,7 @@ service MotorDeRegras {
             'Edit',
             'system-user'
         ]
-    }]) as projection on p.MateriaisExcecao;
+    }]) as projection on p.MateriaisExcecao_P;
 
     entity AcessoTerminal @(restrict : [{
         grant : [

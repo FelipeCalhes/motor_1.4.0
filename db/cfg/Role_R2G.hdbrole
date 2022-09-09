@@ -1,0 +1,35 @@
+{
+  "role": {
+    "name": "Role_R2#",
+    "object_privileges": [
+        {
+          "name": "REGRASNAMESPACE_REMOTECONSOLID",
+          "type": "TABLE",
+          "privileges_with_grant_option": [
+            "SELECT"
+          ]
+        },
+        {
+          "name": "REGRASNAMESPACE_AGRUPADORES",
+          "type": "TABLE",
+          "privileges_with_grant_option": [
+            "SELECT"
+          ]
+        },
+        {
+          "name": "REGRASNAMESPACE_REGIOES",
+          "type": "TABLE",
+          "privileges_with_grant_option": [
+            "SELECT"
+          ]
+        },
+        {
+          "name": "REGRASNAMESPACE_MUNICIPIOS",
+          "type": "TABLE",
+          "privileges_with_grant_option": [
+            "SELECT"
+          ]
+        }
+    ]
+  }
+}

@@ -1,13 +1,69 @@
+###
+POST http://localhost:4004/motor-de-regras/importFornecedorBaixaAutomatica HTTP/1.1
+Accept:application/json;odata.metadata=minimal;IEEE754Compatible=true
+Accept-Language:pt-BR
+X-CSRF-Token:9120566b4d6b1ebf-R3zAoynim39NjQHNzWbNW5cIj2Q
+Content-Type:application/json;charset=UTF-8;IEEE754Compatible=true
+
+{
+    "fornecedor":
+    [
+        {
+            "fornecedor":"CBT0146"
+        },
+        {
+            "fornecedor":"103935"
+        },
+        {
+            "fornecedor":"107150"
+        }
+    ]
+}
+###
+
+DELETE http://localhost:4004/motor-de-regras/TecnicoPorEPO('teste123') HTTP/1.1
+Accept:application/json;odata.metadata=minimal;IEEE754Compatible=true
+Accept-Language:pt-BR
+X-CSRF-Token:8d202a8b5d72f2e5-U1k6sobkrl-idatlfFfQSRLhR7o
+Content-Type:application/json;charset=UTF-8;IEEE754Compatible=true
+
+###
+POST http://localhost:4004/motor-de-regras/importMateriaisExcecao HTTP/1.1
+Accept:application/json;odata.metadata=minimal;IEEE754Compatible=true
+Accept-Language:pt-BR
+X-CSRF-Token:728c8d6720e6ff09-3L7qgb3SOzlyHhj67F9MFZCs7wE
+Content-Type:application/json;charset=UTF-8;IEEE754Compatible=true
+
+{
+    "MateriaisExcecao":
+    [
+        {
+            "material":"22023500"
+        },
+        {
+            "material":"22023557"
+        },
+        {
+            "material":"22023581"
+        },
+        {
+            "material":"22023591"
+        }
+    ]
+}
+
+###
+
 GET http://localhost:4004/motor-de-regras/upsert_acessoTerminal() HTTP/1.1
 Content-Type: application/json;IEEE754Compatible=true
 ###
 
-POST http://localhost:4004/motor-de-regras/Regioes  HTTP/1.1
+POST http://localhost:4004/motor-de-regras/TecnicoPorEPO  HTTP/1.1
 Content-Type: application/json;IEEE754Compatible=true
 
 {
-    "regiao":"teste001",
-    "municipio_municipio":"1000002"
+    "loginTecnico":"loginlogin",
+    "CodFornecedorSAP":"1000073"
 }  
 ### 
     

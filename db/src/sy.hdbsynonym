@@ -1,9 +1,15 @@
 {
-   "REGRASNAMESPACE_TOTALITEMVIEW": {
+  "REGRASNAMESPACE_TOTALITEMVIEW": {
     "target": {
        // "schema"     : "538533B1D4964DFB8E748DB7585A77B0",        // optional
-        "schema" : "D0174AC5F7CE43B1BD76B9A44D8F6E29",
+        //"schema" : "D0174AC5F7CE43B1BD76B9A44D8F6E29",
         "object"     : "PORTALMATERIAIS_TOTALITEMVIEW"
+    }
+  },
+  "REGRASNAMESPACE_FORNECEDORBAIXAAUTOMATICA": {
+    "target": {
+       // "schema"     : "538533B1D4964DFB8E748DB7585A77B0",        // optional
+        "object"     : "PORTALMATERIAIS_FORNECEDORBAIXAAUTOMATICA"
     }
   },
   "REGRASNAMESPACE_TOTALITEMTAB": {
@@ -12,6 +18,18 @@
         "object"     : "PORTALMATERIAIS_TOTALITEMTAB"
     }
   },
+  "REGRASNAMESPACE_UNIONERROSVIEW": {
+   "target": {
+      // "schema"     : "538533B1D4964DFB8E748DB7585A77B0",        // optional
+       "object"     : "PORTALMATERIAIS_UNIONERROSVIEW"
+   }
+ },
+ "REGRASNAMESPACE_UNIONERROS": {
+   "target": {
+      // "schema"     : "538533B1D4964DFB8E748DB7585A77B0",        // optional
+       "object"     : "PORTALMATERIAIS_UNIONERROS"
+   }
+ },
   "REGRASNAMESPACE_MATERIAL": {
     "target": {
        // "schema"     : "538533B1D4964DFB8E748DB7585A77B0",        // optional
@@ -22,6 +40,108 @@
     "target": {
       //  "schema"     : "538533B1D4964DFB8E748DB7585A77B0",        // optional
         "object"     : "PORTALMATERIAIS_WORKORDER"
+    }
+  },
+  "REGRASNAMESPACE_AGRUPADORES_P": {
+    "target": {
+      //  "schema"     : "538533B1D4964DFB8E748DB7585A77B0",        // optional
+        "object"     : "PORTALMATERIAIS_AGRUPADORES"
+    }
+  },
+  "REGRASNAMESPACE_BOM_P": {
+    "target": {
+      //  "schema"     : "538533B1D4964DFB8E748DB7585A77B0",        // optional
+        "object"     : "PORTALMATERIAIS_BOM_ORIGINAL"
+    }
+  },
+  "REGRASNAMESPACE_CENTROS_P": {
+    "target": {
+      //  "schema"     : "538533B1D4964DFB8E748DB7585A77B0",        // optional
+        "object"     : "PORTALMATERIAIS_CENTROS"
+    }
+  },
+  "REGRASNAMESPACE_EMPRESAS_P": {
+    "target": {
+      //  "schema"     : "538533B1D4964DFB8E748DB7585A77B0",        // optional
+        "object"     : "PORTALMATERIAIS_EMPRESAS"
+    }
+  },
+  "REGRASNAMESPACE_ESTOQUE_P": {
+    "target": {
+      //  "schema"     : "538533B1D4964DFB8E748DB7585A77B0",        // optional
+        "object"     : "PORTALMATERIAIS_ESTOQUE"
+    }
+  },
+  "REGRASNAMESPACE_FORNECEDOR_P": {
+    "target": {
+      //  "schema"     : "538533B1D4964DFB8E748DB7585A77B0",        // optional
+        "object"     : "PORTALMATERIAIS_FORNECEDOR"
+    }
+  },
+  "REGRASNAMESPACE_LOGINTECNICOMOTOR_P": {
+    "target": {
+      //  "schema"     : "538533B1D4964DFB8E748DB7585A77B0",        // optional
+        "object"     : "PORTALMATERIAIS_LOGINTECNICOMOTOR"
+    }
+  },
+  "REGRASNAMESPACE_MATERIAISEXCECAO_P": {
+    "target": {
+      //  "schema"     : "538533B1D4964DFB8E748DB7585A77B0",        // optional
+        "object"     : "PORTALMATERIAIS_MATERIAISEXCECAO"
+    }
+  },
+  "REGRASNAMESPACE_MATERIAIS_P": {
+    "target": {
+      //  "schema"     : "538533B1D4964DFB8E748DB7585A77B0",        // optional
+        "object"     : "PORTALMATERIAIS_MATERIAIS"
+    }
+  },
+  "REGRASNAMESPACE_MUNICIPIOS_P": {
+    "target": {
+      //  "schema"     : "538533B1D4964DFB8E748DB7585A77B0",        // optional
+        "object"     : "PORTALMATERIAIS_MUNICIPIOS"
+    }
+  },
+  "REGRASNAMESPACE_PARAMETROS_P": {
+    "target": {
+      //  "schema"     : "538533B1D4964DFB8E748DB7585A77B0",        // optional
+        "object"     : "PORTALMATERIAIS_PARAMETROS"
+    }
+  },
+  "REGRASNAMESPACE_REGIOES_P": {
+    "target": {
+      //  "schema"     : "538533B1D4964DFB8E748DB7585A77B0",        // optional
+        "object"     : "PORTALMATERIAIS_REGIOES"
+    }
+  },
+  "REGRASNAMESPACE_REGRADECALCULO_P": {
+    "target": {
+      //  "schema"     : "538533B1D4964DFB8E748DB7585A77B0",        // optional
+        "object"     : "PORTALMATERIAIS_REGRADECALCULO"
+    }
+  },
+  "REGRASNAMESPACE_RETORNODABAIXA_P": {
+    "target": {
+      //  "schema"     : "538533B1D4964DFB8E748DB7585A77B0",        // optional
+        "object"     : "PORTALMATERIAIS_RETORNODABAIXA"
+    }
+  },
+  "REGRASNAMESPACE_TECNICOPOREPO_P": {
+    "target": {
+      //  "schema"     : "538533B1D4964DFB8E748DB7585A77B0",        // optional
+        "object"     : "PORTALMATERIAIS_TECNICOPOREPO"
+    }
+  },
+  "REGRASNAMESPACE_TIPOOS_P": {
+    "target": {
+      //  "schema"     : "538533B1D4964DFB8E748DB7585A77B0",        // optional
+        "object"     : "PORTALMATERIAIS_TIPOOS"
+    }
+  },
+  "REGRASNAMESPACE_TIPOWOBAIXAAUTOMATICA_P": {
+    "target": {
+      //  "schema"     : "538533B1D4964DFB8E748DB7585A77B0",        // optional
+        "object"     : "PORTALMATERIAIS_TIPOWOBAIXAAUTOMATICA"
     }
   }
 }

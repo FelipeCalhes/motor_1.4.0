@@ -5,12 +5,30 @@
          "object"     : "PORTALMATERIAIS_TOTALITEMVIEW"
      }
    },
+   "REGRASNAMESPACE_FORNECEDORBAIXAAUTOMATICA": {
+     "target": {
+        "schema.configure" : "hanadev01db/schema",        // optional
+         "object"     : "PORTALMATERIAIS_FORNECEDORBAIXAAUTOMATICA"
+     }
+   },
    "REGRASNAMESPACE_TOTALITEMTAB": {
      "target": {
         "schema.configure" : "hanadev01db/schema",        // optional
          "object"     : "PORTALMATERIAIS_TOTALITEMTAB"
      }
    },
+   "REGRASNAMESPACE_UNIONERROS": {
+    "target": {
+       "schema.configure" : "hanadev01db/schema",        // optional
+        "object"     : "PORTALMATERIAIS_UNIONERROS"
+    }
+  },
+  "REGRASNAMESPACE_UNIONERROSVIEW": {
+    "target": {
+       "schema.configure" : "hanadev01db/schema",         // optional
+        "object"     : "PORTALMATERIAIS_UNIONERROSVIEW"
+    }
+  },
    "REGRASNAMESPACE_MATERIAL": {
      "target": {
         "schema.configure" : "hanadev01db/schema",         // optional
@@ -27,6 +45,108 @@
     "target": {
         "schema.configure" : "motor-regras/schema",        // optional
          "object"     : "REGRASNAMESPACE_BOM"
+     }
+   },
+   "REGRASNAMESPACE_AGRUPADORES_P" : {
+    "target": {
+        "schema.configure" : "hanadev01db/schema",        // optional
+         "object"     : "PORTALMATERIAIS_AGRUPADORES"
+     }
+   },
+   "REGRASNAMESPACE_BOM_P" : {
+    "target": {
+        "schema.configure" : "hanadev01db/schema",        // optional
+         "object"     : "PORTALMATERIAIS_BOM_ORIGINAL"
+     }
+   },
+   "REGRASNAMESPACE_CENTROS_P" : {
+    "target": {
+        "schema.configure" : "hanadev01db/schema",        // optional
+         "object"     : "PORTALMATERIAIS_CENTROS"
+     }
+   },
+   "REGRASNAMESPACE_EMPRESAS_P" : {
+    "target": {
+        "schema.configure" : "hanadev01db/schema",        // optional
+         "object"     : "PORTALMATERIAIS_EMPRESAS"
+     }
+   },
+   "REGRASNAMESPACE_ESTOQUE_P" : {
+    "target": {
+        "schema.configure" : "hanadev01db/schema",        // optional
+         "object"     : "PORTALMATERIAIS_ESTOQUE"
+     }
+   },
+   "REGRASNAMESPACE_FORNECEDOR_P" : {
+    "target": {
+        "schema.configure" : "hanadev01db/schema",        // optional
+         "object"     : "PORTALMATERIAIS_FORNECEDOR"
+     }
+   },
+   "REGRASNAMESPACE_LOGINTECNICOMOTOR_P" : {
+    "target": {
+        "schema.configure" : "hanadev01db/schema",        // optional
+         "object"     : "PORTALMATERIAIS_LOGINTECNICOMOTOR"
+     }
+   },
+   "REGRASNAMESPACE_MATERIAISEXCECAO_P" : {
+    "target": {
+        "schema.configure" : "hanadev01db/schema",        // optional
+         "object"     : "PORTALMATERIAIS_MATERIAISEXCECAO"
+     }
+   },
+   "REGRASNAMESPACE_MATERIAIS_P" : {
+    "target": {
+        "schema.configure" : "hanadev01db/schema",        // optional
+         "object"     : "PORTALMATERIAIS_MATERIAIS"
+     }
+   },
+   "REGRASNAMESPACE_MUNICIPIOS_P" : {
+    "target": {
+        "schema.configure" : "hanadev01db/schema",        // optional
+         "object"     : "PORTALMATERIAIS_MUNICIPIOS"
+     }
+   },
+   "REGRASNAMESPACE_PARAMETROS_P" : {
+    "target": {
+        "schema.configure" : "hanadev01db/schema",        // optional
+         "object"     : "PORTALMATERIAIS_PARAMETROS"
+     }
+   },
+   "REGRASNAMESPACE_REGIOES_P" : {
+    "target": {
+        "schema.configure" : "hanadev01db/schema",        // optional
+         "object"     : "PORTALMATERIAIS_REGIOES"
+     }
+   },
+   "REGRASNAMESPACE_REGRADECALCULO_P" : {
+    "target": {
+        "schema.configure" : "hanadev01db/schema",        // optional
+         "object"     : "PORTALMATERIAIS_REGRADECALCULO"
+     }
+   },
+   "REGRASNAMESPACE_RETORNODABAIXA_P" : {
+    "target": {
+        "schema.configure" : "hanadev01db/schema",        // optional
+         "object"     : "PORTALMATERIAIS_RETORNODABAIXA"
+     }
+   },
+   "REGRASNAMESPACE_TECNICOPOREPO_P" : {
+    "target": {
+        "schema.configure" : "hanadev01db/schema",        // optional
+         "object"     : "PORTALMATERIAIS_TECNICOPOREPO"
+     }
+   },
+   "REGRASNAMESPACE_TIPOOS_P" : {
+    "target": {
+        "schema.configure" : "hanadev01db/schema",        // optional
+         "object"     : "PORTALMATERIAIS_TIPOOS"
+     }
+   },
+   "REGRASNAMESPACE_TIPOWOBAIXAAUTOMATICA_P" : {
+    "target": {
+        "schema.configure" : "hanadev01db/schema",        // optional
+         "object"     : "PORTALMATERIAIS_TIPOWOBAIXAAUTOMATICA"
      }
    }
  }

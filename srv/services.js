@@ -8,59 +8,64 @@ module.exports = (motor) => {
         }
     })
 
-    motor.after('CREATE', 'BOM', async (req) => {                
+    motor.after('CREATE', 'BOM', async (req) => {
         let srv = await cds.connect.to('db');
-        await srv.run('CALL UPSERT_TOTALITEMS()')
+        await srv.run('CALL RESET_TOTALITEMS()')
     })
 
-    motor.after('CREATE', 'Parametros', async (req) => {                
+    motor.after('UPDATE', 'BOM', async (req) => {
         let srv = await cds.connect.to('db');
         await srv.run('CALL RESET_TOTALITEMS()')
     })
-    
-    motor.after('UPDATE', 'Parametros', async (req) => {                
+
+    motor.after('CREATE', 'Parametros', async (req) => {
         let srv = await cds.connect.to('db');
         await srv.run('CALL RESET_TOTALITEMS()')
     })
-    
-    motor.after('CREATE', 'RegraDeCalculo', async (req) => {                
+
+    motor.after('UPDATE', 'Parametros', async (req) => {
         let srv = await cds.connect.to('db');
-        await srv.run('CALL UPSERT_TOTALITEMS()')
+        await srv.run('CALL RESET_TOTALITEMS()')
     })
-    
-    motor.after('UPDATE', 'RegraDeCalculo', async (req) => {                
+
+    motor.after('CREATE', 'RegraDeCalculo', async (req) => {
         let srv = await cds.connect.to('db');
-        await srv.run('CALL UPSERT_TOTALITEMS()')
+        await srv.run('CALL RESET_TOTALITEMS()')
     })
-    
-    motor.after('CREATE', 'Regioes', async (req) => {                
+
+    motor.after('UPDATE', 'RegraDeCalculo', async (req) => {
         let srv = await cds.connect.to('db');
-        await srv.run('CALL UPSERT_TOTALITEMS()')
+        await srv.run('CALL RESET_TOTALITEMS()')
     })
-    
-    motor.after('UPDATE', 'Regioes', async (req) => {                
+
+    motor.after('CREATE', 'Regioes', async (req) => {
         let srv = await cds.connect.to('db');
-        await srv.run('CALL UPSERT_TOTALITEMS()')
+        await srv.run('CALL RESET_TOTALITEMS()')
     })
-    
-    motor.after('CREATE', 'Agrupadores', async (req) => {                
+
+    motor.after('UPDATE', 'Regioes', async (req) => {
         let srv = await cds.connect.to('db');
-        await srv.run('CALL UPSERT_TOTALITEMS()')
+        await srv.run('CALL RESET_TOTALITEMS()')
     })
-    
-    motor.after('UPDATE', 'Agrupadores', async (req) => {                
+
+    motor.after('CREATE', 'Agrupadores', async (req) => {
         let srv = await cds.connect.to('db');
-        await srv.run('CALL UPSERT_TOTALITEMS()')
+        await srv.run('CALL RESET_TOTALITEMS()')
     })
-    
-    motor.after('CREATE', 'MateriaisExcecao', async (req) => {                
+
+    motor.after('UPDATE', 'Agrupadores', async (req) => {
         let srv = await cds.connect.to('db');
-        await srv.run('CALL UPSERT_TOTALITEMS()')
+        await srv.run('CALL RESET_TOTALITEMS()')
     })
-    
-    motor.after('UPDATE', 'MateriaisExcecao', async (req) => {                
+
+    motor.after('CREATE', 'MateriaisExcecao', async (req) => {
         let srv = await cds.connect.to('db');
-        await srv.run('CALL UPSERT_TOTALITEMS()')
+        await srv.run('CALL RESET_TOTALITEMS()')
+    })
+
+    motor.after('UPDATE', 'MateriaisExcecao', async (req) => {
+        let srv = await cds.connect.to('db');
+        await srv.run('CALL RESET_TOTALITEMS()')
     })
 
 
@@ -69,7 +74,7 @@ module.exports = (motor) => {
         try {
             const srv = await cds.connect.to('db');
             await srv.run('CALL UPSERT_BOM()')
-            await srv.run('CALL UPDATE_TOTALITEMS()')
+            await srv.run('CALL RESET_TOTALITEMS()')
             return true
         } catch (error) {
             console.error(error)
@@ -81,6 +86,15 @@ module.exports = (motor) => {
         const srv = await cds.connect.to('db');
         const { BOM_TRANSITORIA } = srv.entities
         await srv.run(INSERT.into(BOM_TRANSITORIA).entries(req.data.BOM))
+        return req.data
+    })
+
+    motor.on('CREATE', 'importMateriaisExcecao', async (req) => {
+        const srv = await cds.connect.to('db');
+        const { MateriaisExcecao_Transitoria } = srv.entities
+        await srv.run(INSERT.into(MateriaisExcecao_Transitoria).entries(req.data.MateriaisExcecao))
+        await srv.run(`UPSERT REGRASNAMESPACE_MATERIAISEXCECAO_P SELECT * FROM REGRASNAMESPACE_MATERIAISEXCECAO_TRANSITORIA`)
+        await srv.run(`DELETE FROM REGRASNAMESPACE_MATERIAISEXCECAO_TRANSITORIA`)
         return req.data
     })
 
@@ -101,9 +115,9 @@ module.exports = (motor) => {
 
     motor.on('CREATE', 'importTipoWoBaixaAutomatica', async (req) => {
         const srv = await cds.connect.to('db');
-        const { TipoWoBaixaAutomatica } = srv.entities
+        const { TipoWoBaixaAutomatica_P } = srv.entities
         reqArr = req.data.TipoWoBaixaAutomatica
-        backup = await srv.run(SELECT.from(TipoWoBaixaAutomatica))
+        backup = await srv.run(SELECT.from(TipoWoBaixaAutomatica_P))
         repetidos = []
         insert = []
         reqArr.forEach((r) => {
@@ -118,21 +132,75 @@ module.exports = (motor) => {
                 insert.push(r)
             }
         })
-        try {
-            await srv.run(INSERT.into(TipoWoBaixaAutomatica).entries(insert))
-        }
-        catch (err) {
-            req.reject(400, err.message)
+        if (insert.length > 0) {
+            try {
+                await srv.run(INSERT.into(TipoWoBaixaAutomatica_P).entries(insert))
+            }
+            catch (err) {
+                req.reject(400, err.message)
+            }
         }
         return (req.data)
     })
 
     motor.on('READ', 'killTipoWoBaixaAutomatica', async (req) => {
         const srv = await cds.connect.to('db');
-        const { TipoWoBaixaAutomatica } = srv.entities
+        const { TipoWoBaixaAutomatica_P } = srv.entities
         let resp
         try {
-            await srv.run(DELETE.from(TipoWoBaixaAutomatica))
+            await srv.run(DELETE.from(TipoWoBaixaAutomatica_P))
+            resp = { 'kill': true }
+        }
+        catch (err) {
+            resp = { 'kill': false }
+            req.reject(400, 'Erro ao deletar tabela')
+        }
+        return resp
+    })
+
+    motor.on('CREATE', 'importFornecedorBaixaAutomatica', async (req) => {
+        const srv = await cds.connect.to('db');
+        const { FornecedorBaixaAutomatica, Fornecedor_P } = srv.entities
+        reqArr = req.data.fornecedor
+        backup = await srv.run(SELECT.from(FornecedorBaixaAutomatica))
+        let forn = await srv.run(SELECT.from(Fornecedor_P))
+        let cadastrados = []
+        forn.forEach((c)=>{
+            cadastrados.push(c.lifnr)
+        })
+        repetidos = []
+        insert = []
+        reqArr.forEach((r) => {
+            backup.forEach((b) => {
+                if (b.fornecedor === r.fornecedor) {
+                    repetidos.push(r.fornecedor)
+                }
+            })
+        })
+        reqArr.forEach((r) => {
+            if (!repetidos.includes(r.fornecedor)) {
+                if(cadastrados.includes(r.fornecedor)){
+                    insert.push(r)
+                }
+            }
+        })
+        if (insert.length > 0) {
+            try {
+                await srv.run(INSERT.into(FornecedorBaixaAutomatica).entries(insert))
+            }
+            catch (err) {
+                req.reject(400, err.message)
+            }
+        }
+        return (req.data)
+    })
+
+    motor.on('READ', 'killFornecedorBaixaAutomatica', async (req) => {
+        const srv = await cds.connect.to('db');
+        const { FornecedorBaixaAutomatica } = srv.entities
+        let resp
+        try {
+            await srv.run(DELETE.from(FornecedorBaixaAutomatica))
             resp = { 'kill': true }
         }
         catch (err) {
@@ -183,8 +251,6 @@ module.exports = (motor) => {
 
     motor.before('CREATE', 'Agrupadores', async (req) => {
         const srv = await cds.connect.to('db');
-        const { LogAgrupadores } = srv.entities
-        let log = []
         let hoje = new Date()
         let timestamp =
             ('0000' + JSON.stringify(hoje.getFullYear())).slice(-4)
@@ -219,7 +285,7 @@ module.exports = (motor) => {
 
     motor.on('CREATE', 'importRegioes', async (req) => {
         const srv = await cds.connect.to('db');
-        const { Regioes_Transitoria, Municipios_Transitoria } = srv.entities
+        const { Regioes_Transitoria } = srv.entities
         await srv.run(INSERT.into(Regioes_Transitoria).entries(req.data.regioes))
         return req.data
     })
@@ -239,7 +305,7 @@ module.exports = (motor) => {
         try {
             const srv = await cds.connect.to('db');
             await srv.run('CALL UPSERT_AGRUPADORES()')
-            await srv.run('CALL UPDATE_TOTALITEMS()')
+            await srv.run('CALL RESET_TOTALITEMS()')
             return true
         } catch (error) {
             console.error(error)
@@ -263,10 +329,10 @@ module.exports = (motor) => {
     })
 
     motor.on('upsert_regioes', async () => {
-        try {            
+        try {
             const srv = await cds.connect.to('db');
             await srv.run('CALL UPSERT_REGIOES()')
-            await srv.run('CALL UPDATE_TOTALITEMS()')
+            await srv.run('CALL RESET_TOTALITEMS()')
             return true
         } catch (error) {
             console.error(error)
@@ -275,14 +341,15 @@ module.exports = (motor) => {
     })
 
     motor.on('replicate_baixa', async () => {
-        try {
+        /*try {
             const srv = await cds.connect.to('db');
             await srv.run('CALL REPLICATE_BAIXA()')
             return true
         } catch (error) {
             console.error(error)
             return false
-        }
+        }*/
+        return true
     })
 
     motor.before('CREATE', 'Regioes', async (req) => {
@@ -291,7 +358,39 @@ module.exports = (motor) => {
         let reg = []
         reg = await srv.run(SELECT.from(Regioes).where({ municipio_municipio: req.data.municipio_municipio }))
         if (reg.length > 0) {
-            req.reject(400, 'regiao already exists')
+            req.reject(400, 'Região já cadastrada')
         }
+    })
+
+    motor.before('CREATE', 'TecnicoPorEPO', async (req) => {
+        const srv = await cds.connect.to('db');
+        const { TecnicoPorEPO } = srv.entities
+        let reg = []
+        reg = await srv.run(SELECT.from(TecnicoPorEPO).where({ loginTecnico: req.data.loginTecnico }))
+        if (reg.length > 0) {
+            req.reject(400, 'Técnico já cadastrado')
+        }
+    })
+    
+    motor.on('DELETE', 'TecnicoPorEPO', async (req) => {
+        const srv = await cds.connect.to('db');
+        const { TecnicoPorEPO_P, TecnicoPorEPO } = srv.entities
+        let reg = []
+        reg = await srv.run(SELECT.from(TecnicoPorEPO_P).where({ loginTecnico: req.data.loginTecnico }))
+        if (reg.length < 1) {
+            req.reject(400, 'Técnico não existe')
+        } else {
+            try{
+                await srv.run(DELETE.from(TecnicoPorEPO_P).where({ loginTecnico: req.data.loginTecnico }))
+            }catch{
+                req.reject(400, 'Não pode ser deletado')
+            }
+            try{
+                await srv.run(DELETE.from(TecnicoPorEPO).where({ loginTecnico: req.data.loginTecnico }))
+            }catch{
+                console.log('400 TecnicoPorEPO - Motor')
+            }
+        }
+        return req.data
     })
 }

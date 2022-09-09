@@ -19,6 +19,31 @@ entity BOM {
                              on materiais.matnr = $self.codMaterialSAP;
 }
 
+@cds.persistence.exists
+entity BOM_P {
+    key tipoInstalacao : String(1);
+    key idTipoOS       : String(200);
+    key regiao         : String(50);
+    key codMaterialSAP : String(40);
+    key agrupador      : String(50);
+    key tecnologia     : String(50);
+        qtdMin         : Decimal;
+        qtdMax         : Decimal;
+        pctBom         : Decimal;
+        qtdTol         : Decimal;
+        unidadeConsumo : String(3);
+        aprovacaoClaro : Boolean;
+        tipoOs         : Association to one TipoOs_P
+                             on tipoOs.tipo_Os = $self.idTipoOS;
+        materiais      : Association to one Materiais_P
+                             on materiais.matnr = $self.codMaterialSAP;
+}
+
+@cds.persistence.exists
+entity FornecedorBaixaAutomatica {
+    key fornecedor : String(10);
+}
+
 entity Estoque {
     key matnr     : String(18);
     key werks     : String(4);
@@ -31,7 +56,26 @@ entity Estoque {
         timestamp : Timestamp;
 }
 
+@cds.persistence.exists
+entity Estoque_P {
+    key matnr     : String(18);
+    key werks     : String(4);
+    key charg     : String(10);
+    key sobkz     : String(1);
+    key lifnr     : String(10);
+        lblab     : Decimal(13, 3);
+        lbins     : Decimal(13, 3);
+        meins     : String(3);
+}
+
 entity LoginTecnicoMotor {
+    key loginTecnico     : String(120);
+        CodFornecedorSAP : String(50);
+        CNPJ             : String(16);
+}
+
+@cds.persistence.exists
+entity LoginTecnicoMotor_P {
     key loginTecnico     : String(120);
         CodFornecedorSAP : String(50);
         CNPJ             : String(16);
@@ -42,7 +86,19 @@ entity Regioes {
     key municipio : Association to Municipios;
 }
 
+@cds.persistence.exists
+entity Regioes_P {
+    key regiao    : String(50);
+    key municipio : Association to Municipios;
+}
+
 entity Municipios {
+    key municipio      : String(50);
+        descrMunicipio : String(200);
+}
+
+@cds.persistence.exists
+entity Municipios_P {
     key municipio      : String(50);
         descrMunicipio : String(200);
 }
@@ -55,6 +111,13 @@ entity Regioes_Transitoria {
 entity Municipios_Transitoria {
     key municipio      : String(50);
         descrMunicipio : String(200);
+}
+
+@cds.persistence.exists
+entity Agrupadores_P {
+    key agrupador  : String(50);
+    key tecnologia : String(50);
+    key material   : String(40);
 }
 
 entity Agrupadores {
@@ -107,11 +170,31 @@ entity RegraDeCalculo {
         atribAcessor : Integer;
 }
 
+@cds.persistence.exists
+entity RegraDeCalculo_P {
+    key tipoDeRegra  : String(50);
+        BOM          : Integer;
+        estoque      : Integer;
+        atribTecnico : Integer;
+}
+
 entity TipoWoBaixaAutomatica {
     key tipoWo : String(20);
 }
 
+@cds.persistence.exists
+entity TipoWoBaixaAutomatica_P {
+    key tipoWo : String(20);
+}
+
 entity Parametros {
+    key parametros     : Integer;
+        labelParametro : String;
+        valor          : String;
+}
+
+@cds.persistence.exists
+entity Parametros_P {
     key parametros     : Integer;
         labelParametro : String;
         valor          : String;
@@ -149,7 +232,23 @@ entity Fornecedor {
     stcd2     : String(11);
 }
 
+@cds.persistence.exists
+entity Fornecedor_P {
+    lifnr     : String(10);
+    berid     : String(10);
+    werks_mrp : String(10);
+    name1     : String(35);
+    stcd1     : String(16);
+    stcd2     : String(11);
+}
+
 entity Empresas {
+    bukrs  : String(4);
+    branch : String(4);
+}
+
+@cds.persistence.exists
+entity Empresas_P {
     bukrs  : String(4);
     branch : String(4);
 }
@@ -163,11 +262,24 @@ entity Centros {
     j_1bbranch : String(4);
 }
 
+@cds.persistence.exists
+entity Centros_P {
+    werks      : String(4);
+    lifnr      : String(10);
+    j_1bbranch : String(4);
+}
+
 entity TecnicoPorEPO {
     key loginTecnico     : String(120);
         CodFornecedorSAP : String(50);
         fornecedor       : Association to one FornecedorHelpOdata
                                on $self.CodFornecedorSAP = fornecedor.fornecedor
+}
+
+@cds.persistence.exists
+entity TecnicoPorEPO_P {
+    key loginTecnico     : String(120);
+        CodFornecedorSAP : String(50);
 }
 
 entity ExpandTecnico        as
@@ -214,6 +326,12 @@ entity TipoOs {
         aplicacao : String(1);
 }
 
+@cds.persistence.exists
+entity TipoOs_P {
+    key tipo_Os   : String(4);
+        desc_os   : String(50);
+}
+
 entity RespBaixa {
     key mandt            : String(3);
     key id_consolid_orig : String(50);
@@ -242,6 +360,28 @@ entity TipoOsHelpOdata      as
         tipo_Os as tipoOs,
         desc_os as descricaoOs
     };
+
+@cds.persistence.exists
+entity RetornoDaBaixa_P {
+    key consolidado   : String(50);
+    key consolidID    : String(50);
+    key material      : String(18);
+    key contador      : Integer;
+        status        : String(1);
+        mensagem      : String(220);
+        quantidade    : Decimal(13, 0);
+        quantidadeDoc : Decimal(13, 0);
+        mblnr         : String(10);
+        mjahr         : String(4);
+        zeile         : String(4);
+        data          : String(10);
+    key workOrderID   : String(50);
+        fornecedorID  : String(10);
+        aplicacao     : String(50);
+        uuid          : String(40);
+        erdat         : String(8);
+        erzet         : String(6);
+}
 
 entity RetornoDaBaixa       as
     select from RespBaixa {
@@ -276,11 +416,21 @@ entity RetornoDaBaixa       as
         wo               as workOrderID,
         lifnr            as fornecedorID,
         item_text        as aplicacao,
+        uuid             as uuid,
         erdat            as erdat,
         erzet            as erzet
     };
 
 entity Materiais {
+    key matnr : String(18);
+    key spras : String(1);
+        maktx : String(40);
+        meins : String(3);
+        mtart : String(4);
+}
+
+@cds.persistence.exists
+entity Materiais_P {
     key matnr : String(18);
     key spras : String(1);
         maktx : String(40);
@@ -330,6 +480,15 @@ entity MateriaisExcecao {
     key material : String;
 }
 
+@cds.persistence.exists
+entity MateriaisExcecao_P {
+    key material : String;
+}
+
+entity MateriaisExcecao_Transitoria {
+    key material : String;
+}
+
 entity TesteSidecar {
     key sideDeploy : String;
 }
@@ -374,6 +533,26 @@ entity TotalItemView {
         totalItems        : Integer;
         sla               : String(10);
         status            : Integer;
+}
+
+@cds.persistence.exists
+entity UnionErros {
+    key workOrderID       : String(50);
+        material          : String(50);
+        mensagem          : String;
+        tipoErro         : String(12);
+        status     : Integer;
+        aprovacaoAdmStatus   : String(20);
+}
+
+@cds.persistence.exists
+entity UnionErrosView {
+    key workOrderID       : String(50);
+        material          : String(50);
+        mensagem          : String;
+        tipoErro         : String(12);
+        status     : Integer;
+        aprovacaoAdmStatus   : String(20);
 }
 
 @cds.persistence.exists
